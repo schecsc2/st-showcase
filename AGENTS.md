@@ -84,6 +84,10 @@ If an attendee says, “I want to see _____,” the site should quickly answer: 
 ### Testing:
 - No testing needed. The human developer will do that for you.
 
+### Installing and running servers
+- Do not install packages for the developer
+- Do not keep servers running after you run them to do appropriate checks
+
 ### Design guidelines:
 - Never include extra words or descriptions that pertain to **how** to use the interface, where to click, or what information to enter into a field
 - Minimalist at all times
