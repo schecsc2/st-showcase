@@ -74,7 +74,7 @@ If an attendee says, “I want to see _____,” the site should quickly answer: 
 - The agenda includes two different periods of the event, one in the morning, and one in the afternoon. We will need to swap out maps/posters/speakers for those times, so there should be a very modular way of inserting map data/poster data/speaker data
 
 ## Data
-- Refer to data/ for all event related data currently available
+- Refer to data/event_content for all event related content currently available
 
 ## Code
 ### Stack

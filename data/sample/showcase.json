@@ -1,0 +1,64 @@
+{
+  "periods": {
+    "morning": {
+      "label": "Morning",
+      "items": {
+        "food-coffee": {
+          "id": "food-coffee",
+          "type": "food",
+          "title": "Coffee",
+          "description": "Coffee station.",
+          "location": {
+            "kind": "point",
+            "coordinates": [39.16058, -76.89909],
+            "label": "Main lobby"
+          }
+        },
+        "food-breakfast": {
+          "id": "food-breakfast",
+          "type": "food",
+          "title": "Breakfast",
+          "description": "Morning breakfast table.",
+          "location": {
+            "kind": "point",
+            "coordinates": [39.16063, -76.89901],
+            "label": "Atrium"
+          }
+        },
+        "food-water": {
+          "id": "food-water",
+          "type": "food",
+          "title": "Water",
+          "description": "Water station.",
+          "location": {
+            "kind": "point",
+            "coordinates": [39.1605, -76.89896],
+            "label": "Showcase hall entrance"
+          }
+        },
+        "restroom-lobby": {
+          "id": "restroom-lobby",
+          "type": "restroom",
+          "title": "Lobby Restrooms",
+          "description": "Restrooms near the main lobby.",
+          "location": {
+            "kind": "point",
+            "coordinates": [39.16055, -76.89914],
+            "label": "Main lobby"
+          }
+        },
+        "restroom-hall": {
+          "id": "restroom-hall",
+          "type": "restroom",
+          "title": "Showcase Hall Restrooms",
+          "description": "Restrooms near the showcase hall.",
+          "location": {
+            "kind": "point",
+            "coordinates": [39.16047, -76.89891],
+            "label": "Showcase hall"
+          }
+        }
+      }
+    }
+  }
+}

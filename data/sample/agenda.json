@@ -1,0 +1,102 @@
+{
+  "eventDate": "September 15, 2026",
+  "eventDay": "2026-09-15",
+  "location": "Johns Hopkins APL South Campus",
+  "sessions": [
+    {
+      "id": "morning",
+      "title": "Morning Session",
+      "audience": "Government & Contractor",
+      "time": "8:30 AM - 12:00 PM",
+      "start": "08:30",
+      "end": "12:00",
+      "location": "Johns Hopkins APL South Campus",
+      "items": [
+        {
+          "title": "Event Check-In",
+          "time": "8:30 AM - 9:00 AM",
+          "start": "08:30",
+          "end": "09:00",
+          "location": "Semmel Center Lobby"
+        },
+        {
+          "title": "Welcome & Opening Remarks",
+          "time": "9:00 AM - 9:15 AM",
+          "start": "09:00",
+          "end": "09:15",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Feature Conversation with Gen. David Goldfein",
+          "time": "9:15 AM - 9:45 AM",
+          "start": "09:15",
+          "end": "09:45",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Spotlight Talks",
+          "time": "9:45 AM - 10:00 AM",
+          "start": "09:45",
+          "end": "10:00",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Science & Technology Showcase",
+          "time": "10:00 AM - 12:00 PM",
+          "start": "10:00",
+          "end": "12:00",
+          "location": "South Campus"
+        },
+        {
+          "title": "Conclusion of Government & Contractor Session",
+          "time": "12:00 PM",
+          "start": "12:00"
+        }
+      ]
+    },
+    {
+      "id": "afternoon",
+      "title": "Afternoon Session",
+      "audience": "Academia, Industry, & Community",
+      "time": "1:00 PM - 4:00 PM",
+      "start": "13:00",
+      "end": "16:00",
+      "location": "Johns Hopkins APL South Campus",
+      "items": [
+        {
+          "title": "Event Check-In",
+          "time": "1:00 PM - 1:30 PM",
+          "start": "13:00",
+          "end": "13:30",
+          "location": "Semmel Center Lobby"
+        },
+        {
+          "title": "Welcome & Session Overview",
+          "time": "1:30 PM - 1:40 PM",
+          "start": "13:30",
+          "end": "13:40",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Featured Talks",
+          "time": "1:40 PM - 2:00 PM",
+          "start": "13:40",
+          "end": "14:00",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Science & Technology Showcase",
+          "time": "2:00 PM - 4:00 PM",
+          "start": "14:00",
+          "end": "16:00",
+          "location": "South Campus"
+        },
+        {
+          "title": "Conclusion of Academia, Industry, & Community Session",
+          "time": "4:00 PM",
+          "start": "16:00"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "neighborhoods": [
+    {
+      "id": "ai-autonomy-teaming",
+      "title": "AI, Autonomy, and Teaming",
+      "posters": []
+    },
+    {
+      "id": "sensing-c5isr-networking",
+      "title": "Sensing, C5ISR, and Networking",
+      "posters": []
+    },
+    {
+      "id": "hypersonics-ew-directed-energy",
+      "title": "Hypersonics, EW, and Directed Energy",
+      "posters": []
+    },
+    {
+      "id": "cybersecurity-mission-assurance",
+      "title": "Cybersecurity and Mission Assurance",
+      "posters": []
+    },
+    {
+      "id": "advanced-manufacturing-contested-logistics",
+      "title": "Advanced Manufacturing and Contested Logistics",
+      "posters": []
+    },
+    {
+      "id": "biotechnology-medical-systems",
+      "title": "Biotechnology and Medical Systems",
+      "posters": []
+    },
+    {
+      "id": "space-systems-pnt",
+      "title": "Space Systems and PNT",
+      "posters": []
+    },
+    {
+      "id": "microelectronics-quantum-materials",
+      "title": "Microelectronics, Quantum, and Materials",
+      "posters": []
+    }
+  ]
+}
