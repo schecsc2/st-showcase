@@ -66,19 +66,22 @@ async function navigateTo(link) {
   left: 16px;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
   max-width: 480px;
   margin: 0 auto;
 }
 
 .bottom-nav__button {
+  min-width: 0;
   min-height: 58px;
+  padding: 4px;
   border: 0;
   border-radius: 8px;
   background: #294b75;
   color: #ffffff;
   font-size: 0.75rem;
+  opacity: 1;
   box-shadow: 0 8px 20px rgba(31, 41, 51, 0.24);
 }
 

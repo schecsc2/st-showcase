@@ -30,13 +30,15 @@
 
     <q-btn-dropdown
       v-if="!selectedSearchResult && !(search || '').trim()"
+      align="left"
       class="map-quick-filters"
-      dropdown-icon="keyboard_arrow_down"
+      dense
+      dropdown-icon="add"
       label="Quick Filters"
       no-caps
       unelevated
     >
-      <q-list>
+      <q-list dense>
         <q-item
           v-for="filter in mapSearchCategories"
           :key="filter.key"
@@ -47,7 +49,7 @@
           @click="selectType(filter.type)"
         >
           <q-item-section avatar>
-            <q-icon :name="filter.icon" />
+            <q-icon :name="filter.icon" size="18px" />
           </q-item-section>
           <q-item-section>{{ filter.title }}</q-item-section>
         </q-item>
@@ -803,7 +805,11 @@ function updatePosterMarkers(shouldCenter) {
   })
 
   if (shouldCenter && activeMarker) {
-    map.panTo(activeMarker.getLatLng())
+    const zoom = map.getZoom()
+    const markerPoint = map.project(activeMarker.getLatLng(), zoom)
+    const verticalOffset = Math.min(120, map.getSize().y * 0.18)
+
+    map.panTo(map.unproject(markerPoint.add([0, verticalOffset]), zoom))
   }
 }
 
@@ -907,16 +913,13 @@ function getPosterSearchText(poster) {
 .map-quick-filters {
   position: fixed;
   top: 66px;
-  left: 50%;
+  left: max(16px, calc(50% - 180px));
   z-index: 530;
-  width: calc(100% - 32px);
-  max-width: 360px;
   border: 1px solid #dde3ea;
   border-radius: 8px;
   background: #ffffff;
   color: #1f2933;
   font-weight: 800;
-  transform: translateX(-50%);
   box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
 }
 
