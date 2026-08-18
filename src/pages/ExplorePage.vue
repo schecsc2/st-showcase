@@ -83,6 +83,61 @@
         </section>
 
         <section>
+          <h2 class="explore-section-title">Demos</h2>
+          <div class="neighborhood-list">
+            <article v-for="demo in mapData.demos" :key="demo.id" class="neighborhood-item">
+              <q-btn
+                :class="{ 'neighborhood-button--active': demo.id === selectedDemoId }"
+                class="neighborhood-button"
+                no-caps
+                unelevated
+                @click="selectDemo(demo.id)"
+              >
+                <span class="neighborhood-button__title">
+                  {{ demo.title }}<template v-if="demo.demos?.length"> ({{ demo.demos.length }})</template>
+                </span>
+                <q-icon
+                  class="neighborhood-button__icon"
+                  :name="demo.id === selectedDemoId ? 'expand_more' : 'chevron_right'"
+                  size="20px"
+                />
+              </q-btn>
+
+              <div v-if="demo.id === selectedDemoId" class="poster-list">
+                <template v-if="demo.demos?.length">
+                  <article v-for="demoItem in demo.demos" :key="demoItem.id" class="poster-item">
+                    <h2>{{ demoItem.title }}</h2>
+                    <p>{{ demoItem.authors }}</p>
+                    <p>{{ demoItem.description }}</p>
+                    <q-btn
+                      :to="{ path: '/map', query: { demo: demo.id, item: demoItem.id } }"
+                      class="poster-map-button"
+                      dense
+                      flat
+                      no-caps
+                    >
+                      Show on Map
+                    </q-btn>
+                  </article>
+                </template>
+                <article v-else class="poster-item">
+                  <p>{{ demo.location }}</p>
+                  <q-btn
+                    :to="{ path: '/map', query: { demo: demo.id } }"
+                    class="poster-map-button"
+                    dense
+                    flat
+                    no-caps
+                  >
+                    Show on Map
+                  </q-btn>
+                </article>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
           <h2 class="explore-section-title">Feature Booths</h2>
           <div class="neighborhood-list">
             <article v-for="booth in mapData.scts" :key="booth.id" class="neighborhood-item">
@@ -129,6 +184,7 @@ import mapData from '../../data/live/map/locations.json'
 
 const search = ref('')
 const selectedNeighborhoodId = ref(null)
+const selectedDemoId = ref(null)
 const selectedFeatureBoothId = ref(null)
 const filteredNeighborhoods = computed(() => mapData.neighborhoods)
 const posterSearchResults = computed(() => {
@@ -156,6 +212,10 @@ function getPosterSearchText(neighborhood, poster) {
 
 function selectNeighborhood(id) {
   selectedNeighborhoodId.value = selectedNeighborhoodId.value === id ? null : id
+}
+
+function selectDemo(id) {
+  selectedDemoId.value = selectedDemoId.value === id ? null : id
 }
 
 function selectFeatureBooth(id) {

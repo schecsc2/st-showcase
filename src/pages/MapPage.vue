@@ -428,7 +428,7 @@ watch(search, (value) => {
 })
 
 watch(activePosterSlide, () => updatePosterMarkers(true))
-watch(() => [route.query.neighborhood, route.query.poster, route.query.sct], selectRouteLocation)
+watch(() => [route.query.neighborhood, route.query.poster, route.query.sct, route.query.demo, route.query.item], selectRouteLocation)
 
 function closeSearchResults(event) {
   const target = event.target
@@ -721,6 +721,8 @@ function selectRouteLocation() {
   const id = Array.isArray(route.query.neighborhood) ? route.query.neighborhood[0] : route.query.neighborhood
   const posterId = Array.isArray(route.query.poster) ? route.query.poster[0] : route.query.poster
   const sctId = Array.isArray(route.query.sct) ? route.query.sct[0] : route.query.sct
+  const demoId = Array.isArray(route.query.demo) ? route.query.demo[0] : route.query.demo
+  const demoItemId = Array.isArray(route.query.item) ? route.query.item[0] : route.query.item
 
   if (!map) {
     return
@@ -731,6 +733,18 @@ function selectRouteLocation() {
 
     if (item) {
       selectMarker(item)
+    }
+    return
+  }
+
+  if (demoId) {
+    const markerItem = markers.find(({ node, type }) => type === 'demo' && node.id === demoId)
+    const geometryItem = geometryLayers.find(({ id: geometryId, type }) => type === 'demo' && geometryId === demoId)
+
+    if (markerItem) {
+      selectMarker(markerItem)
+    } else if (geometryItem) {
+      selectGeometry(geometryItem, demoItemId)
     }
     return
   }
