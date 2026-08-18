@@ -35,6 +35,9 @@
       dense
       dropdown-icon="add"
       label="Quick Filters"
+      menu-anchor="top end"
+      :menu-offset="[8, 0]"
+      menu-self="top start"
       no-caps
       unelevated
     >
@@ -42,9 +45,6 @@
         <q-item
           v-for="filter in mapSearchCategories"
           :key="filter.key"
-          v-close-popup
-          :active="activeType === filter.type"
-          active-class="map-quick-filter--active"
           clickable
           @click="selectType(filter.type)"
         >
@@ -52,6 +52,14 @@
             <q-icon :name="filter.icon" size="18px" />
           </q-item-section>
           <q-item-section>{{ filter.title }}</q-item-section>
+          <q-item-section side>
+            <q-checkbox
+              :model-value="activeTypes.includes(filter.type)"
+              dense
+              @click.stop
+              @update:model-value="selectType(filter.type)"
+            />
+          </q-item-section>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -156,7 +164,7 @@ const searchResultsElement = ref(null)
 const search = ref('')
 const searchFocused = ref(false)
 const selectedSearchResult = ref(null)
-const activeType = ref(null)
+const activeTypes = ref([])
 const selectedMapCard = ref(null)
 const activePosterSlide = ref('')
 const markers = []
@@ -391,7 +399,7 @@ onUnmounted(() => {
 watch(search, (value) => {
   if ((value || '').trim()) {
     selectedSearchResult.value = null
-    activeType.value = null
+    activeTypes.value = []
     selectedMarker = null
     selectedGeometryPath = null
     clearPosterMarkers()
@@ -555,7 +563,9 @@ function getSctIcon() {
 
 function selectType(type) {
   selectedSearchResult.value = null
-  activeType.value = activeType.value === type ? null : type
+  activeTypes.value = activeTypes.value.includes(type)
+    ? activeTypes.value.filter((activeType) => activeType !== type)
+    : activeTypes.value.concat(type)
   selectedMarker = null
   selectedGeometryPath = null
   clearPosterMarkers()
@@ -571,7 +581,7 @@ function selectSearchResult(result) {
   selectedSearchResult.value = result
 
   if (result.kind === 'type') {
-    activeType.value = result.type
+    activeTypes.value = [result.type]
     selectedMarker = null
     selectedGeometryPath = null
     clearPosterMarkers()
@@ -611,7 +621,7 @@ function clearSearchSelection() {
   selectedSearchResult.value = null
   search.value = ''
   searchFocused.value = false
-  activeType.value = null
+  activeTypes.value = []
   selectedMarker = null
   selectedGeometryPath = null
   clearPosterMarkers()
@@ -647,7 +657,7 @@ function clearSelection() {
 
 function clearMapHighlight() {
   selectedSearchResult.value = null
-  activeType.value = null
+  activeTypes.value = []
   search.value = ''
   clearSelection()
 }
@@ -664,7 +674,7 @@ function selectMarker(item) {
     return
   }
 
-  activeType.value = null
+  activeTypes.value = []
   selectedMarker = item.marker
   selectedGeometryPath = null
   clearPosterMarkers()
@@ -706,7 +716,7 @@ function selectGeometry(item, posterId) {
     return
   }
 
-  activeType.value = null
+  activeTypes.value = []
   selectedMarker = null
   selectedGeometryPath = item.path
   clearPosterMarkers()
@@ -842,10 +852,10 @@ function getGeometryPoint(x, y) {
 
 function updateMarkers() {
   const hasIndividualHighlight = selectedMarker || selectedGeometryPath
-  const hasGroupHighlight = activeType.value
+  const hasGroupHighlight = activeTypes.value.length > 0
 
   markers.forEach(({ node, type, marker }) => {
-    const isMatch = !activeType.value || type === activeType.value
+    const isMatch = !hasGroupHighlight || activeTypes.value.includes(type)
     const isActive = hasIndividualHighlight ? selectedMarker === marker : hasGroupHighlight && isMatch
     const element = marker.getElement()
 
@@ -854,7 +864,7 @@ function updateMarkers() {
   })
 
   geometryLayers.forEach(({ path, type }) => {
-    const isMatch = !activeType.value || type === activeType.value
+    const isMatch = !hasGroupHighlight || activeTypes.value.includes(type)
     const isActive = hasIndividualHighlight ? selectedGeometryPath === path : hasGroupHighlight && isMatch
 
     path.setAttribute('fill-opacity', isActive ? '0.5' : '0.18')
@@ -918,6 +928,7 @@ function getPosterSearchText(poster) {
   border: 1px solid #dde3ea;
   border-radius: 8px;
   background: #ffffff;
+  padding-left: 10px;
   color: #1f2933;
   font-weight: 800;
   box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
