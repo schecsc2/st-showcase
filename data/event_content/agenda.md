@@ -25,7 +25,7 @@ Semmel Center Auditorium
 
 
 10:00 AM - 12:00 PM 
-Science & Technology Showcase
+Poster Session & Demos
 South Campus
 
 
@@ -56,7 +56,7 @@ Semmel Center Auditorium
 
 
 2:00 PM - 4:00 PM 
-Science & Technology Showcase
+Poster Session & Demos
 South Campus
 
 

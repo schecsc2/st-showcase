@@ -28,20 +28,31 @@
       </template>
     </q-input>
 
-    <div v-if="!selectedSearchResult && !search.trim()" class="map-search-chips">
-      <q-chip
-        v-for="chip in mapSearchChips"
-        :key="chip.key"
-        :class="{ 'map-search-chip--active': activeType === chip.type }"
-        class="map-search-chip"
-        clickable
-        dense
-        square
-        @click="selectType(chip.type)"
-      >
-        {{ chip.title }}
-      </q-chip>
-    </div>
+    <q-btn-dropdown
+      v-if="!selectedSearchResult && !search.trim()"
+      class="map-quick-filters"
+      dropdown-icon="keyboard_arrow_down"
+      label="Quick Filters"
+      no-caps
+      unelevated
+    >
+      <q-list>
+        <q-item
+          v-for="filter in mapSearchCategories"
+          :key="filter.key"
+          v-close-popup
+          :active="activeType === filter.type"
+          active-class="map-quick-filter--active"
+          clickable
+          @click="selectType(filter.type)"
+        >
+          <q-item-section avatar>
+            <q-icon :name="filter.icon" />
+          </q-item-section>
+          <q-item-section>{{ filter.title }}</q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
 
     <div
       v-if="mapSearchResults.length"
@@ -55,7 +66,12 @@
         type="button"
         @click="selectSearchResult(result)"
       >
-        <span class="map-search-result__title">{{ result.title }}</span>
+        <span
+          :class="{ 'map-search-result__title--bold': result.kind === 'neighborhood' || result.kind === 'sct' }"
+          class="map-search-result__title"
+        >
+          {{ result.title }}
+        </span>
       </button>
     </div>
 
@@ -154,6 +170,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'demo',
     title: 'Demos',
+    icon: 'mdi-orbit',
     searchText: 'demo demos demonstration demonstrations'
   },
   {
@@ -161,6 +178,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'neighborhood',
     title: 'Neighborhoods',
+    icon: 'grid_view',
     searchText: 'neighborhood neighborhoods zone zones'
   },
   {
@@ -168,6 +186,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'restroom',
     title: 'Restrooms',
+    icon: 'wc',
     searchText: 'restroom restrooms bathroom bathrooms wc'
   },
   {
@@ -175,6 +194,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'food',
     title: 'Food/Drink',
+    icon: 'restaurant',
     searchText: 'food/drink food foods drink drinks dining restaurant cafe'
   },
   {
@@ -182,18 +202,18 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'help',
     title: 'Help',
+    icon: 'question_mark',
     searchText: 'help info information question questions support'
   },
   {
     key: 'type-sct',
     kind: 'type',
     type: 'sct',
-    title: 'Strat. Challenges',
-    searchText: 'sct scts showcase technology'
+    title: 'Feature Booths',
+    icon: 'lightbulb',
+    searchText: 'feature booth booths sct scts strategic challenge challenges showcase technology'
   },
 ]
-const mapSearchChips = mapSearchCategories.filter((category) => category.type === 'demo' || category.type === 'neighborhood' || category.type === 'sct')
-const mapSearchDefaultResults = mapSearchCategories.filter((category) => category.type === 'restroom' || category.type === 'food' || category.type === 'help')
 const neighborhoodsById = Object.fromEntries(mapData.neighborhoods.map((neighborhood) => [neighborhood.id, neighborhood]))
 const demosById = Object.fromEntries(mapData.demos.map((demoArea) => [demoArea.id, demoArea]))
 const neighborhoodGeometries = Object.keys(neighborhoodGeometryFiles).sort().map((path) => ({
@@ -217,10 +237,10 @@ const mapSearchResults = computed(() => {
   const query = (search.value || '').trim().toLowerCase()
 
   if (!query) {
-    return mapSearchDefaultResults
+    return []
   }
 
-  const categoryResults = mapSearchCategories.filter((category) => category.type !== 'sct' && category.searchText.includes(query))
+  const categoryResults = mapSearchCategories.filter((category) => category.searchText.includes(query))
   const neighborhoodResults = mapData.neighborhoods.filter((neighborhood) => {
     return neighborhood.title.toLowerCase().includes(query)
   }).map((neighborhood) => ({
@@ -240,8 +260,16 @@ const mapSearchResults = computed(() => {
       poster
     }))
   })
+  const sctResults = mapData.scts.filter((sct) => {
+    return sct.title.toLowerCase().includes(query)
+  }).map((sct) => ({
+    key: `sct-${sct.id}`,
+    kind: 'sct',
+    title: sct.title,
+    sct
+  }))
 
-  return categoryResults.concat(neighborhoodResults, posterResults)
+  return categoryResults.concat(neighborhoodResults, sctResults, posterResults)
 })
 let selectedMarker = null
 let selectedGeometryPath = null
@@ -414,7 +442,7 @@ function getGeometryOverlay() {
   })
 
   demoGeometries.forEach((geometry) => {
-    items.push(addGeometryPath(svg, geometry, 'demo', '#7b2cbf'))
+    items.push(addGeometryPath(svg, geometry, 'demo', '#002C77'))
   })
 
   return {
@@ -551,6 +579,16 @@ function selectSearchResult(result) {
     return
   }
 
+  if (result.kind === 'sct') {
+    const item = markers.find(({ node, type }) => type === 'sct' && node.id === result.sct.id)
+
+    if (item) {
+      selectMarker(item)
+      selectedSearchResult.value = result
+    }
+    return
+  }
+
   const item = getNeighborhoodGeometry(result.neighborhood.id)
 
   if (!item) {
@@ -613,26 +651,28 @@ function clearMapHighlight() {
 }
 
 function addMarkerClick(item) {
-  item.marker.on('click', () => {
-    selectedSearchResult.value = null
+  item.marker.on('click', () => selectMarker(item))
+}
 
-    if (selectedMarker === item.marker) {
-      clearSelection()
-      return
-    }
+function selectMarker(item) {
+  selectedSearchResult.value = null
 
-    activeType.value = null
-    selectedMarker = item.marker
-    selectedGeometryPath = null
-    clearPosterMarkers()
-    selectedMapCard.value = {
-      type: item.type,
-      title: item.node.title,
-      subtitle: item.node.location || ''
-    }
-    map.flyTo(item.marker.getLatLng(), map.getMaxZoom())
-    updateMarkers()
-  })
+  if (selectedMarker === item.marker) {
+    clearSelection()
+    return
+  }
+
+  activeType.value = null
+  selectedMarker = item.marker
+  selectedGeometryPath = null
+  clearPosterMarkers()
+  selectedMapCard.value = {
+    type: item.type,
+    title: item.node.title,
+    subtitle: item.node.location || ''
+  }
+  map.flyTo(item.marker.getLatLng(), map.getMaxZoom())
+  updateMarkers()
 }
 
 function addGeometryClick(item) {
@@ -714,7 +754,7 @@ function setPosterMarkers(item) {
         [0.35, 0.68],
         [0.65, 0.68]
       ]
-  const color = item.type === 'demo' ? '#5f1a8b' : '#2e7d32'
+  const color = item.type === 'demo' ? '#002C77' : '#2e7d32'
 
   item.posters.forEach((poster, index) => {
     const position = positions[index % positions.length]
@@ -864,31 +904,20 @@ function getPosterSearchText(poster) {
   white-space: nowrap;
 }
 
-.map-search-chips {
+.map-quick-filters {
   position: fixed;
   top: 66px;
   left: 50%;
   z-index: 530;
-  display: flex;
-  gap: 8px;
-  justify-content: center;
   width: calc(100% - 32px);
   max-width: 360px;
-  transform: translateX(-50%);
-}
-
-.map-search-chip {
-  margin: 0;
   border: 1px solid #dde3ea;
+  border-radius: 8px;
   background: #ffffff;
   color: #1f2933;
   font-weight: 800;
-}
-
-.map-search-chip--active {
-  border-color: #294b75;
-  background: #294b75;
-  color: #ffffff;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
 }
 
 .map-search-results {
@@ -926,8 +955,11 @@ function getPosterSearchText(poster) {
 }
 
 .map-search-result__title {
-  font-weight: 800;
   line-height: 1.25;
+}
+
+.map-search-result__title--bold {
+  font-weight: 800;
 }
 
 .map-popup-card {

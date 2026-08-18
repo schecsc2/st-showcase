@@ -2,6 +2,17 @@
   <q-page class="explore-page">
     <section class="explore-hero">
       <h1>Explore</h1>
+      <q-btn
+        class="explore-lodging"
+        dense
+        flat
+        href="https://www.jhuapl.edu/about/visiting-apl/lodging"
+        no-caps
+        rel="noreferrer"
+        target="_blank"
+      >
+        Lodging
+      </q-btn>
     </section>
 
     <q-input
@@ -51,8 +62,12 @@
             unelevated
             @click="selectNeighborhood(neighborhood.id)"
           >
-            <span>{{ neighborhood.title }}</span>
-            <q-icon :name="neighborhood.id === selectedNeighborhoodId ? 'expand_more' : 'chevron_right'" size="20px" />
+            <span class="neighborhood-button__title">{{ neighborhood.title }} ({{ neighborhood.posters.length }})</span>
+            <q-icon
+              class="neighborhood-button__icon"
+              :name="neighborhood.id === selectedNeighborhoodId ? 'expand_more' : 'chevron_right'"
+              size="20px"
+            />
           </q-btn>
 
           <div v-if="neighborhood.id === selectedNeighborhoodId && neighborhood.posters.length" class="poster-list">
@@ -121,6 +136,10 @@ function selectNeighborhood(id) {
 }
 
 .explore-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding: 20px 0 24px;
 }
 
@@ -134,6 +153,11 @@ function selectNeighborhood(id) {
   font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.05;
+}
+
+.explore-lodging {
+  color: #294b75;
+  font-weight: 800;
 }
 
 .explore-hero p {
@@ -185,7 +209,20 @@ function selectNeighborhood(id) {
   text-align: left;
 }
 
+.neighborhood-button__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal;
+}
+
+.neighborhood-button__icon {
+  flex: 0 0 auto;
+}
+
 .neighborhood-button--active {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   border-color: #294b75;
   background: #294b75;
   color: #ffffff;

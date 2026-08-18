@@ -57,21 +57,21 @@
     {
       "id": "b201-atrium-food",
       "title": "Food",
-      "location": "201 Atrium",
+      "location": "Semmel Center Atrium",
       "x": 1585.38,
       "y": 2077.2
     },
     {
       "id": "b201-atrium-food-2",
       "title": "Food",
-      "location": "201 Atrium",
+      "location": "Semmel Center Atrium",
       "x": 735.87,
       "y": 2058.57
     },
     {
       "id": "b201-lobby-food",
       "title": "Food",
-      "location": "201 Lobby",
+      "location": "Semmel Center Lobby",
       "x": 1790.3,
       "y": 2157.3
     },
@@ -87,28 +87,28 @@
     {
       "id": "b201-patio-help",
       "title": "Help",
-      "location": "201 Patio",
+      "location": "Semmel Center Patio",
       "x": 1430.75,
       "y": 1510.86
     },
     {
       "id": "b201-atrium-help-1",
       "title": "Help",
-      "location": "201 Atrium",
+      "location": "Semmel Center Atrium",
       "x": 1030.21,
       "y": 2093.96
     },
     {
       "id": "b201-atrium-help-2",
       "title": "Help",
-      "location": "201 Atrium",
+      "location": "Semmel Center Atrium",
       "x": 1313.38,
       "y": 2028.76
     },
     {
       "id": "b201-lobby-help",
       "title": "Help",
-      "location": "201 Lobby",
+      "location": "Semmel Center Lobby",
       "x": 1840.6,
       "y": 2159.17
     }
