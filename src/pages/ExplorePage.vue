@@ -183,6 +183,7 @@ function selectNeighborhood(id) {
 }
 
 .neighborhood-button :deep(.q-btn__content) {
+  flex-wrap: nowrap;
   justify-content: space-between;
   gap: 12px;
   width: 100%;
