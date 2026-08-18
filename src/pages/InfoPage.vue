@@ -10,24 +10,30 @@
       <article class="info-card">
         <h3>{{ infoData.location.name }}</h3>
         <p>{{ infoData.location.address }}</p>
-        <div class="info-actions">
-          <q-btn
-            class="info-action"
-            :href="infoData.location.directionsUrl"
-            label="Directions"
-            no-caps
-            target="_blank"
-            unelevated
-          />
-          <q-btn
-            class="info-action"
-            :href="infoData.location.lodgingUrl"
-            label="Lodging"
-            no-caps
-            target="_blank"
-            unelevated
-          />
-        </div>
+        <q-btn
+          class="info-action"
+          :href="infoData.location.directionsUrl"
+          label="Directions"
+          no-caps
+          target="_blank"
+          unelevated
+        />
+      </article>
+    </section>
+
+    <section class="info-section">
+      <h2>Lodging</h2>
+
+      <article class="info-card">
+        <p>{{ infoData.lodging.description }}</p>
+        <q-btn
+          class="info-action"
+          :href="infoData.lodging.url"
+          label="Lodging"
+          no-caps
+          target="_blank"
+          unelevated
+        />
       </article>
     </section>
 
@@ -194,13 +200,8 @@ function getTextParts(text) {
   text-align: right;
 }
 
-.info-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
 .info-action {
+  margin-top: 12px;
   background: #294b75;
   color: #ffffff;
 }
