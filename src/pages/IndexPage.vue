@@ -149,14 +149,14 @@ function getDefaultHappeningNow() {
   border: 1px solid #dde3ea;
   border-radius: 8px;
   background: #ffffff;
-  padding: 16px;
+  padding: 13.6px;
 }
 
 .panel-chip {
   margin: 0;
   background: #79a9ff;
   color: #ffffff;
-  font-size: 0.85rem;
+  font-size: 0.7225rem;
   font-weight: 700;
 }
 
@@ -169,16 +169,17 @@ function getDefaultHappeningNow() {
 }
 
 .status-panel h2 {
-  margin-top: 8px;
-  font-size: 1.25rem;
+  margin-top: 6.8px;
+  font-size: 1.0625rem;
   font-weight: 800;
   line-height: 1.2;
 }
 
 .panel-meta,
 .panel-location {
-  margin-top: 8px;
+  margin-top: 6.8px;
   color: #4c5968;
+  font-size: 0.85rem;
 }
 
 .panel-meta {
