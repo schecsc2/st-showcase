@@ -29,7 +29,7 @@
     </q-input>
 
     <q-btn-dropdown
-      v-if="!selectedSearchResult && !search.trim()"
+      v-if="!selectedSearchResult && !(search || '').trim()"
       class="map-quick-filters"
       dropdown-icon="keyboard_arrow_down"
       label="Quick Filters"
