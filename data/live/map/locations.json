@@ -111,8 +111,17 @@
   ],
   "demos": [
     {
+      "id": "b201-atrium-demo",
+      "title": "Proof of Concept Demo",
+      "location": "Semmel Center Atrium",
+      "shape": "circle",
+      "x": 850,
+      "y": 2080
+    },
+    {
       "id": "patio",
       "title": "Patio Demos",
+      "shape": "zone",
       "demos": [
         {
           "id": "patio-demo-1",
@@ -137,6 +146,7 @@
     {
       "id": "sidewalk",
       "title": "Sidewalk Demos",
+      "shape": "zone",
       "demos": [
         {
           "id": "sidewalk-demo-1",

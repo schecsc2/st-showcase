@@ -10,7 +10,8 @@ export default configure(() => ({
   ],
 
   extras: [
-    'material-icons'
+    'material-icons',
+    'material-symbols-outlined'
   ],
 
   build: {

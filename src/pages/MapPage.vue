@@ -87,10 +87,14 @@
         @click="selectSearchResult(result)"
       >
         <span
-          :class="{ 'map-search-result__title--bold': result.kind === 'neighborhood' || result.kind === 'sct' }"
+          :class="{ 'map-search-result__title--bold': result.kind !== 'poster' }"
           class="map-search-result__title"
         >
-          {{ result.title }}
+          <template v-if="result.kind === 'poster'">
+            <span class="map-search-result__prefix">{{ result.neighborhood.title }} &gt;</span>
+            {{ result.poster.title }}
+          </template>
+          <template v-else>{{ result.title }}</template>
         </span>
       </button>
     </div>
@@ -187,45 +191,33 @@ const geometryHeight = 8500
 const mapSearchCategories = [
   {
     key: 'type-neighborhood',
-    kind: 'type',
     type: 'neighborhood',
-    title: 'Neighborhoods',
-    searchText: 'neighborhood neighborhoods zone zones'
+    title: 'Neighborhoods'
   },
   {
     key: 'type-demo',
-    kind: 'type',
     type: 'demo',
-    title: 'Demos',
-    searchText: 'demo demos demonstration demonstrations'
+    title: 'Demos'
   },
   {
     key: 'type-sct',
-    kind: 'type',
     type: 'sct',
-    title: 'Feature Booths',
-    searchText: 'feature booth booths sct scts strategic challenge challenges showcase technology'
+    title: 'Feature Booths'
   },
   {
     key: 'type-help',
-    kind: 'type',
     type: 'help',
-    title: 'Help',
-    searchText: 'help info information question questions support'
+    title: 'Help'
   },
   {
     key: 'type-restroom',
-    kind: 'type',
     type: 'restroom',
-    title: 'Restrooms',
-    searchText: 'restroom restrooms bathroom bathrooms wc'
+    title: 'Restrooms'
   },
   {
     key: 'type-food',
-    kind: 'type',
     type: 'food',
-    title: 'Food/Drink',
-    searchText: 'food/drink food foods drink drinks dining restaurant cafe'
+    title: 'Food/Drink'
   },
 ]
 const neighborhoodsById = Object.fromEntries(mapData.neighborhoods.map((neighborhood) => [neighborhood.id, neighborhood]))
@@ -254,7 +246,6 @@ const mapSearchResults = computed(() => {
     return []
   }
 
-  const categoryResults = mapSearchCategories.filter((category) => category.searchText.includes(query))
   const neighborhoodResults = mapData.neighborhoods.filter((neighborhood) => {
     return neighborhood.title.toLowerCase().includes(query)
   }).map((neighborhood) => ({
@@ -282,8 +273,16 @@ const mapSearchResults = computed(() => {
     title: sct.title,
     sct
   }))
+  const demoResults = mapData.demos.filter((demo) => {
+    return demo.shape === 'circle' && demo.title.toLowerCase().includes(query)
+  }).map((demo) => ({
+    key: `demo-${demo.id}`,
+    kind: 'demo',
+    title: demo.title,
+    demo
+  }))
 
-  return categoryResults.concat(neighborhoodResults, sctResults, posterResults)
+  return neighborhoodResults.concat(sctResults, demoResults, posterResults)
 })
 let selectedMarker = null
 let selectedGeometryPath = null
@@ -321,6 +320,21 @@ onMounted(() => {
   geometryOverlay.items.forEach((item) => {
     geometryLayers.push(item)
     addGeometryClick(item)
+  })
+
+  mapData.demos.filter((demo) => demo.shape === 'circle').forEach((demo) => {
+    const marker = L.marker(getMapPoint(demo), {
+      icon: getDemoIcon()
+    }).addTo(map)
+
+    const item = {
+      node: demo,
+      type: 'demo',
+      marker
+    }
+
+    markers.push(item)
+    addMarkerClick(item)
   })
 
   mapData.bathrooms.forEach((bathroom) => {
@@ -535,6 +549,16 @@ function getRestroomIcon() {
   })
 }
 
+function getDemoIcon() {
+  return L.divIcon({
+    className: 'map-node map-node--demo',
+    html: '<span class="material-symbols-outlined">orbit</span>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -17]
+  })
+}
+
 function getFoodIcon() {
   return L.divIcon({
     className: 'map-node map-node--food',
@@ -589,19 +613,9 @@ function selectSearchResult(result) {
   search.value = ''
   selectedSearchResult.value = result
 
-  if (result.kind === 'type') {
-    activeTypes.value = [result.type]
-    selectedMarker = null
-    selectedGeometryPath = null
-    clearPosterMarkers()
-    closePopup()
-    updateMarkers()
-    map.fitBounds(getMapBounds())
-    return
-  }
-
-  if (result.kind === 'sct') {
-    const item = markers.find(({ node, type }) => type === 'sct' && node.id === result.sct.id)
+  if (result.kind === 'sct' || result.kind === 'demo') {
+    const node = result[result.kind]
+    const item = markers.find(({ node: markerNode, type }) => type === result.kind && markerNode.id === node.id)
 
     if (item) {
       selectMarker(item)
@@ -1003,6 +1017,10 @@ function getPosterSearchText(poster) {
   font-weight: 800;
 }
 
+.map-search-result__prefix {
+  font-weight: 800;
+}
+
 .map-popup-card {
   position: fixed;
   right: 16px;
@@ -1120,7 +1138,8 @@ function getPosterSearchText(poster) {
   box-shadow: 0 4px 12px rgba(31, 41, 51, 0.22);
 }
 
-.map-page :deep(.map-node .material-icons) {
+.map-page :deep(.map-node .material-icons),
+.map-page :deep(.map-node .material-symbols-outlined) {
   font-size: 20px;
   line-height: 1;
 }
@@ -1128,6 +1147,17 @@ function getPosterSearchText(poster) {
 .map-page :deep(.map-node--active) {
   border-color: #79a9ff;
   background: #79a9ff;
+  color: #ffffff;
+}
+
+.map-page :deep(.map-node--demo) {
+  border-color: #002C77;
+  color: #002C77;
+}
+
+.map-page :deep(.map-node--demo.map-node--active) {
+  border-color: #002C77;
+  background: #002C77;
   color: #ffffff;
 }
 
