@@ -102,8 +102,6 @@ function getDefaultHappeningNow() {
 
 <style scoped>
 .home-page {
-  display: flex;
-  flex-direction: column;
   max-width: 960px;
   margin: 0 auto;
   padding: 24px 16px 120px;
@@ -188,9 +186,8 @@ function getDefaultHappeningNow() {
 
 .home-footer {
   display: flex;
-  justify-content: flex-end;
-  margin-top: auto;
-  padding-top: 32px;
+  justify-content: center;
+  margin-top: 32px;
 }
 
 .apl-logo {
