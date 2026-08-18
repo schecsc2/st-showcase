@@ -31,11 +31,12 @@
     <q-btn-dropdown
       v-if="!selectedSearchResult && !(search || '').trim()"
       class="map-quick-filters"
+      content-class="map-quick-filters-menu"
       dense
       dropdown-icon="add"
       label="Quick Filters"
-      menu-anchor="top end"
-      :menu-offset="[8, 0]"
+      menu-anchor="bottom start"
+      :menu-offset="[0, 0]"
       menu-self="top start"
       no-caps
       unelevated
@@ -48,15 +49,25 @@
           @click="selectType(filter.type)"
         >
           <q-item-section avatar>
-            <q-icon :name="filter.icon" size="18px" />
-          </q-item-section>
-          <q-item-section>{{ filter.title }}</q-item-section>
-          <q-item-section side>
             <q-checkbox
               :model-value="activeTypes.includes(filter.type)"
+              class="map-quick-filter-checkbox"
               dense
               @click.stop
               @update:model-value="selectType(filter.type)"
+            />
+          </q-item-section>
+          <q-item-section>{{ filter.title }}</q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn
+              class="map-quick-filters__clear"
+              dense
+              flat
+              label="Clear"
+              no-caps
+              @click="clearTypes"
             />
           </q-item-section>
         </q-item>
@@ -175,27 +186,38 @@ const geometryWidth = 11000
 const geometryHeight = 8500
 const mapSearchCategories = [
   {
-    key: 'type-demo',
-    kind: 'type',
-    type: 'demo',
-    title: 'Demos',
-    icon: 'sym_o_orbit',
-    searchText: 'demo demos demonstration demonstrations'
-  },
-  {
     key: 'type-neighborhood',
     kind: 'type',
     type: 'neighborhood',
     title: 'Neighborhoods',
-    icon: 'grid_view',
     searchText: 'neighborhood neighborhoods zone zones'
+  },
+  {
+    key: 'type-demo',
+    kind: 'type',
+    type: 'demo',
+    title: 'Demos',
+    searchText: 'demo demos demonstration demonstrations'
+  },
+  {
+    key: 'type-sct',
+    kind: 'type',
+    type: 'sct',
+    title: 'Feature Booths',
+    searchText: 'feature booth booths sct scts strategic challenge challenges showcase technology'
+  },
+  {
+    key: 'type-help',
+    kind: 'type',
+    type: 'help',
+    title: 'Help',
+    searchText: 'help info information question questions support'
   },
   {
     key: 'type-restroom',
     kind: 'type',
     type: 'restroom',
     title: 'Restrooms',
-    icon: 'wc',
     searchText: 'restroom restrooms bathroom bathrooms wc'
   },
   {
@@ -203,24 +225,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'food',
     title: 'Food/Drink',
-    icon: 'restaurant',
     searchText: 'food/drink food foods drink drinks dining restaurant cafe'
-  },
-  {
-    key: 'type-help',
-    kind: 'type',
-    type: 'help',
-    title: 'Help',
-    icon: 'question_mark',
-    searchText: 'help info information question questions support'
-  },
-  {
-    key: 'type-sct',
-    kind: 'type',
-    type: 'sct',
-    title: 'Feature Booths',
-    icon: 'lightbulb',
-    searchText: 'feature booth booths sct scts strategic challenge challenges showcase technology'
   },
 ]
 const neighborhoodsById = Object.fromEntries(mapData.neighborhoods.map((neighborhood) => [neighborhood.id, neighborhood]))
@@ -574,6 +579,11 @@ function selectType(type) {
   map.fitBounds(getMapBounds())
 }
 
+function clearTypes() {
+  activeTypes.value = []
+  updateMarkers()
+}
+
 function selectSearchResult(result) {
   searchFocused.value = false
   search.value = ''
@@ -656,7 +666,6 @@ function clearSelection() {
 
 function clearMapHighlight() {
   selectedSearchResult.value = null
-  activeTypes.value = []
   search.value = ''
   clearSelection()
 }
@@ -931,6 +940,25 @@ function getPosterSearchText(poster) {
   color: #1f2933;
   font-weight: 800;
   box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
+}
+
+.map-quick-filters[aria-expanded='true'] {
+  border-radius: 8px 8px 0 0;
+}
+
+:global(.map-quick-filters-menu) {
+  border: 1px solid #dde3ea;
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
+}
+
+.map-quick-filters__clear {
+  color: #002C77;
+  font-weight: 800;
+}
+
+.map-quick-filter-checkbox :deep(.q-checkbox__inner--truthy) {
+  color: #002C77;
 }
 
 .map-search-results {

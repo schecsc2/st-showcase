@@ -64,7 +64,7 @@ async function navigateTo(link) {
   right: 16px;
   bottom: calc(16px + env(safe-area-inset-bottom));
   left: 16px;
-  z-index: 10;
+  z-index: 1000;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
