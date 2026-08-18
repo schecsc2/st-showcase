@@ -1,0 +1,482 @@
+{
+  "image": {
+    "width": 2448,
+    "height": 2550
+  },
+  "bathrooms": [
+    {
+      "id": "b200-restroom-1",
+      "title": "Restroom",
+      "x": 827.32,
+      "y": 526.16
+    },
+    {
+      "id": "b200-restroom-2",
+      "title": "Restroom",
+      "x": 884.44,
+      "y": 526.16
+    },
+    {
+      "id": "b200-restroom-3",
+      "title": "Restroom",
+      "x": 864.53,
+      "y": 567.7
+    },
+    {
+      "id": "b201-restroom-1",
+      "title": "Restroom",
+      "x": 1250.5,
+      "y": 1876.18
+    },
+    {
+      "id": "b201-restroom-2",
+      "title": "Restroom",
+      "x": 1253.09,
+      "y": 1937.62
+    },
+    {
+      "id": "b201-restroom-3",
+      "title": "Restroom",
+      "x": 1640.79,
+      "y": 2041.47
+    },
+    {
+      "id": "b201-restroom-4",
+      "title": "Restroom",
+      "x": 1694.45,
+      "y": 2042.34
+    },
+    {
+      "id": "b201-restroom-5",
+      "title": "Restroom",
+      "x": 1701.37,
+      "y": 2213.68
+    }
+  ],
+  "food": [
+    {
+      "id": "b201-atrium-food",
+      "title": "Food",
+      "location": "201 Atrium",
+      "x": 1585.38,
+      "y": 2077.2
+    },
+    {
+      "id": "b201-atrium-food-2",
+      "title": "Food",
+      "location": "201 Atrium",
+      "x": 735.87,
+      "y": 2058.57
+    },
+    {
+      "id": "b201-lobby-food",
+      "title": "Food",
+      "location": "201 Lobby",
+      "x": 1790.3,
+      "y": 2157.3
+    },
+    {
+      "id": "b200-lobby-food",
+      "title": "Food",
+      "location": "200 Lobby",
+      "x": 1169.94,
+      "y": 644.58
+    }
+  ],
+  "help": [
+    {
+      "id": "b201-patio-help",
+      "title": "Help",
+      "location": "201 Patio",
+      "x": 1430.75,
+      "y": 1510.86
+    },
+    {
+      "id": "b201-atrium-help-1",
+      "title": "Help",
+      "location": "201 Atrium",
+      "x": 1030.21,
+      "y": 2093.96
+    },
+    {
+      "id": "b201-atrium-help-2",
+      "title": "Help",
+      "location": "201 Atrium",
+      "x": 1313.38,
+      "y": 2028.76
+    },
+    {
+      "id": "b201-lobby-help",
+      "title": "Help",
+      "location": "201 Lobby",
+      "x": 1840.6,
+      "y": 2159.17
+    }
+  ],
+  "scts": [
+    {
+      "id": "sct-1",
+      "title": "Achieving Robust Homeland Defense",
+      "x": 737.73,
+      "y": 2092.1
+    },
+    {
+      "id": "sct-2",
+      "title": "Revitalizing the Nation's Strategic Capabilities",
+      "x": 933.34,
+      "y": 1984.05
+    },
+    {
+      "id": "sct-3",
+      "title": "Accelerating Warfighting Capabilities for the Pacific Theater",
+      "x": 1443.79,
+      "y": 1991.5
+    },
+    {
+      "id": "sct-4",
+      "title": "Enabling Space Superiority",
+      "x": 1080.51,
+      "y": 702.33
+    }
+  ],
+  "demos": [
+    {
+      "id": "patio",
+      "title": "Patio Demos",
+      "demos": [
+        {
+          "id": "patio-demo-1",
+          "title": "Autonomous Rover Handoff",
+          "authors": "Maya Chen, Jordan Ellis",
+          "description": "A small rover switches between autonomous waypoint following and operator tasking during a live site survey."
+        },
+        {
+          "id": "patio-demo-2",
+          "title": "Portable Mesh Sensor Kit",
+          "authors": "Ari Bennett, Grace Park",
+          "description": "Deployable sensor nodes form a temporary network and stream health, location, and detection status to an edge display."
+        },
+        {
+          "id": "patio-demo-3",
+          "title": "Field Power Monitoring",
+          "authors": "Leah Anderson, Victor Chen",
+          "description": "A compact dashboard estimates remaining runtime and load risk for a mixed set of mobile field systems."
+        }
+      ]
+    },
+    {
+      "id": "sidewalk",
+      "title": "Sidewalk Demos",
+      "demos": [
+        {
+          "id": "sidewalk-demo-1",
+          "title": "Wearable Heat Stress Alert",
+          "authors": "Julia Novak, Nikhil Rao",
+          "description": "A wearable prototype combines motion, heart rate, and ambient conditions to flag heat stress risk."
+        },
+        {
+          "id": "sidewalk-demo-2",
+          "title": "Edge Vision Checkpoint",
+          "authors": "Elena Brooks, Mason Green",
+          "description": "An edge device runs lightweight object detection and reports confidence changes as lighting and distance shift."
+        },
+        {
+          "id": "sidewalk-demo-3",
+          "title": "Rapid Repair Workflow",
+          "authors": "Tessa Clark, Henry Morgan",
+          "description": "A guided repair flow links part identification, fabrication options, and inspection checks for field sustainment."
+        }
+      ]
+    }
+  ],
+  "neighborhoods": [
+    {
+      "id": "atrium",
+      "title": "AI, Autonomy, and Teaming",
+      "posters": [
+        {
+          "id": "atrium-poster-1",
+          "title": "Adaptive Swarms for Rapid Site Survey",
+          "authors": "Maya Chen, Luis Ortega",
+          "description": "A simulated autonomy stack assigns small robots to changing survey tasks while keeping operators in the loop."
+        },
+        {
+          "id": "atrium-poster-2",
+          "title": "Human Trust Signals for AI Teammates",
+          "authors": "Priya Shah, Owen Miller",
+          "description": "This work explores simple interface cues that help teams understand when an AI assistant is confident or uncertain."
+        },
+        {
+          "id": "atrium-poster-3",
+          "title": "Mission Planning with Constraint-Aware Agents",
+          "authors": "Nora Patel, James Whitaker",
+          "description": "A planning agent proposes routes and task sequences while honoring timing, safety, and resource limits."
+        },
+        {
+          "id": "atrium-poster-4",
+          "title": "Collaborative Autonomy in Dense Environments",
+          "authors": "Elena Brooks, Marcus Lee",
+          "description": "The poster presents a testbed for coordinating autonomous platforms when communications and line of sight are limited."
+        },
+        {
+          "id": "atrium-poster-5",
+          "title": "AI Teaming Metrics for Field Exercises",
+          "authors": "Sofia Ramirez, Daniel Kim",
+          "description": "A lightweight scoring approach compares human-only, AI-assisted, and mixed-team performance during repeatable exercises."
+        }
+      ]
+    },
+    {
+      "id": "front-atrium",
+      "title": "Sensing, C5ISR, and Networking",
+      "posters": [
+        {
+          "id": "front-atrium-poster-1",
+          "title": "Resilient Mesh Links for Mobile Sensors",
+          "authors": "Ari Bennett, Chloe Nguyen",
+          "description": "A prototype network keeps sensor data moving as nodes enter, leave, and reconnect across a cluttered environment."
+        },
+        {
+          "id": "front-atrium-poster-2",
+          "title": "Low-Power Edge Fusion for Wide-Area Sensing",
+          "authors": "Iris Coleman, Mateo Ruiz",
+          "description": "Edge processors combine multiple sensor streams locally to reduce bandwidth while preserving useful detections."
+        },
+        {
+          "id": "front-atrium-poster-3",
+          "title": "C5ISR Timeline Alignment Tools",
+          "authors": "Grace Park, Ethan Wright",
+          "description": "This poster shows methods for aligning reports, tracks, and sensor events into a shared operational timeline."
+        },
+        {
+          "id": "front-atrium-poster-4",
+          "title": "Signal-Aware Routing Under Interference",
+          "authors": "Hannah Lewis, Omar Haddad",
+          "description": "A routing algorithm shifts traffic away from degraded links using live signal quality estimates."
+        },
+        {
+          "id": "front-atrium-poster-5",
+          "title": "Network Health Summaries for Operators",
+          "authors": "Lena Morris, Victor Chen",
+          "description": "Compact visual summaries help operators spot disconnected nodes, overloaded paths, and sensor coverage gaps."
+        }
+      ]
+    },
+    {
+      "id": "back-atrium",
+      "title": "Hypersonics, EW, and Directed Energy",
+      "posters": [
+        {
+          "id": "back-atrium-poster-1",
+          "title": "Thermal Margins for High-Speed Vehicles",
+          "authors": "Evan Stone, Mira Kapoor",
+          "description": "A reduced-order model estimates heating risk across candidate high-speed vehicle concepts."
+        },
+        {
+          "id": "back-atrium-poster-2",
+          "title": "EW Effects Modeling for Rapid Analysis",
+          "authors": "Talia Moore, Ben Carter",
+          "description": "The poster describes a fast simulation workflow for comparing electronic warfare effects across mission conditions."
+        },
+        {
+          "id": "back-atrium-poster-3",
+          "title": "Directed Energy Beam Quality Diagnostics",
+          "authors": "Renee Johnson, Alexei Petrov",
+          "description": "A laboratory diagnostic estimates beam quality changes caused by turbulence and platform motion."
+        },
+        {
+          "id": "back-atrium-poster-4",
+          "title": "Hypersonic Trajectory Uncertainty Mapping",
+          "authors": "Mei Lin, Carter Evans",
+          "description": "Uncertainty maps show where small environmental changes most affect predicted trajectory behavior."
+        },
+        {
+          "id": "back-atrium-poster-5",
+          "title": "Spectrum Operations Decision Support",
+          "authors": "Noah Singh, Amelia Foster",
+          "description": "A decision aid ranks spectrum options based on mission priority, interference risk, and time sensitivity."
+        }
+      ]
+    },
+    {
+      "id": "breakout-room-2",
+      "title": "Cybersecurity and Mission Assurance",
+      "posters": [
+        {
+          "id": "breakout-room-2-poster-1",
+          "title": "Mission Impact Views for Cyber Alerts",
+          "authors": "Jordan Ellis, Mina Zhao",
+          "description": "Cyber alerts are grouped by the mission functions they may affect, helping teams focus on operational risk."
+        },
+        {
+          "id": "breakout-room-2-poster-2",
+          "title": "Assurance Cases for Rapid Software Updates",
+          "authors": "Kara Simmons, Dev Patel",
+          "description": "A lightweight assurance case tracks what evidence is needed before a fast software update can be trusted."
+        },
+        {
+          "id": "breakout-room-2-poster-3",
+          "title": "Behavioral Baselines for Embedded Systems",
+          "authors": "Felix Grant, Sana Ahmed",
+          "description": "The approach learns normal device behavior and flags suspicious changes during operational testing."
+        },
+        {
+          "id": "breakout-room-2-poster-4",
+          "title": "Cyber Resilience Exercise Scoring",
+          "authors": "Naomi Reed, Isaac Turner",
+          "description": "A scoring model compares how quickly teams detect, contain, and recover from simulated cyber disruptions."
+        },
+        {
+          "id": "breakout-room-2-poster-5",
+          "title": "Supply Chain Signals for Mission Risk",
+          "authors": "Olivia Hart, Miles Brooks",
+          "description": "This poster shows how software, hardware, and vendor signals can be summarized as mission assurance indicators."
+        }
+      ]
+    },
+    {
+      "id": "200-lobby-back",
+      "title": "Advanced Manufacturing and Contested Logistics",
+      "posters": [
+        {
+          "id": "200-lobby-back-poster-1",
+          "title": "Additive Repair Kits for Remote Operations",
+          "authors": "Tessa Clark, Henry Morgan",
+          "description": "A modular repair kit pairs portable fabrication tools with validated part recipes for field sustainment."
+        },
+        {
+          "id": "200-lobby-back-poster-2",
+          "title": "Logistics Routing with Disrupted Supply Lines",
+          "authors": "Paige Wilson, Andre Silva",
+          "description": "The model reroutes supplies under changing risk, delay, and inventory constraints."
+        },
+        {
+          "id": "200-lobby-back-poster-3",
+          "title": "Digital Threads for Critical Components",
+          "authors": "Leah Anderson, Simon Blake",
+          "description": "A digital thread links material data, manufacturing history, inspection results, and field performance."
+        },
+        {
+          "id": "200-lobby-back-poster-4",
+          "title": "Robotic Sorting for Expeditionary Warehouses",
+          "authors": "Camila Torres, Neil Foster",
+          "description": "A small robotic workflow demonstrates how mixed supplies can be sorted and staged with minimal setup."
+        },
+        {
+          "id": "200-lobby-back-poster-5",
+          "title": "Manufacturing Readiness Dashboards",
+          "authors": "Rachel Kim, Thomas Reed",
+          "description": "A dashboard summarizes supplier readiness, production bottlenecks, and qualification status for planners."
+        }
+      ]
+    },
+    {
+      "id": "breakout-room-1",
+      "title": "Biotechnology and Medical Systems",
+      "posters": [
+        {
+          "id": "breakout-room-1-poster-1",
+          "title": "Wearable Biomarkers for Heat Stress",
+          "authors": "Julia Novak, Samir Desai",
+          "description": "A wearable sensing concept estimates heat stress risk using heart rate, motion, and environmental inputs."
+        },
+        {
+          "id": "breakout-room-1-poster-2",
+          "title": "Rapid Triage Support for Austere Care",
+          "authors": "Alyssa Young, Omar Khan",
+          "description": "The prototype prioritizes care recommendations using limited measurements available in austere settings."
+        },
+        {
+          "id": "breakout-room-1-poster-3",
+          "title": "Synthetic Biology Safety Workflows",
+          "authors": "Maren Fischer, Leo Bennett",
+          "description": "A safety workflow tracks design assumptions, test results, and containment decisions across synthetic biology projects."
+        },
+        {
+          "id": "breakout-room-1-poster-4",
+          "title": "Medical Supply Forecasting Under Surge Demand",
+          "authors": "Dina Alvarez, Peter Collins",
+          "description": "Forecasts combine patient arrival patterns and inventory levels to anticipate shortages during surge conditions."
+        },
+        {
+          "id": "breakout-room-1-poster-5",
+          "title": "Bio-Signal Quality Checks at the Edge",
+          "authors": "Nikhil Rao, Emma Price",
+          "description": "Edge quality checks identify noisy biosignals before they affect downstream analytics or clinical decisions."
+        }
+      ]
+    },
+    {
+      "id": "200-lobby-front",
+      "title": "Space Systems and PNT",
+      "posters": [
+        {
+          "id": "200-lobby-front-poster-1",
+          "title": "Resilient Timing for Distributed Platforms",
+          "authors": "Logan Scott, Priya Nair",
+          "description": "A timing architecture maintains synchronization when primary navigation references become degraded."
+        },
+        {
+          "id": "200-lobby-front-poster-2",
+          "title": "Space Domain Event Correlation",
+          "authors": "Molly Jenkins, Tariq Allen",
+          "description": "This poster shows methods for linking observations, maneuvers, and alerts into coherent space-domain events."
+        },
+        {
+          "id": "200-lobby-front-poster-3",
+          "title": "PNT Integrity Checks for Field Users",
+          "authors": "Sarah Ito, Mason Green",
+          "description": "A user-facing integrity check estimates when position, navigation, and timing data may be unreliable."
+        },
+        {
+          "id": "200-lobby-front-poster-4",
+          "title": "Small Satellite Tasking Under Constraints",
+          "authors": "Aiden Murphy, Laila Hassan",
+          "description": "A scheduler balances collection value, power, downlink, and pointing constraints for small satellite missions."
+        },
+        {
+          "id": "200-lobby-front-poster-5",
+          "title": "Navigation Aiding from Opportunistic Signals",
+          "authors": "Clara Evans, Jonah Brooks",
+          "description": "The concept uses available environmental signals to supplement navigation when standard references are limited."
+        }
+      ]
+    },
+    {
+      "id": "200-lobby-middle",
+      "title": "Microelectronics, Quantum, and Materials",
+      "posters": [
+        {
+          "id": "200-lobby-middle-poster-1",
+          "title": "Radiation-Aware Microelectronics Screening",
+          "authors": "Nadia Flores, Eric Walsh",
+          "description": "A screening workflow compares candidate components for performance under radiation-like stress conditions."
+        },
+        {
+          "id": "200-lobby-middle-poster-2",
+          "title": "Quantum Sensor Drift Compensation",
+          "authors": "Yasmin Ali, Connor Hughes",
+          "description": "A compensation method reduces drift in quantum sensor measurements during long-duration collection."
+        },
+        {
+          "id": "200-lobby-middle-poster-3",
+          "title": "Materials Discovery with Active Learning",
+          "authors": "Beatrice Lane, Felix Romero",
+          "description": "Active learning selects the next most useful experiments for evaluating new material candidates."
+        },
+        {
+          "id": "200-lobby-middle-poster-4",
+          "title": "Secure Packaging for Edge Processors",
+          "authors": "Liam Foster, Anika Rao",
+          "description": "The poster describes packaging concepts that protect edge processors from environmental and tamper risks."
+        },
+        {
+          "id": "200-lobby-middle-poster-5",
+          "title": "Defect Mapping in Advanced Materials",
+          "authors": "Isabel Martin, Theo Brooks",
+          "description": "Image analysis tools map microscopic defects and connect them to manufacturing process variables."
+        }
+      ]
+    }
+  ]
+}

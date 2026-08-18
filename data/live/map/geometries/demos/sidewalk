@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:svg="http://www.w3.org/2000/svg"
+     version="1.1"
+     width="34in" height="35.4167in"
+     viewBox="0 0 2448 2550">
+  <path id="path1"
+        fill="none" stroke="black" stroke-width="1"
+        d="M 1425.72,1650.59
+           C 1425.72,1650.59 1507.86,1638.10 1507.86,1638.10
+             1507.86,1638.10 1347.21,1022.22 1347.21,1022.22
+             1347.21,1022.22 1262.44,1022.61 1262.44,1022.61
+             1262.44,1022.61 1425.72,1650.59 1425.72,1650.59 Z">
+        <title>sidewalk</title>
+  </path>
+</svg>
