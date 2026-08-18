@@ -30,7 +30,6 @@
 
     <q-btn-dropdown
       v-if="!selectedSearchResult && !(search || '').trim()"
-      align="left"
       class="map-quick-filters"
       dense
       dropdown-icon="add"
