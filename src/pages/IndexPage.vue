@@ -1,7 +1,7 @@
 <template>
   <q-page class="home-page">
     <section class="home-hero">
-      <h1>2026 APL S&amp;T Showcase</h1>
+      <img class="home-logo" :src="logo" alt="2026 APL S&T Showcase">
       <div class="event-date">{{ eventDate }}</div>
       <p>Johns Hopkins APL South Campus</p>
     </section>
@@ -27,6 +27,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import logo from '../../data/live/logo/logo-transparent.png'
 import agendaData from '../../data/sample/agenda.json'
 
 const eventDate = agendaData.eventDate
@@ -115,18 +116,16 @@ function getDefaultHappeningNow() {
   letter-spacing: 0;
 }
 
-.home-hero h1,
 .home-section h2,
 .status-panel h2 {
   margin: 0;
   letter-spacing: 0;
 }
 
-.home-hero h1 {
-  max-width: 680px;
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 1.05;
+.home-logo {
+  display: block;
+  width: min(100%, 300px);
+  height: auto;
 }
 
 .home-hero p {
@@ -142,14 +141,9 @@ function getDefaultHappeningNow() {
 
 .status-panel {
   border: 1px solid #dde3ea;
-  border-left: 5px solid #79a9ff;
   border-radius: 8px;
   background: #ffffff;
   padding: 16px;
-}
-
-.status-panel--next {
-  border-left-color: #79a9ff;
 }
 
 .panel-chip {
@@ -158,6 +152,14 @@ function getDefaultHappeningNow() {
   color: #ffffff;
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+.status-panel--now .panel-chip {
+  background: #2e7d32;
+}
+
+.status-panel--next .panel-chip {
+  background: #ef7d00;
 }
 
 .status-panel h2 {
@@ -182,19 +184,8 @@ function getDefaultHappeningNow() {
     padding: 36px 24px 128px;
   }
 
-  .home-hero h1 {
-    font-size: 3rem;
-  }
-
   .status-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media (max-width: 420px) {
-  .home-hero h1 {
-    font-size: 2rem;
-  }
-
 }
 </style>

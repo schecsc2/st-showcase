@@ -18,7 +18,27 @@
     </q-input>
 
     <section class="explore-grid">
-      <div class="neighborhood-list">
+      <div v-if="search.trim()" class="poster-list">
+        <article v-for="result in posterSearchResults" :key="result.poster.id" class="poster-item">
+          <q-chip class="poster-neighborhood-chip" dense square>
+            {{ result.neighborhood.title }}
+          </q-chip>
+          <h2>{{ result.poster.title }}</h2>
+          <p>{{ result.poster.authors }}</p>
+          <p>{{ result.poster.description }}</p>
+          <q-btn
+            :to="{ path: '/map', query: { neighborhood: result.neighborhood.id, poster: result.poster.id } }"
+            class="poster-map-button"
+            dense
+            flat
+            no-caps
+          >
+            Show on Map
+          </q-btn>
+        </article>
+      </div>
+
+      <div v-else class="neighborhood-list">
         <article
           v-for="neighborhood in filteredNeighborhoods"
           :key="neighborhood.id"
@@ -29,7 +49,7 @@
             class="neighborhood-button"
             no-caps
             unelevated
-            @click="selectedNeighborhoodId = neighborhood.id"
+            @click="selectNeighborhood(neighborhood.id)"
           >
             <span>{{ neighborhood.title }}</span>
             <q-icon :name="neighborhood.id === selectedNeighborhoodId ? 'expand_more' : 'chevron_right'" size="20px" />
@@ -38,8 +58,17 @@
           <div v-if="neighborhood.id === selectedNeighborhoodId && neighborhood.posters.length" class="poster-list">
             <article v-for="poster in neighborhood.posters" :key="poster.id" class="poster-item">
               <h2>{{ poster.title }}</h2>
-              <p>{{ poster.author }}</p>
+              <p>{{ poster.authors }}</p>
               <p>{{ poster.description }}</p>
+              <q-btn
+                :to="{ path: '/map', query: { neighborhood: neighborhood.id, poster: poster.id } }"
+                class="poster-map-button"
+                dense
+                flat
+                no-caps
+              >
+                Show on Map
+              </q-btn>
             </article>
           </div>
         </article>
@@ -50,23 +79,37 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import exploreData from '../../data/sample/explore.json'
+import mapData from '../../data/live/map/locations.json'
 
 const search = ref('')
 const selectedNeighborhoodId = ref(null)
-const filteredNeighborhoods = computed(() => {
+const filteredNeighborhoods = computed(() => mapData.neighborhoods)
+const posterSearchResults = computed(() => {
   const query = search.value.trim().toLowerCase()
 
   if (!query) {
-    return exploreData.neighborhoods
+    return []
   }
 
-  return exploreData.neighborhoods.filter((neighborhood) => {
-    return neighborhood.title.toLowerCase().includes(query) || neighborhood.posters.some((poster) => {
-      return poster.title.toLowerCase().includes(query) || poster.author.toLowerCase().includes(query)
+  return mapData.neighborhoods.flatMap((neighborhood) => {
+    return neighborhood.posters.filter((poster) => {
+      return getPosterSearchText(neighborhood, poster).includes(query)
+    }).map((poster) => {
+      return {
+        neighborhood,
+        poster
+      }
     })
   })
 })
+
+function getPosterSearchText(neighborhood, poster) {
+  return `${neighborhood.title} ${poster.title} ${poster.authors} ${poster.description}`.toLowerCase()
+}
+
+function selectNeighborhood(id) {
+  selectedNeighborhoodId.value = selectedNeighborhoodId.value === id ? null : id
+}
 </script>
 
 <style scoped>
@@ -118,6 +161,10 @@ const filteredNeighborhoods = computed(() => {
   gap: 10px;
 }
 
+.neighborhood-item .poster-list {
+  margin-left: 16px;
+}
+
 .neighborhood-item {
   display: grid;
   gap: 10px;
@@ -151,6 +198,13 @@ const filteredNeighborhoods = computed(() => {
   padding: 14px;
 }
 
+.poster-neighborhood-chip {
+  margin: 0 0 8px;
+  background: #294b75;
+  color: #ffffff;
+  font-weight: 800;
+}
+
 .poster-item h2 {
   font-size: 1rem;
   font-weight: 800;
@@ -161,6 +215,13 @@ const filteredNeighborhoods = computed(() => {
   margin: 4px 0 0;
   color: #5f6b7a;
   line-height: 1.35;
+}
+
+.poster-map-button {
+  margin-top: 10px;
+  padding: 0;
+  color: #294b75;
+  font-weight: 800;
 }
 
 @media (min-width: 700px) {

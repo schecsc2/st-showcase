@@ -21,14 +21,122 @@
           :subtitle="item.time"
         >
           <p v-if="item.location">{{ item.location }}</p>
+          <q-btn
+            v-if="hasAgendaSpeakers(item)"
+            class="speaker-button"
+            dense
+            flat
+            no-caps
+            @click="showSpeakers(item)"
+          >
+            About Speakers
+          </q-btn>
         </q-timeline-entry>
       </q-timeline>
     </section>
+
+    <q-dialog v-model="speakerDialogOpen">
+      <q-card class="speaker-dialog">
+        <q-card-section class="speaker-dialog__section">
+          <div class="speaker-dialog__title">Speakers</div>
+          <q-btn
+            v-close-popup
+            class="speaker-dialog__close"
+            dense
+            flat
+            icon="close"
+            round
+          />
+        </q-card-section>
+
+        <q-card-section class="speaker-dialog__section speaker-dialog__body">
+          <article
+            v-for="speaker in activeSpeakers"
+            :key="speaker.name"
+            class="speaker-dialog__speaker"
+          >
+            <div class="speaker-dialog__header">
+              <img class="speaker-dialog__image" :src="speaker.image" :alt="speaker.name">
+              <div>
+                <div class="speaker-dialog__label">{{ speaker.label }}</div>
+                <h2>{{ speaker.name }}</h2>
+              </div>
+            </div>
+            <p v-for="paragraph in speaker.paragraphs" :key="paragraph">{{ paragraph }}</p>
+          </article>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import agendaData from '../../data/sample/agenda.json'
+import speakersText from '../../data/event_content/speakers.md?raw'
+import davidVanWieImage from '../../data/live/images/dr-david-van-wie.jpg'
+import joanHoffmannImage from '../../data/live/images/dr-joan-hoffmann.jpg'
+import davidGoldfeinImage from '../../data/live/images/gen-david-goldfein.jpg'
+
+const activeSpeakers = ref([])
+const speakerDialogOpen = ref(false)
+const speakerImages = {
+  'Dr. David Van Wie': davidVanWieImage,
+  'Dr. Joan Hoffmann': joanHoffmannImage,
+  'Gen. David L. Goldfein': davidGoldfeinImage
+}
+const speakers = parseSpeakerContent(speakersText)
+const speakersByAgendaTitle = {
+  'Welcome & Opening Remarks': ['Welcome Speaker', 'Opening Remarks'],
+  'Feature Conversation with Gen. David Goldfein': ['Featured Speaker']
+}
+
+function parseSpeakerContent(text) {
+  const sections = []
+  let section = null
+
+  text.split('\n').forEach((line) => {
+    const value = line.trim()
+
+    if (!value || value === 'Speakers') {
+      return
+    }
+
+    if (value.includes(' | ')) {
+      const parts = value.split(' | ')
+
+      section = {
+        label: parts[0],
+        name: parts[1],
+        image: speakerImages[parts[1]],
+        paragraphs: []
+      }
+      sections.push(section)
+      return
+    }
+
+    if (section) {
+      section.paragraphs.push(value)
+    }
+  })
+
+  return sections
+}
+
+function getAgendaSpeakers(item) {
+  const labels = speakersByAgendaTitle[item.title] || []
+
+  return labels.map((label) => speakers.find((speaker) => speaker.label === label)).filter(Boolean)
+}
+
+function hasAgendaSpeakers(item) {
+  return getAgendaSpeakers(item).length > 0
+}
+
+function showSpeakers(item) {
+  activeSpeakers.value = getAgendaSpeakers(item)
+  speakerDialogOpen.value = true
+}
 </script>
 
 <style scoped>
@@ -129,6 +237,85 @@ import agendaData from '../../data/sample/agenda.json'
 
 .agenda-timeline p {
   margin: 4px 0 0;
+  color: #5f6b7a;
+  line-height: 1.35;
+}
+
+.speaker-button {
+  margin-top: 8px;
+  background: #79a9ff;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.speaker-dialog {
+  position: relative;
+  width: calc(100vw - 32px);
+  max-width: 560px;
+  max-height: 67vh;
+  border-radius: 8px;
+}
+
+.speaker-dialog__section {
+  padding: 14px 16px;
+}
+
+.speaker-dialog__body {
+  display: grid;
+  gap: 16px;
+  max-height: calc(67vh - 112px);
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.speaker-dialog__title,
+.speaker-dialog__speaker h2 {
+  margin: 0;
+  color: #1f2933;
+  letter-spacing: 0;
+}
+
+.speaker-dialog__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.speaker-dialog__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #1f2933;
+}
+
+.speaker-dialog__label {
+  color: #294b75;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.speaker-dialog__header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.speaker-dialog__image {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.speaker-dialog__speaker h2 {
+  margin-top: 2px;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.speaker-dialog__speaker p {
+  margin: 6px 0 0;
   color: #5f6b7a;
   line-height: 1.35;
 }
