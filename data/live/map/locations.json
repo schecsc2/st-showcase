@@ -5,49 +5,19 @@
   },
   "bathrooms": [
     {
-      "id": "b200-restroom-1",
+      "id": "b200-restroom",
       "title": "Restroom",
-      "x": 827.32,
-      "y": 526.16
-    },
-    {
-      "id": "b200-restroom-2",
-      "title": "Restroom",
-      "x": 884.44,
-      "y": 526.16
-    },
-    {
-      "id": "b200-restroom-3",
-      "title": "Restroom",
-      "x": 864.53,
-      "y": 567.7
+      "x": 856.76,
+      "y": 546.01
     },
     {
       "id": "b201-restroom-1",
       "title": "Restroom",
-      "x": 1250.5,
-      "y": 1876.18
+      "x": 1667.62,
+      "y": 2041.91
     },
     {
       "id": "b201-restroom-2",
-      "title": "Restroom",
-      "x": 1253.09,
-      "y": 1937.62
-    },
-    {
-      "id": "b201-restroom-3",
-      "title": "Restroom",
-      "x": 1640.79,
-      "y": 2041.47
-    },
-    {
-      "id": "b201-restroom-4",
-      "title": "Restroom",
-      "x": 1694.45,
-      "y": 2042.34
-    },
-    {
-      "id": "b201-restroom-5",
       "title": "Restroom",
       "x": 1701.37,
       "y": 2213.68
