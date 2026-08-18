@@ -11,7 +11,7 @@ export default configure(() => ({
 
   extras: [
     'material-icons',
-    'mdi-v7'
+    'material-symbols-outlined'
   ],
 
   build: {

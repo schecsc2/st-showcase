@@ -170,7 +170,7 @@ const mapSearchCategories = [
     kind: 'type',
     type: 'demo',
     title: 'Demos',
-    icon: 'mdi-orbit',
+    icon: 'sym_o_orbit',
     searchText: 'demo demos demonstration demonstrations'
   },
   {

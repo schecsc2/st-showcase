@@ -2,17 +2,6 @@
   <q-page class="explore-page">
     <section class="explore-hero">
       <h1>Explore</h1>
-      <q-btn
-        class="explore-lodging"
-        dense
-        flat
-        href="https://www.jhuapl.edu/about/visiting-apl/lodging"
-        no-caps
-        rel="noreferrer"
-        target="_blank"
-      >
-        Lodging
-      </q-btn>
     </section>
 
     <q-input
@@ -136,10 +125,6 @@ function selectNeighborhood(id) {
 }
 
 .explore-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
   padding: 20px 0 24px;
 }
 
@@ -153,11 +138,6 @@ function selectNeighborhood(id) {
   font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.05;
-}
-
-.explore-lodging {
-  color: #294b75;
-  font-weight: 800;
 }
 
 .explore-hero p {
