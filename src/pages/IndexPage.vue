@@ -187,7 +187,7 @@ function getDefaultHappeningNow() {
 .home-footer {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin-top: 16px;
 }
 
 .apl-logo {
