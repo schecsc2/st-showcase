@@ -38,44 +38,86 @@
         </article>
       </div>
 
-      <div v-else class="neighborhood-list">
-        <article
-          v-for="neighborhood in filteredNeighborhoods"
-          :key="neighborhood.id"
-          class="neighborhood-item"
-        >
-          <q-btn
-            :class="{ 'neighborhood-button--active': neighborhood.id === selectedNeighborhoodId }"
-            class="neighborhood-button"
-            no-caps
-            unelevated
-            @click="selectNeighborhood(neighborhood.id)"
-          >
-            <span class="neighborhood-button__title">{{ neighborhood.title }} ({{ neighborhood.posters.length }})</span>
-            <q-icon
-              class="neighborhood-button__icon"
-              :name="neighborhood.id === selectedNeighborhoodId ? 'expand_more' : 'chevron_right'"
-              size="20px"
-            />
-          </q-btn>
-
-          <div v-if="neighborhood.id === selectedNeighborhoodId && neighborhood.posters.length" class="poster-list">
-            <article v-for="poster in neighborhood.posters" :key="poster.id" class="poster-item">
-              <h2>{{ poster.title }}</h2>
-              <p>{{ poster.authors }}</p>
-              <p>{{ poster.description }}</p>
+      <div v-else class="explore-sections">
+        <section>
+          <h2 class="explore-section-title">Neighborhoods</h2>
+          <div class="neighborhood-list">
+            <article
+              v-for="neighborhood in filteredNeighborhoods"
+              :key="neighborhood.id"
+              class="neighborhood-item"
+            >
               <q-btn
-                :to="{ path: '/map', query: { neighborhood: neighborhood.id, poster: poster.id } }"
-                class="poster-map-button"
-                dense
-                flat
+                :class="{ 'neighborhood-button--active': neighborhood.id === selectedNeighborhoodId }"
+                class="neighborhood-button"
                 no-caps
+                unelevated
+                @click="selectNeighborhood(neighborhood.id)"
               >
-                Show on Map
+                <span class="neighborhood-button__title">{{ neighborhood.title }} ({{ neighborhood.posters.length }})</span>
+                <q-icon
+                  class="neighborhood-button__icon"
+                  :name="neighborhood.id === selectedNeighborhoodId ? 'expand_more' : 'chevron_right'"
+                  size="20px"
+                />
               </q-btn>
+
+              <div v-if="neighborhood.id === selectedNeighborhoodId && neighborhood.posters.length" class="poster-list">
+                <article v-for="poster in neighborhood.posters" :key="poster.id" class="poster-item">
+                  <h2>{{ poster.title }}</h2>
+                  <p>{{ poster.authors }}</p>
+                  <p>{{ poster.description }}</p>
+                  <q-btn
+                    :to="{ path: '/map', query: { neighborhood: neighborhood.id, poster: poster.id } }"
+                    class="poster-map-button"
+                    dense
+                    flat
+                    no-caps
+                  >
+                    Show on Map
+                  </q-btn>
+                </article>
+              </div>
             </article>
           </div>
-        </article>
+        </section>
+
+        <section>
+          <h2 class="explore-section-title">Feature Booths</h2>
+          <div class="neighborhood-list">
+            <article v-for="booth in mapData.scts" :key="booth.id" class="neighborhood-item">
+              <q-btn
+                :class="{ 'neighborhood-button--active': booth.id === selectedFeatureBoothId }"
+                class="neighborhood-button"
+                no-caps
+                unelevated
+                @click="selectFeatureBooth(booth.id)"
+              >
+                <span class="neighborhood-button__title">{{ booth.title }}</span>
+                <q-icon
+                  class="neighborhood-button__icon"
+                  :name="booth.id === selectedFeatureBoothId ? 'expand_more' : 'chevron_right'"
+                  size="20px"
+                />
+              </q-btn>
+
+              <div v-if="booth.id === selectedFeatureBoothId" class="poster-list">
+                <article class="poster-item">
+                  <p>Placeholder description.</p>
+                  <q-btn
+                    :to="{ path: '/map', query: { sct: booth.id } }"
+                    class="poster-map-button"
+                    dense
+                    flat
+                    no-caps
+                  >
+                    Show on Map
+                  </q-btn>
+                </article>
+              </div>
+            </article>
+          </div>
+        </section>
       </div>
     </section>
   </q-page>
@@ -87,6 +129,7 @@ import mapData from '../../data/live/map/locations.json'
 
 const search = ref('')
 const selectedNeighborhoodId = ref(null)
+const selectedFeatureBoothId = ref(null)
 const filteredNeighborhoods = computed(() => mapData.neighborhoods)
 const posterSearchResults = computed(() => {
   const query = search.value.trim().toLowerCase()
@@ -113,6 +156,10 @@ function getPosterSearchText(neighborhood, poster) {
 
 function selectNeighborhood(id) {
   selectedNeighborhoodId.value = selectedNeighborhoodId.value === id ? null : id
+}
+
+function selectFeatureBooth(id) {
+  selectedFeatureBoothId.value = selectedFeatureBoothId.value === id ? null : id
 }
 </script>
 
@@ -157,6 +204,17 @@ function selectNeighborhood(id) {
   display: grid;
   gap: 16px;
   margin-top: 16px;
+}
+
+.explore-sections {
+  display: grid;
+  gap: 24px;
+}
+
+.explore-section-title {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  font-weight: 800;
 }
 
 .neighborhood-list,

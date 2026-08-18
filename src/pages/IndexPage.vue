@@ -22,12 +22,16 @@
       </article>
     </section>
 
+    <div class="home-footer">
+      <img class="apl-logo" :src="aplLogo" alt="Johns Hopkins Applied Physics Laboratory">
+    </div>
   </q-page>
 </template>
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import logo from '../../data/live/logo/logo-transparent.png'
+import logo from '../../data/live/logos/logo-transparent.png'
+import aplLogo from '../../data/live/logos/apl_small_horizontal_blue.png'
 import agendaData from '../../data/sample/agenda.json'
 
 const eventDate = agendaData.eventDate
@@ -98,6 +102,8 @@ function getDefaultHappeningNow() {
 
 <style scoped>
 .home-page {
+  display: flex;
+  flex-direction: column;
   max-width: 960px;
   margin: 0 auto;
   padding: 24px 16px 120px;
@@ -177,6 +183,18 @@ function getDefaultHappeningNow() {
 
 .panel-meta {
   font-weight: 700;
+}
+
+.home-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.apl-logo {
+  width: min(100%, 300px);
+  height: auto;
 }
 
 @media (min-width: 700px) {

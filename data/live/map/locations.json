@@ -112,7 +112,7 @@
   "demos": [
     {
       "id": "b201-atrium-demo",
-      "title": "Proof of Concept Demo",
+      "title": "Demo",
       "location": "Semmel Center Atrium",
       "shape": "circle",
       "x": 850,

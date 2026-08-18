@@ -397,7 +397,7 @@ onMounted(() => {
     addMarkerClick(item)
   })
 
-  selectRouteNeighborhood()
+  selectRouteLocation()
   document.addEventListener('pointerdown', closeSearchResults)
 })
 
@@ -428,7 +428,7 @@ watch(search, (value) => {
 })
 
 watch(activePosterSlide, () => updatePosterMarkers(true))
-watch(() => [route.query.neighborhood, route.query.poster], selectRouteNeighborhood)
+watch(() => [route.query.neighborhood, route.query.poster, route.query.sct], selectRouteLocation)
 
 function closeSearchResults(event) {
   const target = event.target
@@ -717,11 +717,25 @@ function addGeometryClick(item) {
   })
 }
 
-function selectRouteNeighborhood() {
+function selectRouteLocation() {
   const id = Array.isArray(route.query.neighborhood) ? route.query.neighborhood[0] : route.query.neighborhood
   const posterId = Array.isArray(route.query.poster) ? route.query.poster[0] : route.query.poster
+  const sctId = Array.isArray(route.query.sct) ? route.query.sct[0] : route.query.sct
 
-  if (!map || !id) {
+  if (!map) {
+    return
+  }
+
+  if (sctId) {
+    const item = markers.find(({ node, type }) => type === 'sct' && node.id === sctId)
+
+    if (item) {
+      selectMarker(item)
+    }
+    return
+  }
+
+  if (!id) {
     return
   }
 
