@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-page-container>
+    <q-page-container :class="{ 'page-container--background': route.path === '/' }">
       <router-view />
     </q-page-container>
 
@@ -21,8 +21,9 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
 const router = useRouter()
 
 const navLinks = [
@@ -59,6 +60,14 @@ async function navigateTo(link) {
 </script>
 
 <style scoped>
+.page-container--background {
+  background-attachment: scroll;
+  background-image: url('../../data/live/background/st-background.png');
+  background-position: left top;
+  background-repeat: repeat-y;
+  background-size: auto 100vh;
+}
+
 .bottom-nav {
   position: fixed;
   right: 16px;
