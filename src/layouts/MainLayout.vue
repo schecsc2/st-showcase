@@ -64,8 +64,8 @@ async function navigateTo(link) {
   background-attachment: scroll;
   background-image: url('../../data/live/background/st-background.png');
   background-position: left top;
-  background-repeat: repeat-y;
-  background-size: auto 100vh;
+  background-repeat: no-repeat;
+  background-size: max(100vw, 177.68vh) auto;
 }
 
 .bottom-nav {
