@@ -1084,7 +1084,7 @@ function updatePosterMarkers(shouldCenter) {
     const markerPoint = map.project(activeMarker.getLatLng(), zoom)
     const verticalOffset = Math.min(120, map.getSize().y * 0.18)
 
-    map.panTo(map.unproject(markerPoint.add([0, verticalOffset]), zoom))
+    map.panTo(map.unproject(markerPoint.add([0, verticalOffset]), zoom), { animate: true })
   }
 }
 
