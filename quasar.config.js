@@ -15,7 +15,8 @@ export default configure(() => ({
   ],
 
   build: {
-    vueRouterMode: 'hash'
+    vueRouterMode: 'hash',
+    publicPath: '/st-showcase/'
   },
 
   devServer: {

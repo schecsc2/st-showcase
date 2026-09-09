@@ -19,6 +19,10 @@
       "description": "Semmel Center Lobby"
     }
   ],
+  "contact": {
+    "technicalEmail": "research@jhuapl.edu",
+    "otherEmail": "apl-st-showcase@jhuapl.edu"
+  },
   "faqs": [
     {
       "question": "What do I need to know when visiting APL?",

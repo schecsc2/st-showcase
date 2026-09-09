@@ -1,26 +1,26 @@
 {
   "image": {
-    "width": 2448,
-    "height": 2550
+    "width": 5511,
+    "height": 5741
   },
   "bathrooms": [
     {
       "id": "b200-restroom",
       "title": "Restroom",
-      "x": 856.76,
-      "y": 546.01
+      "x": 1371.86,
+      "y": 1403.71
     },
     {
       "id": "b201-restroom-1",
       "title": "Restroom",
-      "x": 1667.62,
-      "y": 2041.91
+      "x": 4023.7,
+      "y": 4780.22
     },
     {
       "id": "b201-restroom-2",
       "title": "Restroom",
-      "x": 1701.37,
-      "y": 2213.68
+      "x": 4109.82,
+      "y": 5304.87
     }
   ],
   "food": [
@@ -28,29 +28,29 @@
       "id": "b201-atrium-food",
       "title": "Food",
       "location": "Semmel Center Atrium",
-      "x": 1585.38,
-      "y": 2077.2
+      "x": 3760.66,
+      "y": 4935.66
     },
     {
       "id": "b201-atrium-food-2",
       "title": "Food",
       "location": "Semmel Center Atrium",
-      "x": 735.87,
-      "y": 2058.57
+      "x": 1591.7,
+      "y": 4832.5
     },
     {
       "id": "b201-lobby-food",
       "title": "Food",
       "location": "Semmel Center Lobby",
-      "x": 1790.3,
-      "y": 2157.3
+      "x": 4467.57,
+      "y": 5145.82
     },
     {
       "id": "b200-lobby-food",
       "title": "Food",
       "location": "200 Lobby",
-      "x": 1169.94,
-      "y": 644.58
+      "x": 2580.54,
+      "y": 1826.88
     }
   ],
   "help": [
@@ -58,403 +58,813 @@
       "id": "b201-patio-help",
       "title": "Help",
       "location": "Semmel Center Patio",
-      "x": 1430.75,
-      "y": 1510.86
+      "x": 3354.25,
+      "y": 3619.6
     },
     {
       "id": "b201-atrium-help-1",
       "title": "Help",
       "location": "Semmel Center Atrium",
-      "x": 1030.21,
-      "y": 2093.96
+      "x": 2147.06,
+      "y": 4938.86
     },
     {
       "id": "b201-atrium-help-2",
       "title": "Help",
       "location": "Semmel Center Atrium",
-      "x": 1313.38,
-      "y": 2028.76
+      "x": 2976.02,
+      "y": 4770.53
     },
     {
       "id": "b201-lobby-help",
       "title": "Help",
       "location": "Semmel Center Lobby",
-      "x": 1840.6,
-      "y": 2159.17
+      "x": 4529.14,
+      "y": 5145.31
     }
   ],
   "scts": [
     {
       "id": "sct-1",
       "title": "Achieving Robust Homeland Defense",
-      "x": 737.73,
-      "y": 2092.1
+      "description": "APL is advancing resilient critical infrastructure to counter kinetic, cyber, and other non-kinetic threats while enabling rapid response. Emerging technologies are key to building a more secure and resilient future.",
+      "x": 3102.59,
+      "y": 4864.15
     },
     {
       "id": "sct-2",
       "title": "Revitalizing the Nation's Strategic Capabilities",
-      "x": 933.34,
-      "y": 1984.05
+      "description": "The Johns Hopkins Applied Physics Laboratory is leveraging decades of experience with sea- and land-based strategic systems to lead development of flexible, adaptable, and integrated next-generation nuclear and conventional deterrent capabilities for the Navy and Air Force.",
+      "x": 1983.31,
+      "y": 4645.68
     },
     {
       "id": "sct-3",
       "title": "Accelerating Warfighting Capabilities for the Pacific Theater",
-      "x": 1443.79,
-      "y": 1991.5
+      "description": "APL is committed to accelerating the development and fielding of new, compelling capabilities through responsive mission engineering and integrated prototyping. Prioritizing capabilities that sustain operational access and reinforce resilient logistics and supply chains in contested environments.",
+      "x": 3364.18,
+      "y": 4660.17
     },
     {
       "id": "sct-4",
       "title": "Enabling Space Superiority",
-      "x": 1080.51,
-      "y": 702.33
+      "description": "With space now a contested but essential domain for security, commerce, and daily life, the Johns Hopkins Applied Physics Laboratory is leveraging six decades of experience to help achieve U.S. space superiority through advanced science, responsible space control, and innovative capabilities from Earth orbit to cislunar space.",
+      "x": 1849.39,
+      "y": 1969.52
     }
   ],
   "demos": [
     {
-      "id": "b201-atrium-demo",
-      "title": "Demo",
-      "location": "Semmel Center Atrium",
-      "shape": "circle",
-      "x": 850,
-      "y": 2080
-    },
-    {
-      "id": "patio",
-      "title": "Patio Demos",
-      "shape": "zone",
-      "demos": [
-        {
-          "id": "patio-demo-1",
-          "title": "Autonomous Rover Handoff",
-          "authors": "Maya Chen, Jordan Ellis",
-          "description": "A small rover switches between autonomous waypoint following and operator tasking during a live site survey."
-        },
-        {
-          "id": "patio-demo-2",
-          "title": "Portable Mesh Sensor Kit",
-          "authors": "Ari Bennett, Grace Park",
-          "description": "Deployable sensor nodes form a temporary network and stream health, location, and detection status to an edge display."
-        },
-        {
-          "id": "patio-demo-3",
-          "title": "Field Power Monitoring",
-          "authors": "Leah Anderson, Victor Chen",
-          "description": "A compact dashboard estimates remaining runtime and load risk for a mixed set of mobile field systems."
-        }
-      ]
-    },
-    {
       "id": "sidewalk",
-      "title": "Sidewalk Demos",
+      "title": "Demos",
       "shape": "zone",
       "demos": [
         {
           "id": "sidewalk-demo-1",
-          "title": "Wearable Heat Stress Alert",
-          "authors": "Julia Novak, Nikhil Rao",
-          "description": "A wearable prototype combines motion, heart rate, and ambient conditions to flag heat stress risk."
+          "title": "Site Model Operations",
+          "authors": "Neil Joshi",
+          "description": "Photo-realistic site models based on a combination of varying altitude imagery"
         },
         {
           "id": "sidewalk-demo-2",
-          "title": "Edge Vision Checkpoint",
-          "authors": "Elena Brooks, Mason Green",
-          "description": "An edge device runs lightweight object detection and reports confidence changes as lighting and distance shift."
+          "title": "Engineering Ice Properties",
+          "authors": "Joel Sarapas, William Stone",
+          "description": "Demo of engineered molecules for controlling ice formation and surface adhesion"
         },
         {
           "id": "sidewalk-demo-3",
-          "title": "Rapid Repair Workflow",
-          "authors": "Tessa Clark, Henry Morgan",
-          "description": "A guided repair flow links part identification, fabrication options, and inspection checks for field sustainment."
+          "title": "Autonomous Mobility",
+          "authors": "Emma Holmes, Bethany Kemp, David Handelman",
+          "description": "Live demo of the SPOT robotic platform showcasing autonomous mobility and mission capabilities"
+        },
+        {
+          "id": "sidewalk-demo-4",
+          "title": "Quantum Noise",
+          "authors": "Tom McJunkin, Mayra Amezcua",
+          "description": "Interactive demo on APL efforts to study and mitigate noise in quantum systems"
+        },
+        {
+          "id": "sidewalk-demo-5",
+          "title": "Scalable Manufacturing",
+          "authors": "Wes Chapkin",
+          "description": "Features next-generation manufacturing for critical hypersonic-enabling materials"
+        },
+        {
+          "id": "sidewalk-demo-6",
+          "title": "Blackbird: Printing a UAV",
+          "authors": "Brian Reardon, Jame Schuh",
+          "description": "Static display of the full scale Blackbird UAV with supporting visuals and video"
+        }
+      ]
+    },
+    {
+      "id": "201-lobby",
+      "title": "Demos",
+      "shape": "zone",
+      "demos": [
+        {
+          "id": "201-lobby-demo-1",
+          "title": "Tech Transfer",
+          "authors": "Susan Ehrlich, Norma Lee Todd, Kyle Costabile, Darryl Mitchell",
+          "description": "Connect with APL Tech Transfer to explore innovations, industry partnerships, licensing opportunities, and pathways for moving technologies into real-world applications."
         }
       ]
     }
   ],
+  "networking": [
+    {
+      "id": "breakout-room-2",
+      "title": "Networking Lounge"
+    }
+  ],
   "neighborhoods": [
     {
-      "id": "atrium",
+      "id": "ai_autonomy_teaming",
       "title": "AI, Autonomy, and Teaming",
       "posters": [
         {
-          "id": "atrium-poster-1",
-          "title": "Adaptive Swarms for Rapid Site Survey",
-          "authors": "Maya Chen, Luis Ortega",
-          "description": "A simulated autonomy stack assigns small robots to changing survey tasks while keeping operators in the loop."
+          "id": "7",
+          "title": "Noumenon: Cognitive-Capability Assessment of Foundation Models",
+          "authors": "Shayne Biagi, Chace Ashcraft, Chris Ratto, John Winder, Willa Mannering, Joshua McClellan",
+          "description": "A framework that identifies mechanisms underlying cognitive behaviors in foundation models to evaluate capabilities beyond benchmark scores."
         },
         {
-          "id": "atrium-poster-2",
-          "title": "Human Trust Signals for AI Teammates",
-          "authors": "Priya Shah, Owen Miller",
-          "description": "This work explores simple interface cues that help teams understand when an AI assistant is confident or uncertain."
+          "id": "8",
+          "title": "ML-Informed Retrieval of Atmospheric Properties from Exoplanet Spectra",
+          "authors": "Reza Ashtari, Jacob Lustig-Yaeger",
+          "description": "A machine-learning guided framework for rapidly estimating exoplanet atmospheric composition from JWST spectra using physics-based model libraries."
         },
         {
-          "id": "atrium-poster-3",
-          "title": "Mission Planning with Constraint-Aware Agents",
-          "authors": "Nora Patel, James Whitaker",
-          "description": "A planning agent proposes routes and task sequences while honoring timing, safety, and resource limits."
+          "id": "9",
+          "title": "MESSIER-MAESTRO: Agentic Planning for Space Vehicles",
+          "authors": "Ben Schmachtenberger, Meghan Booker, Adam Byerly",
+          "description": "Agentic planning for autonomous spacecraft teaming that enables dynamic mission execution across intermittent communications and changing operational environments."
         },
         {
-          "id": "atrium-poster-4",
-          "title": "Collaborative Autonomy in Dense Environments",
-          "authors": "Elena Brooks, Marcus Lee",
-          "description": "The poster presents a testbed for coordinating autonomous platforms when communications and line of sight are limited."
+          "id": "10",
+          "title": "LaunchPAD: Launch Vehicle Probabilistic Aerodynamic Databases",
+          "authors": "Allison Moyer, Jenelle Millison",
+          "description": "AI co-investigator for autonomous design, testing, and refinement of complex chemistry experiments through closed-loop learning."
         },
         {
-          "id": "atrium-poster-5",
-          "title": "AI Teaming Metrics for Field Exercises",
-          "authors": "Sofia Ramirez, Daniel Kim",
-          "description": "A lightweight scoring approach compares human-only, AI-assisted, and mixed-team performance during repeatable exercises."
+          "id": "11",
+          "title": "Kepler",
+          "authors": "Jack Bandy, Amanda Emmert, Cody Meiners",
+          "description": "AI-driven analysis of scientific publications to identify emerging adversary research priorities and investment trends."
+        },
+        {
+          "id": "12",
+          "title": "Molecules on Demand: Generative AI for Rapid Response Countermeasures",
+          "authors": "Carlos Barajas, William Clay, Daniel Jimenez, Shirley Klimkiewicz, Evan Lloyd",
+          "description": "AI-driven pipeline enabling rapid design, synthesis, and evaluation of novel small-molecule countermeasures for emerging chemical threats."
+        },
+        {
+          "id": "13",
+          "title": "ACCEL: AI Co-engineer for Complex Engineering Loops",
+          "authors": "Victor Leon, William Hiler, Christian Lomicka, Liam Rogers, Calvin Ferrin, Walter Zimbeck, Kameron Stevenson, Nicholas Knowlton, Joe Downs, Jonathan Russ, Aaron Baumgarten, Karol Grabczewski, Ryan Seery, Craig Leese, Li Ma, Bill Swartz, Emily Crane, Christopher Stiles, Steven Storck",
+          "description": "AI-powered engineering workflows accelerating design, manufacturing, and validation while dramatically reducing development time for complex engineered systems."
+        },
+        {
+          "id": "14",
+          "title": "Agentic AI for Autonomous Collaborative Platforms",
+          "authors": "John Winder, Swadha Bhatt, Shayne Biagi, Noel Brindise, Greyson Brothers, Eric Joraskie, Ciku Makumi, Willa Mannering, Anish Nayak, Pedro Santiago-Dominicci",
+          "description": "An agentic battle manager for live‑virtual‑constructive scenarios that orchestrates autonomous collaborative platforms using context‑rich prompting and distributed autonomy."
+        },
+        {
+          "id": "15",
+          "title": "AI Benchmarking Challenge",
+          "authors": "Daniel Wernig, Karl Otness, Jeff Dunne, Lindsey Kitchell, Joe Downs, Rishab Chakravarty",
+          "description": "Building configurable, mission-relevant AI benchmarks from documents to rapidly evaluate frontier models across diverse defense use cases."
+        },
+        {
+          "id": "16",
+          "title": "AI Self-Assessment for Vulnerability Exposure (AI-SAVE)",
+          "authors": "Alec Koppel, Nathan Drenkow",
+          "description": "Causal AI methods for identifying vulnerability and adapting to changing operational environments."
+        },
+        {
+          "id": "17",
+          "title": "ECHOES: Emulated Conferencing with Humanlike Operators for the Evaluation of Systems",
+          "authors": "Nicholus Sakha, Julia Craciun, Hannah Haldren, Jason Yao",
+          "description": "Decentralized AI agents for realistic conference emulation and evaluation of communication impairments on mission performance."
+        },
+        {
+          "id": "18",
+          "title": "Learning Critical Transitions in Complex Dynamical Systems",
+          "authors": "Jennifer Sleeman, Jay Brett, Caroline Tang, Adeline Hillier, Jenelle Millison, Chace Ashcraft, Alex Chen, Mary Keller, Caitlin Amos, Michael Bowles, Anand Gnanadesikan, Jeff Maranchi, Elizabeth Reilly, David Patrone",
+          "description": "Developing AI methods to detect, predict, and understand critical transitions and cascading risks in complex, nonlinear dynamical systems."
+        },
+        {
+          "id": "19",
+          "title": "Sophon",
+          "authors": "Byerly, Adam",
+          "description": "Generative AI workflow for manipulating space system overhead imagery and signals, including subtle insertion of synthetic “phantom” objects."
+        },
+        {
+          "id": "20",
+          "title": "INTUIT: Intuitive Navigation and Task Understanding using Image-Text Embeddings",
+          "authors": "Alexander Spinos, Cora Duggan, Meghan Booker",
+          "description": "Image-text embeddings for mission-guided robot exploration and accelerated discovery of mission-relevant objects."
+        },
+        {
+          "id": "21",
+          "title": "The Integrated Maritime Search and Rescue System (IMSARS)",
+          "authors": "Austin Veith, Jason Tiffany, Ian McAdams, Nick Vavalle, Melissa Yates, Eric Cawi, Tom Metzger",
+          "description": "Integrated wearable sensing and survivability prediction for combat search and rescue decision support and casualty medical planning."
+        },
+        {
+          "id": "22",
+          "title": "Ultra-Stable Clock using Neural Network Compensation",
+          "authors": "Alex New; Lizzy Robinson; Daniel Jimenez; Eliza Scheffers; Andrea Shepard",
+          "description": "Iterative data-driven pipeline combining experiments and AI models to design novel proteins and optimize functional properties."
+        },
+        {
+          "id": "23",
+          "title": "Toward AI-driven coastal defense",
+          "authors": "Alex New; Jared Markowitz; Jennifer Sleeman; Jay Brett; Pete Winstead",
+          "description": "Multi-component AI and physics-based framework that optimizes coastal interventions to improve regional resilience to storm-driven flooding."
+        },
+        {
+          "id": "24",
+          "title": "Ask GDELT: Natural Language Querying of Global News Data",
+          "authors": "Vera Kazakova, Ilya Marchenko, Cody Meiners",
+          "description": "Natural language querying of enriched global news data for operational awareness and analysis of global events.",
+          "demo": true
+        },
+        {
+          "id": "25",
+          "title": "Blowing Snow Readiness Assessments for Cold Environments (BRACE)",
+          "authors": "Rebecca Eager, Lauren Ice, Marisel Villafañe-Delgado, Krista Rand",
+          "description": "Predictive blowing snow modeling improves mission planning and assesses operational impacts on airfields and military systems in Arctic environments."
+        },
+        {
+          "id": "26",
+          "title": "Real-Speech FM: A Foundation Model Representing Paralinguistic Speech Features for Improved State, Health and Readiness Analytics",
+          "authors": "Mattson Ogg, Sarah Robinson, Will Coon, Drew Grant",
+          "description": "Self-supervised speech foundation model capturing paralinguistic features to improve emotion, stress, fatigue, health, and readiness assessment."
+        },
+        {
+          "id": "27",
+          "title": "Fixed-Wing UAV Obstacle Avoidance",
+          "authors": "Gino Perrotta, Adam Polevoy",
+          "description": "Stereo vision and model predictive control for autonomous detection and avoidance of unmapped obstacles."
+        },
+        {
+          "id": "28",
+          "title": "Terrain-Aware Generative Planning for High-Speed Off-Road Navigation",
+          "authors": "Cora Duggan, Henry Phalen",
+          "description": "Terrain-aware generative planning for safe, high-speed autonomous navigation across challenging off-road environments."
+        },
+        {
+          "id": "29",
+          "title": "Verifiable Control for Autonomous Multi-domain Surveillance",
+          "authors": "Adam Houser, Claire Trop, D. Sawyer Elliott",
+          "description": "Verifiable autonomous control methods enabling coordinated surveillance across air, sea, space, and subsea domains with guaranteed planning robustness."
+        },
+        {
+          "id": "30",
+          "title": "ECHO: Ecoacoustics for Climate, Habitat, and Observation",
+          "authors": "Lindsey Kitchell, Shelby Anderson, Mattson Ogg, Miguel Wimbish, Kevin Romero",
+          "description": "Underwater acoustic foundation model (ECHOmarine) providing adaptable representations for marine species classification and large-scale ecological soundscape monitoring."
+        },
+        {
+          "id": "2",
+          "title": "AI, Autonomy, and Teaming Demo",
+          "authors": "Stephen Vance, Kevin Mather",
+          "description": "This demo will be available for viewing during the morning session only",
+          "demo": true
+        },
+        {
+          "id": "31",
+          "title": "AI, Autonomy, and Teaming Poster",
+          "authors": "Stephen Mitchell",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "3",
+          "title": "AI, Autonomy, and Teaming Poster",
+          "authors": "Mike Peters, Kyle Klarup, Debbie Chang, Alex Hrybyk",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "4",
+          "title": "AI, Autonomy, and Teaming Poster",
+          "authors": "Matthew Grawe; Adam Beyer; Michelle Chen; John Clemens; Rebecca Foust; Isaac Lyss-Loren; Takeshi Morozono; Alec Mudick; Kimberly Ord; Andrew Smith; Mason Stuart; Amanda Voegtlin; Bretton Wade",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "5",
+          "title": "AI, Autonomy, and Teaming Poster",
+          "authors": "Allie Gaines, Frank Camargo, Corban Rivera, Jason Reid, Amy Gao",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "6",
+          "title": "AI, Autonomy, and Teaming Poster",
+          "authors": "Theresa Moore, Heather Hunter, Jacob Manning",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "33",
+          "title": "CLAUDIA: Collaborative Laboratories for Advancing Understanding & Discovery, by Integrating Autonomy — A Generalizable & Scalable Autonomous Laboratory Co-Investigator",
+          "authors": "Nick Pavlopoulos, Raph Norman-Tenazas",
+          "description": "Autonomous AI laboratory co-investigator integrating reasoning, automation, and human collaboration to accelerate experimental discovery across scientific domains."
+        },
+        {
+          "id": "34",
+          "title": "XTeam: AutoResearch — Can Frontier Intelligent Systems Replicate and Extend Science?",
+          "authors": "Mike Wolmetz, Mike Pekala, Alec Koppel, Jeffrey Wen, Bart Paulhamus",
+          "description": "Agentic systems and AutoReplication cookbook enabling automated reproduction of computational research results and discovery of new scientific findings."
+        },
+        {
+          "id": "32",
+          "title": "AI-Identification of Gamma-Ray Spectra",
+          "authors": "Eric C. Miller, Marisel Villafane-Delgado, Tom Haard",
+          "description": "Gamma-ray spectral foundation model improving radioisotope identification using synthetic training data, operationally inspired algorithms, and robust phase-space performance analysis."
         }
       ]
     },
     {
-      "id": "front-atrium",
+      "id": "sensing",
       "title": "Sensing, C5ISR, and Networking",
       "posters": [
         {
-          "id": "front-atrium-poster-1",
-          "title": "Resilient Mesh Links for Mobile Sensors",
-          "authors": "Ari Bennett, Chloe Nguyen",
-          "description": "A prototype network keeps sensor data moving as nodes enter, leave, and reconnect across a cluttered environment."
+          "id": "36",
+          "title": "VIPERFISH (VLF/HF Intensity and Propagation Effects Resolved From Interconnected Small Hardware)",
+          "authors": "Matthew Hall; Drew Blankstein",
+          "description": "Low-cost distributed VLF/HF sensing network enabling scalable RF spectrum monitoring, signal analysis, and propagation characterization."
         },
         {
-          "id": "front-atrium-poster-2",
-          "title": "Low-Power Edge Fusion for Wide-Area Sensing",
-          "authors": "Iris Coleman, Mateo Ruiz",
-          "description": "Edge processors combine multiple sensor streams locally to reduce bandwidth while preserving useful detections."
+          "id": "38",
+          "title": "Sensing, C5ISR, and Networking Poster",
+          "authors": "Kobe Lawson-Chavanu, Zerotti Woods, Jordan Turley, Jon DeSena",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "front-atrium-poster-3",
-          "title": "C5ISR Timeline Alignment Tools",
-          "authors": "Grace Park, Ethan Wright",
-          "description": "This poster shows methods for aligning reports, tracks, and sensor events into a shared operational timeline."
+          "id": "37",
+          "title": "Sensing, C5ISR, and Networking Poster",
+          "authors": "Bennett Blitz, Elijah Parker, Bridget Tan",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "front-atrium-poster-4",
-          "title": "Signal-Aware Routing Under Interference",
-          "authors": "Hannah Lewis, Omar Haddad",
-          "description": "A routing algorithm shifts traffic away from degraded links using live signal quality estimates."
-        },
-        {
-          "id": "front-atrium-poster-5",
-          "title": "Network Health Summaries for Operators",
-          "authors": "Lena Morris, Victor Chen",
-          "description": "Compact visual summaries help operators spot disconnected nodes, overloaded paths, and sensor coverage gaps."
+          "id": "35",
+          "title": "Sensing, C5ISR, and Networking Poster",
+          "authors": "Austin Cox; Joseph Prosser; Jodie Johnson; Stephen Hayes",
+          "description": "This poster will be available for viewing during the morning session only"
         }
       ]
     },
     {
-      "id": "back-atrium",
+      "id": "hypersonics",
       "title": "Hypersonics, EW, and Directed Energy",
       "posters": [
         {
-          "id": "back-atrium-poster-1",
-          "title": "Thermal Margins for High-Speed Vehicles",
-          "authors": "Evan Stone, Mira Kapoor",
-          "description": "A reduced-order model estimates heating risk across candidate high-speed vehicle concepts."
+          "id": "39",
+          "title": "Hypersonics, EW, and Directed Energy Poster",
+          "authors": "Michelle Camp, Brian Cranston, Avi Friedman, Sean Garrison, Bertrand Smith",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "back-atrium-poster-2",
-          "title": "EW Effects Modeling for Rapid Analysis",
-          "authors": "Talia Moore, Ben Carter",
-          "description": "The poster describes a fast simulation workflow for comparing electronic warfare effects across mission conditions."
+          "id": "40",
+          "title": "LaunchPAD: Launch Vehicle Probabilistic Aerodynamic Databases",
+          "authors": "Nikhil Nigam",
+          "description": "Multi-fidelity machine learning for probabilistic aerodynamic predictions with quantified uncertainty across multiple data sources."
         },
         {
-          "id": "back-atrium-poster-3",
-          "title": "Directed Energy Beam Quality Diagnostics",
-          "authors": "Renee Johnson, Alexei Petrov",
-          "description": "A laboratory diagnostic estimates beam quality changes caused by turbulence and platform motion."
+          "id": "41",
+          "title": "Additive Manufacturing of Polymer Derived UV-curable Products (AMP'D UP)",
+          "authors": "Clare Sabata, Meera Kesavan",
+          "description": "UV-curable preceramic polymer formulations for additively manufactured ultra-high-temperature ceramics with complex geometries and extreme-environment performance."
         },
         {
-          "id": "back-atrium-poster-4",
-          "title": "Hypersonic Trajectory Uncertainty Mapping",
-          "authors": "Mei Lin, Carter Evans",
-          "description": "Uncertainty maps show where small environmental changes most affect predicted trajectory behavior."
-        },
-        {
-          "id": "back-atrium-poster-5",
-          "title": "Spectrum Operations Decision Support",
-          "authors": "Noah Singh, Amelia Foster",
-          "description": "A decision aid ranks spectrum options based on mission priority, interference risk, and time sensitivity."
+          "id": "42",
+          "title": "Design of IR Transparent Materials",
+          "authors": "Keith Caruso, Victor Leon, Clare Sabata, Adriana Pena, Michael Hunt, Karun Kumar Rao, Collin McClain, Tim Holgate",
+          "description": "AI‑driven generation and rapid synthesis of high‑temperature, IR‑transparent window materials optimized for hypersonic environments and practical constraints.",
+          "demo": true
         }
       ]
     },
     {
-      "id": "breakout-room-2",
+      "id": "cybersecurity_ma",
       "title": "Cybersecurity and Mission Assurance",
       "posters": [
         {
-          "id": "breakout-room-2-poster-1",
-          "title": "Mission Impact Views for Cyber Alerts",
-          "authors": "Jordan Ellis, Mina Zhao",
-          "description": "Cyber alerts are grouped by the mission functions they may affect, helping teams focus on operational risk."
+          "id": "43",
+          "title": "Crunchwrap Supreme",
+          "authors": "Keegan Woodburn; Caleb Frey; Joshua Kimrey; Matt Steele",
+          "description": "AI-driven industrial control system characterization that rapidly learns system behavior to improve cybersecurity, resilience, and operational understanding."
         },
         {
-          "id": "breakout-room-2-poster-2",
-          "title": "Assurance Cases for Rapid Software Updates",
-          "authors": "Kara Simmons, Dev Patel",
-          "description": "A lightweight assurance case tracks what evidence is needed before a fast software update can be trusted."
+          "id": "44",
+          "title": "Prioritizing Cyber Alerts with Machine Learning",
+          "authors": "Nick Kowalski",
+          "description": "CARP (Contextual Alert Risk Prioritization) automates cyber alert triage using machine learning to prioritize high-risk alerts and improve analyst decision-making."
         },
         {
-          "id": "breakout-room-2-poster-3",
-          "title": "Behavioral Baselines for Embedded Systems",
-          "authors": "Felix Grant, Sana Ahmed",
-          "description": "The approach learns normal device behavior and flags suspicious changes during operational testing."
+          "id": "45",
+          "title": "SCAVENGR: Static Code Analysis through Vector Embeddings of Networked Graph Representations",
+          "authors": "Uyen Nguyen, Leo Babun, Ilya Marchenko, Sophia Hamer",
+          "description": "Graph-based static code analysis for detecting obfuscated and zero-day malware with fewer training samples."
         },
         {
-          "id": "breakout-room-2-poster-4",
-          "title": "Cyber Resilience Exercise Scoring",
-          "authors": "Naomi Reed, Isaac Turner",
-          "description": "A scoring model compares how quickly teams detect, contain, and recover from simulated cyber disruptions."
+          "id": "46",
+          "title": "PCAP2Network: Automated Network Topology Reconstruction from Packet Captures",
+          "authors": "Gabriella Colletti, Misael Valentin, Chris Yu, Roxy Holden",
+          "description": "Transforms packet capture data into realistic emulated networks for cyber testing, traffic generation, and network topology analysis."
         },
         {
-          "id": "breakout-room-2-poster-5",
-          "title": "Supply Chain Signals for Mission Risk",
-          "authors": "Olivia Hart, Miles Brooks",
-          "description": "This poster shows how software, hardware, and vendor signals can be summarized as mission assurance indicators."
+          "id": "47",
+          "title": "Enhanced Confidence Hot-Swapping for Operational Technology (ECHO)",
+          "authors": "Matt Steele; Daniel Davenport; Matthew Cole; Ahmed Abdo; Denzel Hamilton; Sabrina Lesser",
+          "description": "Trusted virtual PLC recovery technology enabling rapid restoration, validation, and secure deployment of industrial control systems after disruptions."
         }
       ]
     },
     {
-      "id": "200-lobby-back",
+      "id": "advanced_manufacturing",
       "title": "Advanced Manufacturing and Contested Logistics",
       "posters": [
         {
-          "id": "200-lobby-back-poster-1",
-          "title": "Additive Repair Kits for Remote Operations",
-          "authors": "Tessa Clark, Henry Morgan",
-          "description": "A modular repair kit pairs portable fabrication tools with validated part recipes for field sustainment."
+          "id": "55",
+          "title": "TOMA(T)TA: Topology Optimization for Metamaterial, Additive Transient Thermomechanical Applications",
+          "authors": "Jonathan Russ, Aaron Baumgarten",
+          "description": "Graded lattice topology optimization for hypersonic components operating under extreme thermal and mechanical conditions.",
+          "demo": true
         },
         {
-          "id": "200-lobby-back-poster-2",
-          "title": "Logistics Routing with Disrupted Supply Lines",
-          "authors": "Paige Wilson, Andre Silva",
-          "description": "The model reroutes supplies under changing risk, delay, and inventory constraints."
+          "id": "61",
+          "title": "Advanced Manufacturing and Contested Logistics Poster",
+          "authors": "Steven Knowlden",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "200-lobby-back-poster-3",
-          "title": "Digital Threads for Critical Components",
-          "authors": "Leah Anderson, Simon Blake",
-          "description": "A digital thread links material data, manufacturing history, inspection results, and field performance."
+          "id": "53",
+          "title": "Bonds, Brisk Bonds",
+          "authors": "Zachary Kiick",
+          "description": "Developing instant, low-temperature polymer adhesives that reliably bond and cure at −40°C for challenging arctic and cold-environment operations.",
+          "demo": true
         },
         {
-          "id": "200-lobby-back-poster-4",
-          "title": "Robotic Sorting for Expeditionary Warehouses",
-          "authors": "Camila Torres, Neil Foster",
-          "description": "A small robotic workflow demonstrates how mixed supplies can be sorted and staged with minimal setup."
+          "id": "63",
+          "title": "Advanced Manufacturing and Contested Logistics Poster",
+          "authors": "James Hoopman, Richard Korneisel",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "200-lobby-back-poster-5",
-          "title": "Manufacturing Readiness Dashboards",
-          "authors": "Rachel Kim, Thomas Reed",
-          "description": "A dashboard summarizes supplier readiness, production bottlenecks, and qualification status for planners."
+          "id": "49",
+          "title": "Novel Hybrid Radiation Shielding Solution",
+          "authors": "Muhammad Khan",
+          "description": "Additively manufactured hybrid radiation shielding for lightweight protection of electronics in harsh radiation environments."
+        },
+        {
+          "id": "50",
+          "title": "C3PO: Controllable 3D-Printed Optics",
+          "authors": "Kourtney Porsch, Jarod Gagnon, Lisa Pogue, Yonkun Sui, Meera Kesavan, Andrew Bennett-Jackson, David Brown",
+          "description": "Additively manufactured piezoelectric optics for precise optical actuation in high-performance photonic systems."
+        },
+        {
+          "id": "51",
+          "title": "Explainable Data-Driven Instruction Engine (EDDIE)",
+          "authors": "Brendan McNelly, Aakash Bajpai, Drew Seeker, William Gray Roncal, Carly Mayhood, Michael Hannan",
+          "description": "Agentic AI that learns from diverse data, incorporates expert feedback, and adapts knowledge bases to capture human expertise."
+        },
+        {
+          "id": "52",
+          "title": "Adversarial Coercive Opportunities Dependency Analytics (A-CODA)",
+          "authors": "Ava Scharfstein, Aniela Skibniewska, Adam Schmidt, Jessica Ma",
+          "description": "Data-driven framework for identifying economic vulnerabilities and evaluating policies that strengthen resilience against adversarial economic coercion."
+        },
+        {
+          "id": "48",
+          "title": "Advanced Manufacturing and Contested Logistics Poster",
+          "authors": "Jessica Ma; Lori Baxter; Jonathon Cosgrove; Ala Graff; Harold Lee; Keshav Mittu; Kaelyn Richardson",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "54",
+          "title": "Thermoresponsive Polymers for Reusable Oil Cleanup and Recovery",
+          "authors": "Allison Moyer, Christine Chung",
+          "description": "Developing temperature-responsive “smart sponge” polymers that selectively absorb oil, then release it for efficient recovery and reuse."
+        },
+        {
+          "id": "56",
+          "title": "PIC-Integrated Optical Couplers for Heterogeneous Photonic Systems",
+          "authors": "Richard Korneisel",
+          "description": "Integrated 3D photonic coupling technology for advanced, low-SWAP heterogeneous photonic systems."
+        },
+        {
+          "id": "62",
+          "title": "Advanced Manufacturing and Contested Logistics Poster",
+          "authors": "Joseph Prosser, Vanessa Rojas, Rama Venkatasubramanian, Jonathan Pierce, Austin Cox, Richard Ung, Nathan Fairbanks, Jake Ballard",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "57",
+          "title": "FABRICS: Fiber Architecture Breakthroughs in Conversion and Storage",
+          "authors": "Rachel Altmayer; Michael Jin; Konstantinos Gerasopoulos",
+          "description": "Textile-integrated energy harvesting and storage fibers enabling scalable electronic textiles and wearable systems with reduced battery burden."
+        },
+        {
+          "id": "58",
+          "title": "Thunder Road: Solid Precursors to Liquid Fuels",
+          "authors": "Brian Koronkiewicz",
+          "description": "Energy-positive, separation-free flow-reactor process converting safe solid precursors into on-demand liquid combustion fuels for military logistics."
+        },
+        {
+          "id": "59",
+          "title": "PHAME: Physics-in-the-loop Automated Mechanical Engineering",
+          "authors": "Greg Merboth, Jackie Sharp",
+          "description": "Agentic human-in-the-loop framework for generative CAD design, automated physics-based analysis, and rapid iteration using large engineering part libraries."
+        },
+        {
+          "id": "60",
+          "title": "LOTUS: Liquid and Oil-Repellent Textiles for Upgraded Safety",
+          "authors": "Emma Olson, Mairead Bartlett, Reid Messersmith, Andrea Potocny, Joel Sarapas",
+          "description": "PFAS-free biomimetic polymer–nanoparticle coatings providing durable water and oil repellence for high-performance textiles and glass substrates."
+        },
+        {
+          "id": "64",
+          "title": "Elem3nt: Mission-enabling materials anywhere",
+          "authors": "Chris Stiles",
+          "description": "Integrated AI-driven, closed-loop discovery and manufacturing framework for high-performance mission-critical materials in resource-constrained environments."
+        },
+        {
+          "id": "65",
+          "title": "Interfacial Engineering for Low Temperature Batteries",
+          "authors": "Nick Pavlopoulos, Joel Sarapas",
+          "description": "Polymer-inspired interfacial materials suppress electrolyte freezing, enabling improved battery performance and capacity in extreme cold environments."
+        },
+        {
+          "id": "66",
+          "title": "Lithium Sulfur Batteries at APL: Molecular engineering to overcome sulfur’s inherently insulating nature and unlock >300 Wh/kg for domestically secure energy",
+          "authors": "Nicholas G. Pavlopoulos, Nathan Rafisman",
+          "description": "Molecularly engineered polymers, cathode materials, and separators enabling high-energy, scalable lithium–sulfur batteries for secure, domestically sourced energy storage."
         }
       ]
     },
     {
-      "id": "breakout-room-1",
+      "id": "biotech",
       "title": "Biotechnology and Medical Systems",
       "posters": [
         {
-          "id": "breakout-room-1-poster-1",
-          "title": "Wearable Biomarkers for Heat Stress",
-          "authors": "Julia Novak, Samir Desai",
-          "description": "A wearable sensing concept estimates heat stress risk using heart rate, motion, and environmental inputs."
+          "id": "74",
+          "title": "Peptide Identification via Oxford Nanopore Technology",
+          "authors": "Abhinaya Srikanth, Hayley DeHart, Brian Koronkiewicz, Emma Olson, Daniel Berman, Alex New",
+          "description": "A nanopore-based strategy for detecting synthetic peptide modifications using DNA-peptide constructs and signal clustering for fieldable threat identification."
         },
         {
-          "id": "breakout-room-1-poster-2",
-          "title": "Rapid Triage Support for Austere Care",
-          "authors": "Alyssa Young, Omar Khan",
-          "description": "The prototype prioritizes care recommendations using limited measurements available in austere settings."
+          "id": "94",
+          "title": "MicroMechanobiological Models for Blast Overpressure Prediction (MMMBOP)",
+          "authors": "Tom Metzger/Kris RawlThomas Metzger, Kris Rawlss",
+          "description": "Integrated pulmonary mechanics and mechanobiological signaling models predicting cellular injury and gas-exchange degradation from repetitive low-level blast overpressure."
         },
         {
-          "id": "breakout-room-1-poster-3",
-          "title": "Synthetic Biology Safety Workflows",
-          "authors": "Maren Fischer, Leo Bennett",
-          "description": "A safety workflow tracks design assumptions, test results, and containment decisions across synthetic biology projects."
+          "id": "75",
+          "title": "Scylla: Scalogram Derived Pattern Recognition of Taxonomy",
+          "authors": "Brian Merritt, Daniel Berman, Libby Lewis, Amanda Ernlund",
+          "description": "A scalogram-based machine learning framework that infers pathogen transmission routes, tissue targets, and entry mechanisms directly from protein sequences."
         },
         {
-          "id": "breakout-room-1-poster-4",
-          "title": "Medical Supply Forecasting Under Surge Demand",
-          "authors": "Dina Alvarez, Peter Collins",
-          "description": "Forecasts combine patient arrival patterns and inventory levels to anticipate shortages during surge conditions."
+          "id": "67",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Megan Hannegan, Jessica Semel, Elizabeth Robinson, Allison Moyer, Karun Kumar Rao, Michael Salerno",
+          "description": "This poster will be available for viewing during the morning session only"
         },
         {
-          "id": "breakout-room-1-poster-5",
-          "title": "Bio-Signal Quality Checks at the Edge",
-          "authors": "Nikhil Rao, Emma Price",
-          "description": "Edge quality checks identify noisy biosignals before they affect downstream analytics or clinical decisions."
+          "id": "76",
+          "title": "Pocket PLR: Smartphone Neurological Assessment",
+          "authors": "Paul Hage",
+          "description": "A smartphone-based pupillary light reflex tool providing rapid, objective, and field-deployable screening for traumatic brain injury and neurological readiness."
+        },
+        {
+          "id": "77",
+          "title": "PRIME: Prokaryotic RNA-seq of Isolated Microbial Environments",
+          "authors": "Bryan Brensinger",
+          "description": "Bacterial single-cell RNA sequencing to characterize microbial heterogeneity and identify new targets for persistent infection countermeasures."
+        },
+        {
+          "id": "78",
+          "title": "Molecular Farming: Biomanufacturing Pharmaceutical Small Molecules",
+          "authors": "Rickey Egan, Collin TimRichard Egan, Collin Timmm",
+          "description": "Biomanufacturing technologies strengthening domestic pharmaceutical production, supply chain resilience, and rapid manufacturing of essential medicines."
+        },
+        {
+          "id": "68",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Ian Bird, Carlos Barajas, Daniel Jimenez, Daniel Berman, Samuel McKey",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "79",
+          "title": "Trauma Registry and Combat Care E-Recorder (TRACER)",
+          "authors": "Megan Leahy-Hoppa, Michael Williams",
+          "description": "Captures and transfers battlefield patient data without connectivity to improve continuity of care across medical echelons."
+        },
+        {
+          "id": "69",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Cecelia Kinane, Will Suero-Amparo, Steven Knowlden, Andrea Zeppuhar, Thomas Lawton",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "80",
+          "title": "ARMOR: Advanced Recovery through Mechanogenetic Overpressure-induced Repair",
+          "authors": "Tom Metzger, Bryan Brensinger",
+          "description": "Cell-based blast dosimeter for detecting biologically relevant overpressure exposures and supporting traumatic brain injury prevention."
+        },
+        {
+          "id": "70",
+          "title": "Biotechnology and Medical Systems Demo",
+          "authors": "Eric Handy, Megan Hannegan, Andrea Shepard, Cecelia Kinane, Tanner Hamann, Julie Gleason",
+          "description": "This demo will be available for viewing during the morning session only",
+          "demo": true
+        },
+        {
+          "id": "81",
+          "title": "SYNAXIS – SYNaptic AXonal Injury Signaling",
+          "authors": "Connor Bradfield, Ashlee Liao, Brendan Celii",
+          "description": "Computational framework linking repetitive mild brain injury to changes in neuronal signaling and functional brain network activity."
+        },
+        {
+          "id": "82",
+          "title": "ACORNE: Aerosol Collector for Operational Readiness in Novel Environments",
+          "authors": "Danielle Harris; Ben Alvarez; Mike Schuit",
+          "description": "Low-SWAP aerosol sampling technology enabling affordable detection of airborne chemical and biological hazards in operational environments."
+        },
+        {
+          "id": "83",
+          "title": "VISAGE: Virulence Signature Analysis from GEnomes",
+          "authors": "Rachael Sparklin, Sanjeevani Choudhery",
+          "description": "Natural language processing for bacterial genomes to predict pathogen virulence and identify genomic signatures associated with disease severity."
+        },
+        {
+          "id": "84",
+          "title": "Advanced Resins for Removing Persistent Water Contaminants",
+          "authors": "Luke Skala",
+          "description": "Novel ion exchange resin technology enabling highly effective removal of PFAS and other persistent water contaminants from challenging water sources."
+        },
+        {
+          "id": "71",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Neil Momsen; Corinne Morrison; Kristine Suritis; Chad Weiler; Julie Patrone; Andrea Timm; Rebecca Williams; Stephanie Ku",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "72",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Hannah Parks, Brenna Walsh, Danielle Nachman, Nathan Hagan",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "85",
+          "title": "BIONIC: Bioprinting In vitro Organic Neuronal Integrated Circuits",
+          "authors": "Ashlee Liao, Olayide Ashiru, Jenny Boothby, Andrea Timm",
+          "description": "Tunable hydrogel inks for bioprinting neurons with controlled circuit architectures and improved cell viability."
+        },
+        {
+          "id": "86",
+          "title": "Project AgLine",
+          "authors": "Terrence Garcia, Megan Toms, Tim O’Hanlon, Ryan Darragh, Rebecca Eager, Quinn Aithinne",
+          "description": "Validating and standardizing methods to model, test, and mitigate infectious aerosol movement in agricultural environments and structures."
+        },
+        {
+          "id": "73",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Lauren Wagner, Hayley DeHart, Kris Rawls, & James Johnson",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "87",
+          "title": "Agnostic Exposure Detection: Early Warning for Hazardous Exposures",
+          "authors": "Amanda Ernlund; Daniel Berman; Kris Rawls; Kenneth Bowden; Abhinaya Srikanth; Anissa Elayadi",
+          "description": "Wearable biomarker monitoring and explainable AI for early detection of hazardous chemical, biological, and toxic exposures."
+        },
+        {
+          "id": "89",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Michael Wagner, Connor Sage, Justin Eduagal, Shirley Klimkiewicz, Daniel Mishins, Noah Wichrowski, Santiago Segura",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "88",
+          "title": "BESTies",
+          "authors": "Denise Hoover, Elizabeth Robinson, Jessica Semel, Isabel Bradshaw, Olayide Ashiru, Mark Gasser, Alison Moyer",
+          "description": "A fully biological sensing circuit powered by cell‑free biochemical energy for low‑signature, self‑powered thermal and calcium flux detection."
+        },
+        {
+          "id": "91",
+          "title": "MOTO (Model-Based AI-in-the-Loop Framework for Optimized Training of Cortical Organoid Systems)",
+          "authors": "Brian Robinson, Ashlee Liao, Isaac Western, Erik Johnson",
+          "description": "Closed-loop, model-based AI framework for efficiently training cortical organoids using high‑density multi‑electrode arrays and optimized stimulation strategies."
+        },
+        {
+          "id": "90",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Brenna Walsh, Shirley Klimkiewicz, Ken Bowden, Amanda Ernlund, Mark Gasser, Reid Smith, Claire Marie Filone",
+          "description": "This poster will be available for viewing during the morning session only"
+        },
+        {
+          "id": "92",
+          "title": "Bio-Prospecting Novel Nitro-Aromatic Precursors",
+          "authors": "William Stone, Hannah Parks, Brooke Luisi, Andrea Zeppuhar, Steven Knowlden",
+          "description": "Biological and computational discovery of phloroglucinol derivatives as safer, efficient precursors for synthesis of insensitive explosive TATB."
+        },
+        {
+          "id": "93",
+          "title": "Biotechnology and Medical Systems Poster",
+          "authors": "Claire Bell, Corrine Fuller, Chad Weiler",
+          "description": "This poster will be available for viewing during the morning session only"
         }
       ]
     },
     {
-      "id": "200-lobby-front",
+      "id": "space",
       "title": "Space Systems and PNT",
       "posters": [
         {
-          "id": "200-lobby-front-poster-1",
-          "title": "Resilient Timing for Distributed Platforms",
-          "authors": "Logan Scott, Priya Nair",
-          "description": "A timing architecture maintains synchronization when primary navigation references become degraded."
+          "id": "95",
+          "title": "ABRA: All-Band Radio Accelerated",
+          "authors": "Justin Bradfield; Mike Dauberman; James Morton; Evan Shi; Austin Flynt",
+          "description": "Low-SWAP, broadband software-defined radio enabling reconfigurable, multi-mission communications across wide RF frequency ranges."
         },
         {
-          "id": "200-lobby-front-poster-2",
-          "title": "Space Domain Event Correlation",
-          "authors": "Molly Jenkins, Tariq Allen",
-          "description": "This poster shows methods for linking observations, maneuvers, and alerts into coherent space-domain events."
+          "id": "96",
+          "title": "Differential Games for Spaceflight",
+          "authors": "Christopher Scott",
+          "description": "Mathematical game-theoretic frameworks for optimizing autonomous spacecraft decision-making and maneuvering in adversarial spaceflight environments."
         },
         {
-          "id": "200-lobby-front-poster-3",
-          "title": "PNT Integrity Checks for Field Users",
-          "authors": "Sarah Ito, Mason Green",
-          "description": "A user-facing integrity check estimates when position, navigation, and timing data may be unreliable."
+          "id": "97",
+          "title": "Revisiting Case Debris in Nuclear Planetary Defense",
+          "authors": "Patrick King",
+          "description": "Modeling how nuclear device case debris transfers momentum to asteroids, improving predictions of deflection effectiveness for planetary defense."
         },
         {
-          "id": "200-lobby-front-poster-4",
-          "title": "Small Satellite Tasking Under Constraints",
-          "authors": "Aiden Murphy, Laila Hassan",
-          "description": "A scheduler balances collection value, power, downlink, and pointing constraints for small satellite missions."
+          "id": "98",
+          "title": "Signature Modeling Using Radiance Fields (SMURFs)",
+          "authors": "Brian Keane, Sam Albert, Allen Mathew, Stephen Okoniewski, John Martin, Sean McCurry",
+          "description": "Radiance field models for accurate, high-speed radiometric imagery and multi-object on-orbit scene simulation."
         },
         {
-          "id": "200-lobby-front-poster-5",
-          "title": "Navigation Aiding from Opportunistic Signals",
-          "authors": "Clara Evans, Jonah Brooks",
-          "description": "The concept uses available environmental signals to supplement navigation when standard references are limited."
+          "id": "99",
+          "title": "Development and Implementation of a Low-Cost Scalable Electrical Power Subsystem",
+          "authors": "Yuriy Noyvert, David Frankford, Tyler Boehmer, Emmanuel Coleman, Kelvin DeFeo, Joanna Mellert, Allison Orr, Julia Van Burger, Chad Whiteley",
+          "description": "Radiation-tolerant, modular electrical power subsystem for low-cost space missions, balancing performance, reliability, manufacturability, and reduced component and handling costs."
         }
       ]
     },
     {
-      "id": "200-lobby-middle",
+      "id": "microelectronics",
       "title": "Microelectronics, Quantum, and Materials",
       "posters": [
         {
-          "id": "200-lobby-middle-poster-1",
-          "title": "Radiation-Aware Microelectronics Screening",
-          "authors": "Nadia Flores, Eric Walsh",
-          "description": "A screening workflow compares candidate components for performance under radiation-like stress conditions."
+          "id": "100",
+          "title": "LUNA: Lithium-ion Batteries Upgraded for Nocturnal Autonomy on the Moon",
+          "authors": "Jesse Ko, Mike Butler, Peter Kofinas, Paul Albertus, Christopher Johnson",
+          "description": "Advanced lithium-ion batteries engineered to survive extreme lunar cold, enabling reliable overnight energy storage and sustained Moon surface operations."
         },
         {
-          "id": "200-lobby-middle-poster-2",
-          "title": "Quantum Sensor Drift Compensation",
-          "authors": "Yasmin Ali, Connor Hughes",
-          "description": "A compensation method reduces drift in quantum sensor measurements during long-duration collection."
+          "id": "101",
+          "title": "TRI-Nets: Transmit-Reflect Metasurface Nets",
+          "authors": "Timothy  Sleasman",
+          "description": "Flexible, textile-based metasurfaces for dynamic control of reflected and transmitted radio frequency signals."
         },
         {
-          "id": "200-lobby-middle-poster-3",
-          "title": "Materials Discovery with Active Learning",
-          "authors": "Beatrice Lane, Felix Romero",
-          "description": "Active learning selects the next most useful experiments for evaluating new material candidates."
+          "id": "102",
+          "title": "Reprogrammable In Flight FPGA",
+          "authors": "Cassandra Derr; Kathryn Marcotte",
+          "description": "In-flight FPGA reprogramming technology enabling secure software updates, enhanced reliability, and extended mission flexibility for space systems."
         },
         {
-          "id": "200-lobby-middle-poster-4",
-          "title": "Secure Packaging for Edge Processors",
-          "authors": "Liam Foster, Anika Rao",
-          "description": "The poster describes packaging concepts that protect edge processors from environmental and tamper risks."
+          "id": "103",
+          "title": "Fieldable nitrogen vacancy nuclear magnetic resonance with nanofluidic confinement",
+          "authors": "Isaiah Gray, Andrew Bennett-Jackson, Prashant Ramesh, Andrea Timm, Bryan Brensinger",
+          "description": "Portable NV-diamond NMR platform using nanofluidic confinement to enhance chemical sensitivity for field detection of chemical and biological threats."
         },
         {
-          "id": "200-lobby-middle-poster-5",
-          "title": "Defect Mapping in Advanced Materials",
-          "authors": "Isabel Martin, Theo Brooks",
-          "description": "Image analysis tools map microscopic defects and connect them to manufacturing process variables."
+          "id": "104",
+          "title": "Versatile Optical ID (VOID) Tag",
+          "authors": "Sean O’Connor,Diamond Moody, Ian Gervasi, Joe Prosser",
+          "description": "Chip-scale optical tag project delivering unique low-probability-of-detection signatures for covert free-space optical communications."
+        },
+        {
+          "id": "105",
+          "title": "Electro-Optical Metasurfaces for Rapid Beam Steering and Intensity Modulation",
+          "authors": "Joe Miragliotta, Sam Kim, Lance Oh, Archana Devasia, Andrew Bennett-Jackson, Garrett Bonnema",
+          "description": "High-Q Si/BTO resonator metasurfaces enabling compact, low-voltage SWIR beam steering and >50% electro-optic intensity modulation."
+        },
+        {
+          "id": "106",
+          "title": "Leveraging Commercial Foundries for Wideband RF Photonic Systems",
+          "authors": "Navin Lingaraju",
+          "description": "Microsystem architecture and chip-scale photonics enabling widely tunable, high-power RF photonic systems with superior bandwidth and frequency agility."
+        },
+        {
+          "id": "137",
+          "title": "mmWAVES - mmWave Waveform-driven Apertures for Versatile Evolutionary Spacecraft",
+          "authors": "Luke Newton",
+          "description": "Intelligent mmWave metasurface aperture enabling low-power electronic beam steering and high-throughput communications for future versatile spacecraft."
         }
       ]
     }

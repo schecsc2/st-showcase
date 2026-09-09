@@ -78,6 +78,23 @@
       </q-list>
     </section>
 
+    <section class="info-section">
+      <h2>Contact</h2>
+
+      <article class="info-card">
+        <div class="contact-list">
+          <p>
+            For technical questions following the showcase, contact us here:
+            <a class="contact-email" :href="`mailto:${infoData.contact.technicalEmail}`">{{ infoData.contact.technicalEmail }}</a>
+          </p>
+          <p>
+            For other questions, contact us here:
+            <a class="contact-email" :href="`mailto:${infoData.contact.otherEmail}`">{{ infoData.contact.otherEmail }}</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
   </q-page>
 </template>
 
@@ -217,7 +234,17 @@ function getTextParts(text) {
   padding: 0 16px 16px;
 }
 
+.contact-list {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-list p {
+  margin: 0;
+}
+
 .info-item a,
+.contact-email,
 .faq-answer a {
   color: #294b75;
   font-weight: 700;

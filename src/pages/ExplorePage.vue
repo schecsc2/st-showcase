@@ -23,6 +23,7 @@
           <q-chip class="poster-neighborhood-chip" dense square>
             {{ result.neighborhood.title }}
           </q-chip>
+          <q-chip v-if="result.poster.demo" class="poster-demo-chip" dense square>Demo</q-chip>
           <h2>{{ result.poster.title }}</h2>
           <p>{{ result.poster.authors }}</p>
           <p>{{ result.poster.description }}</p>
@@ -45,6 +46,7 @@
             <article
               v-for="neighborhood in filteredNeighborhoods"
               :key="neighborhood.id"
+              :data-neighborhood-id="neighborhood.id"
               class="neighborhood-item"
             >
               <q-btn
@@ -52,7 +54,7 @@
                 class="neighborhood-button"
                 no-caps
                 unelevated
-                @click="selectNeighborhood(neighborhood.id)"
+                @click="selectNeighborhood(neighborhood.id, $event)"
               >
                 <span class="neighborhood-button__title">{{ neighborhood.title }} ({{ neighborhood.posters.length }})</span>
                 <q-icon
@@ -64,6 +66,7 @@
 
               <div v-if="neighborhood.id === selectedNeighborhoodId && neighborhood.posters.length" class="poster-list">
                 <article v-for="poster in neighborhood.posters" :key="poster.id" class="poster-item">
+                  <q-chip v-if="poster.demo" class="poster-demo-chip" dense square>Demo</q-chip>
                   <h2>{{ poster.title }}</h2>
                   <p>{{ poster.authors }}</p>
                   <p>{{ poster.description }}</p>
@@ -85,45 +88,63 @@
         <section>
           <h2 class="explore-section-title">Demos</h2>
           <div class="neighborhood-list">
-            <article v-for="demo in mapData.demos" :key="demo.id" class="neighborhood-item">
+            <article class="neighborhood-item">
               <q-btn
-                :class="{ 'neighborhood-button--active': demo.id === selectedDemoId }"
+                :class="{ 'neighborhood-button--active': selectedDemoId === 'outside' }"
                 class="neighborhood-button"
                 no-caps
                 unelevated
-                @click="selectDemo(demo.id)"
+                @click="selectDemo('outside')"
               >
-                <span class="neighborhood-button__title">
-                  {{ demo.title }}<template v-if="demo.demos?.length"> ({{ demo.demos.length }})</template>
-                </span>
+                <span class="neighborhood-button__title">Outside ({{ outsideDemos.length }})</span>
                 <q-icon
                   class="neighborhood-button__icon"
-                  :name="demo.id === selectedDemoId ? 'expand_more' : 'chevron_right'"
+                  :name="selectedDemoId === 'outside' ? 'expand_more' : 'chevron_right'"
                   size="20px"
                 />
               </q-btn>
 
-              <div v-if="demo.id === selectedDemoId" class="poster-list">
-                <template v-if="demo.demos?.length">
-                  <article v-for="demoItem in demo.demos" :key="demoItem.id" class="poster-item">
-                    <h2>{{ demoItem.title }}</h2>
-                    <p>{{ demoItem.authors }}</p>
-                    <p>{{ demoItem.description }}</p>
-                    <q-btn
-                      :to="{ path: '/map', query: { demo: demo.id, item: demoItem.id } }"
-                      class="poster-map-button"
-                      dense
-                      flat
-                      no-caps
-                    >
-                      Show on Map
-                    </q-btn>
-                  </article>
-                </template>
-                <article v-else class="poster-item">
-                  <p>{{ demo.location }}</p>
+              <div v-if="selectedDemoId === 'outside'" class="poster-list">
+                <article v-for="item in outsideDemos" :key="item.demo.id" class="poster-item">
+                  <h2>{{ item.demo.title }}</h2>
+                  <p>{{ item.demo.authors }}</p>
+                  <p>{{ item.demo.description }}</p>
                   <q-btn
-                    :to="{ path: '/map', query: { demo: demo.id } }"
+                    :to="{ path: '/map', query: { demo: item.area.id, item: item.demo.id } }"
+                    class="poster-map-button"
+                    dense
+                    flat
+                    no-caps
+                  >
+                    Show on Map
+                  </q-btn>
+                </article>
+              </div>
+            </article>
+
+            <article class="neighborhood-item">
+              <q-btn
+                :class="{ 'neighborhood-button--active': selectedDemoId === 'integrated' }"
+                class="neighborhood-button"
+                no-caps
+                unelevated
+                @click="selectDemo('integrated')"
+              >
+                <span class="neighborhood-button__title">Integrated ({{ integratedDemos.length }})</span>
+                <q-icon
+                  class="neighborhood-button__icon"
+                  :name="selectedDemoId === 'integrated' ? 'expand_more' : 'chevron_right'"
+                  size="20px"
+                />
+              </q-btn>
+
+              <div v-if="selectedDemoId === 'integrated'" class="poster-list">
+                <article v-for="item in integratedDemos" :key="item.poster.id" class="poster-item">
+                  <h2>{{ item.poster.title }}</h2>
+                  <p>{{ item.poster.authors }}</p>
+                  <p>{{ item.poster.description }}</p>
+                  <q-btn
+                    :to="{ path: '/map', query: { neighborhood: item.neighborhood.id, poster: item.poster.id } }"
                     class="poster-map-button"
                     dense
                     flat
@@ -158,7 +179,7 @@
 
               <div v-if="booth.id === selectedFeatureBoothId" class="poster-list">
                 <article class="poster-item">
-                  <p>Placeholder description.</p>
+                  <p>{{ booth.description }}</p>
                   <q-btn
                     :to="{ path: '/map', query: { sct: booth.id } }"
                     class="poster-map-button"
@@ -179,7 +200,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import mapData from '../../data/live/map/locations.json'
 
 const search = ref('')
@@ -187,6 +208,12 @@ const selectedNeighborhoodId = ref(null)
 const selectedDemoId = ref(null)
 const selectedFeatureBoothId = ref(null)
 const filteredNeighborhoods = computed(() => mapData.neighborhoods)
+const outsideDemos = computed(() => mapData.demos.flatMap((area) => {
+  return (area.demos || []).map((demo) => ({ area, demo }))
+}))
+const integratedDemos = computed(() => mapData.neighborhoods.flatMap((neighborhood) => {
+  return neighborhood.posters.filter((poster) => poster.demo).map((poster) => ({ neighborhood, poster }))
+}))
 const posterSearchResults = computed(() => {
   const query = search.value.trim().toLowerCase()
 
@@ -210,8 +237,19 @@ function getPosterSearchText(neighborhood, poster) {
   return `${neighborhood.title} ${poster.title} ${poster.authors} ${poster.description}`.toLowerCase()
 }
 
-function selectNeighborhood(id) {
+function selectNeighborhood(id, event) {
+  const activeButton = document.querySelector(`[data-neighborhood-id="${selectedNeighborhoodId.value}"] .neighborhood-button`)
+  const clickedNeighborhood = event.currentTarget.closest('.neighborhood-item')
+  const clickedTop = clickedNeighborhood.getBoundingClientRect().top
+  const shouldPreservePosition = selectedNeighborhoodId.value !== id && activeButton?.getBoundingClientRect().top <= 0
+
   selectedNeighborhoodId.value = selectedNeighborhoodId.value === id ? null : id
+
+  if (shouldPreservePosition) {
+    nextTick(() => {
+      window.scrollBy(0, clickedNeighborhood.getBoundingClientRect().top - clickedTop)
+    })
+  }
 }
 
 function selectDemo(id) {
@@ -338,6 +376,14 @@ function selectFeatureBooth(id) {
   margin: 0 0 8px;
   background: #294b75;
   color: #ffffff;
+  font-weight: 800;
+}
+
+.poster-demo-chip {
+  margin: 0 4px 8px 0;
+  background: #002C77;
+  color: #ffffff;
+  font-size: 11px;
   font-weight: 800;
 }
 

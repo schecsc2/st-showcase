@@ -1,0 +1,238 @@
+{
+  "eventDate": "September 15, 2026",
+  "eventDay": "2026-09-15",
+  "location": "Johns Hopkins APL South Campus",
+  "speakers": {
+    "gen-david-goldfein": {
+      "label": "Featured Speaker",
+      "name": "Gen. David L. Goldfein",
+      "image": "gen-david-goldfein.jpg",
+      "paragraphs": [
+        "The 2026 Science & Technology Showcase will feature a session with Gen. David L. Goldfein, who was the 21st chief of staff of the Air Force from 2016 to 2020, during which he was responsible for organizing, training, and equipping 685,000 forces and civilians serving in the Air Force worldwide.",
+        "Goldfein previously served as Air Force vice chief of staff, director of the Joint Staff at the Pentagon, and commander of U.S. Air Forces Central Command in Southwest Asia. A rated command pilot, he flew combat missions in operations Desert Shield, Desert Storm, Allied Force, and Enduring Freedom, and logged more than 4,200 flight hours over his 37-year career. Goldfein was named an APL Senior Fellow in 2021."
+      ]
+    },
+    "david-van-wie": {
+      "name": "Dr. David Van Wie",
+      "image": "dr-david-van-wie.jpg",
+      "paragraphs": [
+        "Dr. David Van Wie is the ninth director of the Johns Hopkins Applied Physics Laboratory (APL), which performs research and development on behalf of the Department of War, the Intelligence Community, NASA, and other federal agencies.",
+        "Prior to becoming director on July 14, 2025, Dr. Van Wie led APL’s Air and Missile Defense Sector, where he was responsible for strategic planning, execution, and performance of over 1,500 staff advancing the ability of the nation to defend our homeland, deployed forces, allies, and partners against adversarial threats. In this role, he championed new types of kinetic interceptors, novel approaches to sensing and data fusion, deployable artificial intelligence capabilities, and innovative non-kinetic effectors."
+      ]
+    },
+    "joan-hoffmann": {
+      "name": "Dr. Joan Hoffmann",
+      "image": "dr-joan-hoffmann.jpg",
+      "paragraphs": [
+        "Dr. Joan Hoffmann is the mission area executive for Research and Exploratory Development at APL. In this role, she drives the investment strategy for research programs seeking technology breakthroughs to benefit the missions of the Laboratory’s sponsors. She previously served as exploration program area manager and program manager for Alternative Computing Paradigms in APL’s Research and Exploratory Development Mission Area. As exploration program area manager, she oversaw the strategic direction and execution of emerging research technologies in artificial intelligence, computing, neuroscience, robotics, and autonomy."
+      ]
+    },
+    "lawrence-dobbs": {
+      "name": "Dr. Lawrence Dobbs",
+      "image": "dr-lawrence-dobbs.png",
+      "paragraphs": [
+        "Dr. Lawrence Dobbs is the Chief Engineer for the Homeland Defense Mission Area at APL, where he focuses on translating operational needs into state-of-the-art capabilities to protect the U.S. homeland and its critical infrastructure. During his 19 years at APL, his work has spanned countering weapons of mass destruction and critical infrastructure protection."
+      ]
+    },
+    "shannon-hall": {
+      "name": "Dr. Shannon Hall",
+      "image": "dr-shannon-hall.png",
+      "paragraphs": [
+        "Dr. Shannon Hall is the Mission Area Chief Scientist for the Strategic Deterrence Mission Area at APL, helping shape the evolution of strategic systems to meet current and future national security challenges. Over her 30 years at APL, she has led efforts spanning strategic deterrence, hypersonic rapid prototyping, and systems supporting the Navy’s Fleet Ballistic Missile program."
+      ]
+    },
+    "elizabeth-congdon": {
+      "name": "Dr. Elizabeth Congdon",
+      "image": "dr-elizabeth-congdon.png",
+      "paragraphs": [
+        "Dr. Elizabeth Congdon is the Chief Technologist for the Engineering Branch in the Space Exploration Sector at APL. She was the lead engineer for the Parker Solar Probe thermal protection system and the mechanical lead engineer for the Double Asteroid Redirection Test (DART) mission. Dr. Congdon’s research interests include materials and mechanical systems in extreme environments, drawing on nearly 20 years of experience at APL."
+      ]
+    },
+    "coire-maranzano": {
+      "name": "Dr. Coire Maranzano",
+      "image": "dr-coire-maranzano.png",
+      "paragraphs": [
+        "Dr. Coire J. Maranzano is the Deputy Mission Area Executive for the Precision Strike Mission Area at APL. He brings 20 years of experience at APL across weapon system development, missile guidance and navigation, electronic attack, and systems engineering. In his current role, he helps lead the development of integrated precision strike and air combat capabilities, including both kinetic and non-kinetic systems."
+      ]
+    },
+    "ron-schulze": {
+      "name": "Ron Schulze",
+      "image": "ron-schulze.png",
+      "paragraphs": [
+        "Ron Schulze is an RF Systems Lead Engineer and Program Manager in APL's Space Exploration Sector, where he leads the development of advanced space systems and partnerships spanning NASA, the Department of Defense, commercial industry, and academia. Over more than 30 years at APL, he has held technical and program leadership roles on missions including New Horizons, DART, Europa Clipper, SunCET, and several next-generation communications and radar initiatives. His work has focused on translating innovative technologies into operational capabilities by building multidisciplinary teams and fostering collaboration across organizational boundaries."
+      ]
+    },
+    "morgan-trexler": {
+      "name": "Dr. Morgan Trexler",
+      "image": "dr-morgan-trexler.png",
+      "paragraphs": [
+        "Dr. Morgan M. Trexler is the research program area manager in APL’s Research and Exploratory Development Mission Area. In this capacity, she oversees the strategy, execution, and transition of research in materials, biological, and chemical sciences. She previously served as program manager for Science of Extreme and Multifunctional Materials, where she led a diverse and expansive portfolio of research projects focused on developing new capabilities for extreme environment applications."
+      ]
+    },
+    "susan-ehrlich": {
+      "name": "Susan Ehrlich",
+      "image": "susan-ehrlich.png",
+      "paragraphs": [
+        "Susan Ehrlich is a Technology Manager at APL, where she helps move breakthrough technologies beyond the laboratory and into real-world use. Working at the intersection of science, business, and intellectual property, Susan partners with APL researchers and program teams to identify promising innovations, protect intellectual property, build relationships with industry, negotiate technology licenses, and support the creation of new companies. Her work has helped advance the transition of APL technologies spanning next-generation batteries, advanced manufacturing, thermoelectric cooling, hypersonic materials, and other emerging fields."
+      ]
+    }
+  },
+  "sessions": [
+    {
+      "id": "morning",
+      "title": "Morning Session",
+      "audience": "Government & Contractor",
+      "time": "8:30 AM - 12:00 PM",
+      "start": "08:30",
+      "end": "12:00",
+      "location": "Johns Hopkins APL South Campus",
+      "items": [
+        {
+          "title": "Event Check-In",
+          "time": "8:30 AM - 9:00 AM",
+          "start": "08:30",
+          "end": "09:00",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Welcome",
+          "time": "9:00 AM - 9:05 AM",
+          "start": "09:00",
+          "end": "09:05",
+          "details": [
+            "Dr. Joan Hoffmann"
+          ],
+          "speakerIds": [
+            "joan-hoffmann"
+          ]
+        },
+        {
+          "title": "Introductory Remarks",
+          "time": "9:05 AM - 9:15 AM",
+          "start": "09:05",
+          "end": "09:15",
+          "details": [
+            "Dr. David Van Wie"
+          ],
+          "speakerIds": [
+            "david-van-wie"
+          ]
+        },
+        {
+          "title": "The Technology Behind Tomorrow's Mission",
+          "time": "9:15 AM - 9:45 AM",
+          "start": "09:15",
+          "end": "09:45",
+          "details": [
+            "Featuring Gen. David Goldfein",
+            "Moderated by Dr. Joan Hoffmann"
+          ],
+          "speakerIds": [
+            "gen-david-goldfein",
+            "joan-hoffmann"
+          ]
+        },
+        {
+          "title": "Meeting the Nation's Toughest Challenges",
+          "time": "9:45 AM - 10:00 AM",
+          "start": "09:45",
+          "end": "10:00",
+          "details": [
+            "Homeland Defense | Dr. Lawrence Dobbs",
+            "Strategic Capabilities | Dr. Shannon Hall",
+            "Space Superiority | Dr. Elizabeth Congdon",
+            "Pacific Theater | Dr. Coire Maranzano"
+          ],
+          "speakerIds": [
+            "lawrence-dobbs",
+            "shannon-hall",
+            "elizabeth-congdon",
+            "coire-maranzano"
+          ]
+        },
+        {
+          "title": "Science & Technology Showcase",
+          "time": "10:00 AM - 12:00 PM",
+          "start": "10:00",
+          "end": "12:00",
+          "location": "South Campus"
+        },
+        {
+          "title": "Conclusion of Government & Contractor Session",
+          "time": "12:00 PM",
+          "start": "12:00"
+        }
+      ]
+    },
+    {
+      "id": "afternoon",
+      "title": "Afternoon Session",
+      "audience": "Academia, Industry, & Community",
+      "time": "1:00 PM - 4:00 PM",
+      "start": "13:00",
+      "end": "16:00",
+      "location": "Johns Hopkins APL South Campus",
+      "items": [
+        {
+          "title": "Event Check-In",
+          "time": "1:00 PM - 1:30 PM",
+          "start": "13:00",
+          "end": "13:30",
+          "location": "Semmel Center Auditorium"
+        },
+        {
+          "title": "Welcome",
+          "time": "1:30 PM - 1:35 PM",
+          "start": "13:30",
+          "end": "13:35",
+          "details": [
+            "Dr. Joan Hoffmann"
+          ],
+          "speakerIds": [
+            "joan-hoffmann"
+          ]
+        },
+        {
+          "title": "Introductory Remarks",
+          "time": "1:35 PM - 1:40 PM",
+          "start": "13:35",
+          "end": "13:40",
+          "details": [
+            "Dr. David Van Wie"
+          ],
+          "speakerIds": [
+            "david-van-wie"
+          ]
+        },
+        {
+          "title": "Behind the Breakthroughs",
+          "time": "1:40 PM - 2:00 PM",
+          "start": "13:40",
+          "end": "14:00",
+          "details": [
+            "Enabling Lunar Ecosystems | Ron Schulze",
+            "From Discovery to Deployment | Dr. Morgan Trexler",
+            "Transforming Innovation into Impact | Susan Ehrlich"
+          ],
+          "speakerIds": [
+            "ron-schulze",
+            "morgan-trexler",
+            "susan-ehrlich"
+          ]
+        },
+        {
+          "title": "Science & Technology Showcase",
+          "time": "2:00 PM - 4:00 PM",
+          "start": "14:00",
+          "end": "16:00",
+          "location": "South Campus"
+        },
+        {
+          "title": "Conclusion of Academia, Industry, & Community Session",
+          "time": "4:00 PM",
+          "start": "16:00"
+        }
+      ]
+    }
+  ]
+}

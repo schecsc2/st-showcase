@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "quasar dev",
-    "build": "quasar build"
+    "build": "quasar build",
+    "populate-locations": "python3 scripts/populate_locations.py"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.17",

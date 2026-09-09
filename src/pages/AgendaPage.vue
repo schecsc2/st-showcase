@@ -21,6 +21,7 @@
           :subtitle="item.time"
         >
           <p v-if="item.location">{{ item.location }}</p>
+          <p v-for="detail in item.details" :key="detail">{{ detail }}</p>
           <q-btn
             v-if="hasAgendaSpeakers(item)"
             class="speaker-button"
@@ -58,7 +59,7 @@
             <div class="speaker-dialog__header">
               <img class="speaker-dialog__image" :src="speaker.image" :alt="speaker.name">
               <div>
-                <div class="speaker-dialog__label">{{ speaker.label }}</div>
+                <div v-if="speaker.label" class="speaker-dialog__label">{{ speaker.label }}</div>
                 <h2>{{ speaker.name }}</h2>
               </div>
             </div>
@@ -72,61 +73,25 @@
 
 <script setup>
 import { ref } from 'vue'
-import agendaData from '../../data/sample/agenda.json'
-import speakersText from '../../data/event_content/speakers.md?raw'
-import davidVanWieImage from '../../data/live/images/dr-david-van-wie.jpg'
-import joanHoffmannImage from '../../data/live/images/dr-joan-hoffmann.jpg'
-import davidGoldfeinImage from '../../data/live/images/gen-david-goldfein.jpg'
+import agendaData from '../../data/event_content/agenda.json'
 
 const activeSpeakers = ref([])
 const speakerDialogOpen = ref(false)
-const speakerImages = {
-  'Dr. David Van Wie': davidVanWieImage,
-  'Dr. Joan Hoffmann': joanHoffmannImage,
-  'Gen. David L. Goldfein': davidGoldfeinImage
-}
-const speakers = parseSpeakerContent(speakersText)
-const speakersByAgendaTitle = {
-  'Welcome & Opening Remarks': ['Welcome Speaker', 'Opening Remarks'],
-  'Feature Conversation with Gen. David Goldfein': ['Featured Speaker']
-}
-
-function parseSpeakerContent(text) {
-  const sections = []
-  let section = null
-
-  text.split('\n').forEach((line) => {
-    const value = line.trim()
-
-    if (!value || value === 'Speakers') {
-      return
-    }
-
-    if (value.includes(' | ')) {
-      const parts = value.split(' | ')
-
-      section = {
-        label: parts[0],
-        name: parts[1],
-        image: speakerImages[parts[1]],
-        paragraphs: []
-      }
-      sections.push(section)
-      return
-    }
-
-    if (section) {
-      section.paragraphs.push(value)
-    }
-  })
-
-  return sections
-}
+const speakerImages = import.meta.glob('../../data/live/images/*', {
+  eager: true,
+  import: 'default',
+  query: '?url'
+})
 
 function getAgendaSpeakers(item) {
-  const labels = speakersByAgendaTitle[item.title] || []
+  return (item.speakerIds || []).map((id) => {
+    const speaker = agendaData.speakers[id]
 
-  return labels.map((label) => speakers.find((speaker) => speaker.label === label)).filter(Boolean)
+    return {
+      ...speaker,
+      image: speakerImages[`../../data/live/images/${speaker.image}`]
+    }
+  })
 }
 
 function hasAgendaSpeakers(item) {

@@ -101,10 +101,11 @@
 
     <q-card
       v-if="selectedMapCard"
-      :class="{ 'map-popup-card--compact': selectedMapCard.type }"
+      :class="{ 'map-popup-card--compact': selectedMapCard.type && !selectedMapCard.description }"
       class="map-popup-card"
     >
       <q-card-section class="map-popup-card__section">
+        <q-chip v-if="selectedMapCard.type === 'sct'" class="map-feature-booth-chip" dense square>Feature Booth</q-chip>
         <div
           :class="{ 'map-popup-card__title--neighborhood': selectedMapCard.posters?.length }"
           class="map-popup-card__title"
@@ -112,6 +113,7 @@
           {{ selectedMapCard.title }}
         </div>
         <div v-if="selectedMapCard.subtitle" class="map-popup-card__subtitle">{{ selectedMapCard.subtitle }}</div>
+        <p v-if="selectedMapCard.description" class="map-poster-description">{{ selectedMapCard.description }}</p>
       </q-card-section>
       <q-carousel
         v-if="selectedMapCard.posters?.length"
@@ -129,6 +131,8 @@
           :name="poster.id"
           class="map-poster-slide"
         >
+          <q-chip v-if="poster.demo" class="map-poster-demo-chip" dense square>Demo</q-chip>
+          <q-chip v-if="poster.demo" class="map-poster-chip" dense square>Poster</q-chip>
           <div class="map-poster-title">{{ poster.title }}</div>
           <div class="map-poster-authors">{{ poster.authors }}</div>
           <p class="map-poster-description">{{ poster.description }}</p>
@@ -155,7 +159,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import * as L from 'leaflet'
 import { useRoute } from 'vue-router'
 import mapImage from '../../data/live/map/map.png'
@@ -166,7 +170,17 @@ const neighborhoodGeometryFiles = import.meta.glob('../../data/live/map/geometri
   import: 'default',
   eager: true
 })
+const neighborhoodPosterGeometryFiles = import.meta.glob('../../data/live/map/geometries/neighborhoods/posters/*', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+})
 const demoGeometryFiles = import.meta.glob('../../data/live/map/geometries/demos/*', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+})
+const networkingGeometryFiles = import.meta.glob('../../data/live/map/geometries/networking/*', {
   query: '?raw',
   import: 'default',
   eager: true
@@ -205,6 +219,11 @@ const mapSearchCategories = [
     title: 'Feature Booths'
   },
   {
+    key: 'type-networking',
+    type: 'networking',
+    title: 'Networking Lounge'
+  },
+  {
     key: 'type-help',
     type: 'help',
     title: 'Help'
@@ -222,10 +241,16 @@ const mapSearchCategories = [
 ]
 const neighborhoodsById = Object.fromEntries(mapData.neighborhoods.map((neighborhood) => [neighborhood.id, neighborhood]))
 const demosById = Object.fromEntries(mapData.demos.map((demoArea) => [demoArea.id, demoArea]))
+const networkingById = Object.fromEntries((mapData.networking || []).map((area) => [area.id, area]))
+const neighborhoodPosterGeometriesById = Object.fromEntries(Object.keys(neighborhoodPosterGeometryFiles).map((path) => [
+  getFileId(path).replace(/[-_]posters$/, ''),
+  neighborhoodPosterGeometryFiles[path]
+]))
 const neighborhoodGeometries = Object.keys(neighborhoodGeometryFiles).sort().map((path) => ({
   id: getFileId(path),
   title: neighborhoodsById[getFileId(path)]?.title,
   posters: neighborhoodsById[getFileId(path)]?.posters || [],
+  posterGeometry: neighborhoodPosterGeometriesById[getFileId(path)],
   geometry: neighborhoodGeometryFiles[path]
 }))
 const demoGeometries = Object.keys(demoGeometryFiles).sort().map((path) => ({
@@ -234,6 +259,11 @@ const demoGeometries = Object.keys(demoGeometryFiles).sort().map((path) => ({
   posters: demosById[getFileId(path)]?.demos || [],
   itemLabel: 'demos',
   geometry: demoGeometryFiles[path]
+}))
+const networkingGeometries = Object.keys(networkingGeometryFiles).sort().map((path) => ({
+  id: getFileId(path),
+  title: networkingById[getFileId(path)]?.title,
+  geometry: networkingGeometryFiles[path]
 }))
 const mapSearchResults = computed(() => {
   if (!searchFocused.value || selectedSearchResult.value) {
@@ -286,6 +316,7 @@ const mapSearchResults = computed(() => {
 })
 let selectedMarker = null
 let selectedGeometryPath = null
+let shouldCenterActivePoster = true
 let map
 const route = useRoute()
 
@@ -321,6 +352,28 @@ onMounted(() => {
     geometryLayers.push(item)
     addGeometryClick(item)
   })
+
+  geometryOverlay.items
+    .filter(({ type }) => type === 'demo')
+    .forEach(setPosterMarkers)
+
+  geometryOverlay.items
+    .filter(({ type }) => type === 'networking')
+    .forEach((networking) => {
+      const marker = L.marker(getGeometryBounds(networking).getCenter(), {
+        icon: getNetworkingIcon()
+      }).addTo(map)
+
+      const item = {
+        node: networking,
+        type: 'networking',
+        geometryPath: networking.path,
+        marker
+      }
+
+      markers.push(item)
+      addMarkerClick(item)
+    })
 
   mapData.demos.filter((demo) => demo.shape === 'circle').forEach((demo) => {
     const marker = L.marker(getMapPoint(demo), {
@@ -411,7 +464,7 @@ onUnmounted(() => {
 
   markers.length = 0
   geometryLayers.length = 0
-  clearPosterMarkers()
+  clearPosterMarkers(true)
 })
 
 watch(search, (value) => {
@@ -427,7 +480,7 @@ watch(search, (value) => {
   updateMarkers()
 })
 
-watch(activePosterSlide, () => updatePosterMarkers(true))
+watch(activePosterSlide, () => updatePosterMarkers(shouldCenterActivePoster))
 watch(() => [route.query.neighborhood, route.query.poster, route.query.sct, route.query.demo, route.query.item], selectRouteLocation)
 
 function closeSearchResults(event) {
@@ -473,6 +526,10 @@ function getGeometryOverlay() {
     items.push(addGeometryPath(svg, geometry, 'demo', '#002C77'))
   })
 
+  networkingGeometries.forEach((geometry) => {
+    items.push(addGeometryPath(svg, geometry, 'networking', '#000000'))
+  })
+
   return {
     svg,
     items
@@ -507,6 +564,7 @@ function addGeometryPath(svg, geometry, type, color) {
     type,
     title: geometry.title || '',
     posters: geometry.posters || [],
+    posterGeometry: geometry.posterGeometry,
     itemLabel: geometry.itemLabel || 'posters'
   }
 }
@@ -573,6 +631,16 @@ function getHelpIcon() {
   return L.divIcon({
     className: 'map-node map-node--help',
     html: '<span class="material-icons">question_mark</span>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -17]
+  })
+}
+
+function getNetworkingIcon() {
+  return L.divIcon({
+    className: 'map-node map-node--networking',
+    html: '<span class="material-symbols-outlined">groups</span>',
     iconSize: [34, 34],
     iconAnchor: [17, 17],
     popupAnchor: [0, -17]
@@ -691,19 +759,20 @@ function addMarkerClick(item) {
 function selectMarker(item) {
   selectedSearchResult.value = null
 
-  if (selectedMarker === item.marker) {
+  if (selectedMarker === item.marker || item.geometryPath === selectedGeometryPath) {
     clearSelection()
     return
   }
 
   activeTypes.value = []
   selectedMarker = item.marker
-  selectedGeometryPath = null
+  selectedGeometryPath = item.geometryPath || null
   clearPosterMarkers()
   selectedMapCard.value = {
     type: item.type,
     title: item.node.title,
-    subtitle: item.node.location || ''
+    subtitle: item.node.location || '',
+    description: item.node.description || ''
   }
   map.flyTo(item.marker.getLatLng(), map.getMaxZoom())
   updateMarkers()
@@ -772,26 +841,43 @@ function selectGeometry(item, posterId) {
   clearPosterMarkers()
   const center = getGeometryBounds(item).getCenter()
   const posters = item.posters || []
+  const demoCount = posters.filter((poster) => poster.demo).length
 
   selectedMapCard.value = item.title
     ? {
+        type: item.type === 'networking' ? 'networking' : '',
         title: item.title,
-        subtitle: posters.length ? `${posters.length} ${item.itemLabel}` : '',
+        subtitle: posters.length
+          ? item.type === 'neighborhood'
+            ? `${posters.length} posters${demoCount ? `, ${demoCount} demo${demoCount === 1 ? '' : 's'}` : ''}`
+            : `${posters.length} ${item.itemLabel}`
+          : '',
         posters
       }
     : null
+  if (item.type === 'demo') {
+    shouldCenterActivePoster = false
+  }
   activePosterSlide.value = posters.some((poster) => poster.id === posterId) ? posterId : posters[0]?.id || ''
 
-  map.once('moveend', () => {
-    if (selectedGeometryPath === item.path) {
-      setPosterMarkers(item)
-    }
+  nextTick(() => {
+    shouldCenterActivePoster = true
   })
-  if (item.type === 'demo') {
-    map.flyToBounds(getGeometryBounds(item))
+
+  if (item.type !== 'demo') {
+    map.once('moveend', () => {
+      if (selectedGeometryPath === item.path) {
+        setPosterMarkers(item)
+      }
+    })
   } else {
-    map.flyTo(center, map.getMaxZoom())
+    map.once('moveend', () => {
+      if (selectedGeometryPath === item.path) {
+        updatePosterMarkers(true)
+      }
+    })
   }
+  map.flyTo(center, map.getMaxZoom())
   updateMarkers()
 }
 
@@ -803,12 +889,12 @@ function setPosterMarkers(item) {
   }
 
   const box = getGeometryBox(item)
-  const positions = item.id === 'sidewalk'
-    ? [
-        [0.32, 0.22],
-        [0.51, 0.5],
-        [0.7, 0.78]
-      ]
+  const positions = item.type === 'demo'
+    ? item.posters.map((_, index) => {
+        const position = item.posters.length === 1 ? 0.5 : index / (item.posters.length - 1)
+
+        return [0.32 + 0.38 * position, 0.22 + 0.56 * position]
+      })
     : [
         [0.25, 0.3],
         [0.5, 0.3],
@@ -817,50 +903,179 @@ function setPosterMarkers(item) {
         [0.65, 0.68]
       ]
   const color = item.type === 'demo' ? '#002C77' : '#2e7d32'
+  const usesDemoIcon = item.type === 'demo'
+  const posterEdgePoints = item.type === 'neighborhood' && item.posterGeometry ? getPosterEdgePoints(item) : []
 
   item.posters.forEach((poster, index) => {
+    if (item.type === 'neighborhood' && !posterEdgePoints[index]) {
+      return
+    }
+
     const position = positions[index % positions.length]
-    const point = getGeometryPoint(box.x + box.width * position[0], box.y + box.height * position[1])
-    const marker = L.circleMarker(point, {
-      radius: 5,
-      color,
-      weight: 2,
-      fillColor: color,
-      fillOpacity: 0.35,
-      opacity: 0.35
-    }).addTo(map)
+    const point = item.type === 'neighborhood'
+      ? posterEdgePoints[index]
+      : getGeometryPoint(box.x + box.width * position[0], box.y + box.height * position[1])
+    const marker = usesDemoIcon
+      ? L.marker(point, {
+          icon: getDemoIcon(),
+          bubblingMouseEvents: false
+        }).addTo(map)
+      : L.circleMarker(point, {
+          radius: 5,
+          color,
+          weight: 2,
+          fillColor: color,
+          fillOpacity: 0.35,
+          opacity: 0.35,
+          bubblingMouseEvents: false
+        }).addTo(map)
+
+    marker.on('click', () => {
+      if (item.type === 'demo') {
+        selectGeometry(item, poster.id)
+        return
+      }
+
+      activePosterSlide.value = poster.id
+    })
 
     posterLayers.push({
       poster,
-      marker
+      marker,
+      usesDemoIcon
     })
   })
 
   updatePosterMarkers(true)
 }
 
-function clearPosterMarkers() {
-  posterLayers.forEach(({ marker }) => {
-    marker.remove()
+function getPosterEdgePoints(item) {
+  const sourceSvg = new window.DOMParser().parseFromString(item.posterGeometry, 'image/svg+xml').documentElement
+  const sourceViewBox = getSvgViewBox(sourceSvg)
+  const values = sourceSvg.querySelector('path').getAttribute('d').match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi).map(Number)
+  const vertices = [{ x: values[0], y: values[1] }]
+
+  for (let index = 2; index + 5 < values.length; index += 6) {
+    vertices.push({ x: values[index + 4], y: values[index + 5] })
+  }
+
+  const lastVertex = vertices[vertices.length - 1]
+
+  if (vertices[0].x === lastVertex.x && vertices[0].y === lastVertex.y) {
+    vertices.pop()
+  }
+  const cornerIndexes = vertices.map((_, index) => index)
+
+  const edges = cornerIndexes.map((cornerIndex, index) => {
+    const nextCornerIndex = cornerIndexes[(index + 1) % cornerIndexes.length]
+    const points = [vertices[cornerIndex]]
+    let vertexIndex = cornerIndex
+
+    while (vertexIndex !== nextCornerIndex) {
+      vertexIndex = (vertexIndex + 1) % vertices.length
+      points.push(vertices[vertexIndex])
+    }
+
+    const segmentLengths = points.slice(0, -1).map((point, pointIndex) => {
+      const nextPoint = points[pointIndex + 1]
+
+      return Math.hypot(nextPoint.x - point.x, nextPoint.y - point.y)
+    })
+
+    return {
+      points,
+      segmentLengths,
+      length: segmentLengths.reduce((total, length) => total + length, 0)
+    }
+  })
+  const edgeLengths = edges.map((edge) => edge.length)
+  const perimeterLength = edgeLengths.reduce((total, length) => total + length, 0)
+  const remainingPoints = item.posters.length - cornerIndexes.length
+  const exactAllocations = edgeLengths.map((length) => remainingPoints * length / perimeterLength)
+  const allocations = exactAllocations.map(Math.floor)
+  let unallocatedPoints = remainingPoints - allocations.reduce((total, count) => total + count, 0)
+
+  exactAllocations.map((allocation, index) => ({
+    index,
+    remainder: allocation - allocations[index]
+  })).sort((a, b) => b.remainder - a.remainder).forEach(({ index }) => {
+    if (unallocatedPoints > 0) {
+      allocations[index] += 1
+      unallocatedPoints -= 1
+    }
+  })
+
+  const points = edges.flatMap((edge, index) => {
+    const edgePoints = [edge.points[0]]
+
+    for (let pointIndex = 1; pointIndex <= allocations[index]; pointIndex += 1) {
+      let remainingLength = edge.length * pointIndex / (allocations[index] + 1)
+
+      for (let segmentIndex = 0; segmentIndex < edge.segmentLengths.length; segmentIndex += 1) {
+        if (remainingLength <= edge.segmentLengths[segmentIndex]) {
+          const startPoint = edge.points[segmentIndex]
+          const endPoint = edge.points[segmentIndex + 1]
+          const position = remainingLength / edge.segmentLengths[segmentIndex]
+
+          edgePoints.push({
+            x: startPoint.x + (endPoint.x - startPoint.x) * position,
+            y: startPoint.y + (endPoint.y - startPoint.y) * position
+          })
+          break
+        }
+
+        remainingLength -= edge.segmentLengths[segmentIndex]
+      }
+    }
+
+    return edgePoints
+  })
+  return points.map((point) => {
+    return getGeometryPoint(
+      (point.x - sourceViewBox.x) * geometryWidth / sourceViewBox.width,
+      (point.y - sourceViewBox.y) * geometryHeight / sourceViewBox.height
+    )
+  })
+}
+
+function clearPosterMarkers(includeDemo = false) {
+  const persistentLayers = includeDemo
+    ? []
+    : posterLayers.filter(({ usesDemoIcon }) => usesDemoIcon)
+
+  posterLayers.forEach(({ marker, usesDemoIcon }) => {
+    if (includeDemo || !usesDemoIcon) {
+      marker.remove()
+    }
   })
   posterLayers.length = 0
+  posterLayers.push(...persistentLayers)
 }
 
 function updatePosterMarkers(shouldCenter) {
   let activeMarker = null
 
-  posterLayers.forEach(({ poster, marker }) => {
+  posterLayers.forEach(({ poster, marker, usesDemoIcon }) => {
     const isActive = poster.id === activePosterSlide.value
 
-    marker.setRadius(isActive ? 9 : 5)
-    marker.setStyle({
-      fillOpacity: isActive ? 1 : 0.35,
-      opacity: isActive ? 1 : 0.35
-    })
+    if (usesDemoIcon) {
+      marker.setOpacity(1)
+      marker.getElement().classList.toggle('map-node--active', isActive)
+      marker.setZIndexOffset(isActive ? 1000 : 0)
+    } else {
+      marker.setRadius(isActive ? 9 : 5)
+      marker.setStyle({
+        fillOpacity: isActive ? 1 : 0.35,
+        opacity: isActive ? 1 : 0.35
+      })
+    }
 
     if (isActive) {
       activeMarker = marker
-      marker.bringToFront()
+
+      if (!usesDemoIcon) {
+        marker.bringToFront()
+      }
     }
   })
 
@@ -904,13 +1119,14 @@ function updateMarkers() {
   const hasIndividualHighlight = selectedMarker || selectedGeometryPath
   const hasGroupHighlight = activeTypes.value.length > 0
 
-  markers.forEach(({ node, type, marker }) => {
+  markers.forEach(({ node, type, geometryPath, marker }) => {
     const isMatch = !hasGroupHighlight || activeTypes.value.includes(type)
-    const isActive = hasIndividualHighlight ? selectedMarker === marker : hasGroupHighlight && isMatch
+    const isSelected = selectedMarker === marker || geometryPath === selectedGeometryPath
+    const isActive = hasIndividualHighlight ? isSelected : hasGroupHighlight && isMatch
     const element = marker.getElement()
 
     element.classList.toggle('map-node--active', isActive)
-    element.classList.toggle('map-node--muted', hasIndividualHighlight ? selectedMarker !== marker : hasGroupHighlight && !isMatch)
+    element.classList.toggle('map-node--muted', hasIndividualHighlight ? !isSelected : hasGroupHighlight && !isMatch)
   })
 
   geometryLayers.forEach(({ path, type }) => {
@@ -920,6 +1136,7 @@ function updateMarkers() {
     path.setAttribute('fill-opacity', isActive ? '0.5' : '0.18')
     path.setAttribute('opacity', hasIndividualHighlight ? selectedGeometryPath !== path ? '0.25' : '1' : hasGroupHighlight && !isMatch ? '0.25' : '1')
   })
+
 }
 
 function getPosterSearchText(poster) {
@@ -1089,6 +1306,14 @@ function getPosterSearchText(poster) {
   font-size: 16px;
 }
 
+.map-feature-booth-chip {
+  margin: 0 0 6px;
+  background: #5f1a8b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
 .map-popup-card__subtitle {
   margin-top: 2px;
   color: #52606d;
@@ -1107,6 +1332,28 @@ function getPosterSearchText(poster) {
 
 .map-poster-slide {
   padding: 12px 52px 34px;
+}
+
+.map-poster-slide::after {
+  display: block;
+  height: 16px;
+  content: '';
+}
+
+.map-poster-demo-chip {
+  margin: 0 0 6px;
+  background: #002C77;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.map-poster-chip {
+  margin: 0 0 6px 4px;
+  background: #2e7d32;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .map-poster-title {
@@ -1208,6 +1455,17 @@ function getPosterSearchText(poster) {
 .map-page :deep(.map-node--help.map-node--active) {
   border-color: #d32f2f;
   background: #d32f2f;
+  color: #ffffff;
+}
+
+.map-page :deep(.map-node--networking) {
+  border-color: #000000;
+  color: #000000;
+}
+
+.map-page :deep(.map-node--networking.map-node--active) {
+  border-color: #000000;
+  background: #000000;
   color: #ffffff;
 }
 

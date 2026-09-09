@@ -32,7 +32,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import logo from '../../data/live/logos/logo-transparent.png'
 import aplLogo from '../../data/live/logos/apl_small_horizontal_blue.png'
-import agendaData from '../../data/sample/agenda.json'
+import agendaData from '../../data/event_content/agenda.json'
 
 const eventDate = agendaData.eventDate
 const eventDay = agendaData.eventDay

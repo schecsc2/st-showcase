@@ -7,9 +7,3 @@
 - Biotechnology and Medical Systems
 - Space Systems and PNT
 - Microelectronics, Quantum, and Materials
-
-# SCTs:
-- Achieving Robust Homeland Defense
-- Revitalizing the Nation's Strategic Capabilities
-- Accelerating Warfighting Capabilities for the Pacific Theater
-- Enabling Space Superiority
