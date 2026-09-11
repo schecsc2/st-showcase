@@ -101,6 +101,13 @@ def read_sct_coordinates():
     return coordinates
 
 
+def normalize_authors(value):
+    value = re.sub(r'\s*[;/]\s*', ', ', value)
+    value = re.sub(r',?\s*&\s*', ', ', value)
+    value = re.sub(r',\s*', ', ', value)
+    return re.sub(r'\s+', ' ', value).strip()
+
+
 def populate_locations():
     rows = read_workbook_rows()
     headers = {value.strip(): column for column, value in rows[0].items()}
@@ -138,7 +145,7 @@ def populate_locations():
             {
                 'id': f'sidewalk-demo-{index}',
                 'title': demo['demo_name'].strip(),
-                'authors': (demo.get('author') or '').strip(),
+                'authors': normalize_authors(demo.get('author') or ''),
                 'description': demo['description'].strip()
             }
             for index, demo in enumerate(sidewalk_demos, start=1)
@@ -180,7 +187,7 @@ def populate_locations():
         item = {
             'id': str(row_number),
             'title': row.get(headers['IRAD/PG Title'], '').strip() if is_distro_a else f'{category} {"Demo" if is_demo else "Poster"}',
-            'authors': row.get(headers['Presenter'], '').strip(),
+            'authors': normalize_authors(row.get(headers['Presenter'], '')),
             'description': row.get(headers['Description'], '').strip() if is_distro_a else f'This {"demo" if is_demo else "poster"} will be available for viewing during the morning session only'
         }
 

@@ -1,7 +1,9 @@
 {
   "image": {
     "width": 5511,
-    "height": 5741
+    "height": 6100,
+    "contentWidth": 5511,
+    "contentHeight": 5741
   },
   "bathrooms": [
     {
@@ -171,9 +173,13 @@
       ]
     }
   ],
-  "networking": [
+  "other": [
     {
-      "id": "breakout-room-2",
+      "id": "auditorium",
+      "title": "Semmel Center Auditorium"
+    },
+    {
+      "id": "networking",
       "title": "Networking Lounge"
     }
   ],
@@ -275,13 +281,13 @@
         {
           "id": "22",
           "title": "Ultra-Stable Clock using Neural Network Compensation",
-          "authors": "Alex New; Lizzy Robinson; Daniel Jimenez; Eliza Scheffers; Andrea Shepard",
+          "authors": "Alex New, Lizzy Robinson, Daniel Jimenez, Eliza Scheffers, Andrea Shepard",
           "description": "Iterative data-driven pipeline combining experiments and AI models to design novel proteins and optimize functional properties."
         },
         {
           "id": "23",
           "title": "Toward AI-driven coastal defense",
-          "authors": "Alex New; Jared Markowitz; Jennifer Sleeman; Jay Brett; Pete Winstead",
+          "authors": "Alex New, Jared Markowitz, Jennifer Sleeman, Jay Brett, Pete Winstead",
           "description": "Multi-component AI and physics-based framework that optimizes coastal interventions to improve regional resilience to storm-driven flooding."
         },
         {
@@ -349,7 +355,7 @@
         {
           "id": "4",
           "title": "AI, Autonomy, and Teaming Poster",
-          "authors": "Matthew Grawe; Adam Beyer; Michelle Chen; John Clemens; Rebecca Foust; Isaac Lyss-Loren; Takeshi Morozono; Alec Mudick; Kimberly Ord; Andrew Smith; Mason Stuart; Amanda Voegtlin; Bretton Wade",
+          "authors": "Matthew Grawe, Adam Beyer, Michelle Chen, John Clemens, Rebecca Foust, Isaac Lyss-Loren, Takeshi Morozono, Alec Mudick, Kimberly Ord, Andrew Smith, Mason Stuart, Amanda Voegtlin, Bretton Wade",
           "description": "This poster will be available for viewing during the morning session only"
         },
         {
@@ -391,7 +397,7 @@
         {
           "id": "36",
           "title": "VIPERFISH (VLF/HF Intensity and Propagation Effects Resolved From Interconnected Small Hardware)",
-          "authors": "Matthew Hall; Drew Blankstein",
+          "authors": "Matthew Hall, Drew Blankstein",
           "description": "Low-cost distributed VLF/HF sensing network enabling scalable RF spectrum monitoring, signal analysis, and propagation characterization."
         },
         {
@@ -409,7 +415,7 @@
         {
           "id": "35",
           "title": "Sensing, C5ISR, and Networking Poster",
-          "authors": "Austin Cox; Joseph Prosser; Jodie Johnson; Stephen Hayes",
+          "authors": "Austin Cox, Joseph Prosser, Jodie Johnson, Stephen Hayes",
           "description": "This poster will be available for viewing during the morning session only"
         }
       ]
@@ -452,7 +458,7 @@
         {
           "id": "43",
           "title": "Crunchwrap Supreme",
-          "authors": "Keegan Woodburn; Caleb Frey; Joshua Kimrey; Matt Steele",
+          "authors": "Keegan Woodburn, Caleb Frey, Joshua Kimrey, Matt Steele",
           "description": "AI-driven industrial control system characterization that rapidly learns system behavior to improve cybersecurity, resilience, and operational understanding."
         },
         {
@@ -476,7 +482,7 @@
         {
           "id": "47",
           "title": "Enhanced Confidence Hot-Swapping for Operational Technology (ECHO)",
-          "authors": "Matt Steele; Daniel Davenport; Matthew Cole; Ahmed Abdo; Denzel Hamilton; Sabrina Lesser",
+          "authors": "Matt Steele, Daniel Davenport, Matthew Cole, Ahmed Abdo, Denzel Hamilton, Sabrina Lesser",
           "description": "Trusted virtual PLC recovery technology enabling rapid restoration, validation, and secure deployment of industrial control systems after disruptions."
         }
       ]
@@ -538,7 +544,7 @@
         {
           "id": "48",
           "title": "Advanced Manufacturing and Contested Logistics Poster",
-          "authors": "Jessica Ma; Lori Baxter; Jonathon Cosgrove; Ala Graff; Harold Lee; Keshav Mittu; Kaelyn Richardson",
+          "authors": "Jessica Ma, Lori Baxter, Jonathon Cosgrove, Ala Graff, Harold Lee, Keshav Mittu, Kaelyn Richardson",
           "description": "This poster will be available for viewing during the morning session only"
         },
         {
@@ -562,7 +568,7 @@
         {
           "id": "57",
           "title": "FABRICS: Fiber Architecture Breakthroughs in Conversion and Storage",
-          "authors": "Rachel Altmayer; Michael Jin; Konstantinos Gerasopoulos",
+          "authors": "Rachel Altmayer, Michael Jin, Konstantinos Gerasopoulos",
           "description": "Textile-integrated energy harvesting and storage fibers enabling scalable electronic textiles and wearable systems with reduced battery burden."
         },
         {
@@ -616,7 +622,7 @@
         {
           "id": "94",
           "title": "MicroMechanobiological Models for Blast Overpressure Prediction (MMMBOP)",
-          "authors": "Tom Metzger/Kris RawlThomas Metzger, Kris Rawlss",
+          "authors": "Tom Metzger, Kris Rawls",
           "description": "Integrated pulmonary mechanics and mechanobiological signaling models predicting cellular injury and gas-exchange degradation from repetitive low-level blast overpressure."
         },
         {
@@ -646,7 +652,7 @@
         {
           "id": "78",
           "title": "Molecular Farming: Biomanufacturing Pharmaceutical Small Molecules",
-          "authors": "Rickey Egan, Collin TimRichard Egan, Collin Timmm",
+          "authors": "Rickey Egan, Collin Timm",
           "description": "Biomanufacturing technologies strengthening domestic pharmaceutical production, supply chain resilience, and rapid manufacturing of essential medicines."
         },
         {
@@ -689,7 +695,7 @@
         {
           "id": "82",
           "title": "ACORNE: Aerosol Collector for Operational Readiness in Novel Environments",
-          "authors": "Danielle Harris; Ben Alvarez; Mike Schuit",
+          "authors": "Danielle Harris, Ben Alvarez, Mike Schuit",
           "description": "Low-SWAP aerosol sampling technology enabling affordable detection of airborne chemical and biological hazards in operational environments."
         },
         {
@@ -707,7 +713,7 @@
         {
           "id": "71",
           "title": "Biotechnology and Medical Systems Poster",
-          "authors": "Neil Momsen; Corinne Morrison; Kristine Suritis; Chad Weiler; Julie Patrone; Andrea Timm; Rebecca Williams; Stephanie Ku",
+          "authors": "Neil Momsen, Corinne Morrison, Kristine Suritis, Chad Weiler, Julie Patrone, Andrea Timm, Rebecca Williams, Stephanie Ku",
           "description": "This poster will be available for viewing during the morning session only"
         },
         {
@@ -731,13 +737,13 @@
         {
           "id": "73",
           "title": "Biotechnology and Medical Systems Poster",
-          "authors": "Lauren Wagner, Hayley DeHart, Kris Rawls, & James Johnson",
+          "authors": "Lauren Wagner, Hayley DeHart, Kris Rawls, James Johnson",
           "description": "This poster will be available for viewing during the morning session only"
         },
         {
           "id": "87",
           "title": "Agnostic Exposure Detection: Early Warning for Hazardous Exposures",
-          "authors": "Amanda Ernlund; Daniel Berman; Kris Rawls; Kenneth Bowden; Abhinaya Srikanth; Anissa Elayadi",
+          "authors": "Amanda Ernlund, Daniel Berman, Kris Rawls, Kenneth Bowden, Abhinaya Srikanth, Anissa Elayadi",
           "description": "Wearable biomarker monitoring and explainable AI for early detection of hazardous chemical, biological, and toxic exposures."
         },
         {
@@ -785,7 +791,7 @@
         {
           "id": "95",
           "title": "ABRA: All-Band Radio Accelerated",
-          "authors": "Justin Bradfield; Mike Dauberman; James Morton; Evan Shi; Austin Flynt",
+          "authors": "Justin Bradfield, Mike Dauberman, James Morton, Evan Shi, Austin Flynt",
           "description": "Low-SWAP, broadband software-defined radio enabling reconfigurable, multi-mission communications across wide RF frequency ranges."
         },
         {
@@ -827,13 +833,13 @@
         {
           "id": "101",
           "title": "TRI-Nets: Transmit-Reflect Metasurface Nets",
-          "authors": "Timothy  Sleasman",
+          "authors": "Timothy Sleasman",
           "description": "Flexible, textile-based metasurfaces for dynamic control of reflected and transmitted radio frequency signals."
         },
         {
           "id": "102",
           "title": "Reprogrammable In Flight FPGA",
-          "authors": "Cassandra Derr; Kathryn Marcotte",
+          "authors": "Cassandra Derr, Kathryn Marcotte",
           "description": "In-flight FPGA reprogramming technology enabling secure software updates, enhanced reliability, and extended mission flexibility for space systems."
         },
         {
@@ -845,7 +851,7 @@
         {
           "id": "104",
           "title": "Versatile Optical ID (VOID) Tag",
-          "authors": "Sean O’Connor,Diamond Moody, Ian Gervasi, Joe Prosser",
+          "authors": "Sean O’Connor, Diamond Moody, Ian Gervasi, Joe Prosser",
           "description": "Chip-scale optical tag project delivering unique low-probability-of-detection signatures for covert free-space optical communications."
         },
         {

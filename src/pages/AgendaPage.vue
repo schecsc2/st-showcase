@@ -20,7 +20,23 @@
           :title="item.title"
           :subtitle="item.time"
         >
-          <p v-if="item.location">{{ item.location }}</p>
+          <p v-if="item.location">
+            <router-link
+              v-if="item.location === 'Semmel Center Auditorium'"
+              :to="{ path: '/map', query: { filter: 'auditorium' } }"
+              class="agenda-location-link"
+            >
+              {{ item.location }}
+            </router-link>
+            <router-link
+              v-else-if="item.location.includes('South Campus')"
+              to="/map"
+              class="agenda-location-link"
+            >
+              {{ item.location }}
+            </router-link>
+            <template v-else>{{ item.location }}</template>
+          </p>
           <p v-for="detail in item.details" :key="detail">{{ detail }}</p>
           <q-btn
             v-if="hasAgendaSpeakers(item)"
@@ -204,6 +220,11 @@ function showSpeakers(item) {
   margin: 4px 0 0;
   color: #5f6b7a;
   line-height: 1.35;
+}
+
+.agenda-location-link {
+  color: #294b75;
+  font-weight: 800;
 }
 
 .speaker-button {

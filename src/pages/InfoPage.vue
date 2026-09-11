@@ -46,7 +46,13 @@
             <h3>{{ item.title }}</h3>
             <p>
               <template v-for="(part, index) in getTextParts(item.description)" :key="`${item.title}-${index}`">
-                <a v-if="part.url" :href="part.url" target="_blank" rel="noreferrer">{{ part.text }}</a>
+                <router-link
+                  v-if="item.title === 'Check-In' && part.text === 'Semmel Center Lobby'"
+                  to="/map"
+                >
+                  {{ part.text }}
+                </router-link>
+                <a v-else-if="part.url" :href="part.url" target="_blank" rel="noreferrer">{{ part.text }}</a>
                 <span v-else>{{ part.text }}</span>
               </template>
             </p>

@@ -40,6 +40,7 @@
       menu-self="top start"
       no-caps
       unelevated
+      @hide="resetIgnoredMapClick"
     >
       <q-list dense>
         <q-item
@@ -155,6 +156,33 @@
       />
     </div>
 
+    <button
+      v-if="showMapInset && !activeTypes.length"
+      class="map-inset"
+      type="button"
+      @click="insetExpanded = true"
+    >
+      <img :src="mapInsetImage" alt="Area map">
+    </button>
+
+    <div
+      v-if="insetExpanded"
+      aria-modal="true"
+      class="map-inset-overlay"
+      role="dialog"
+      @click.self="insetExpanded = false"
+    >
+      <div ref="insetMapElement" class="map-inset-expanded" />
+      <q-btn
+        aria-label="Close"
+        class="map-inset-close"
+        icon="close"
+        round
+        unelevated
+        @click="insetExpanded = false"
+      />
+    </div>
+
   </q-page>
 </template>
 
@@ -162,6 +190,7 @@
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import * as L from 'leaflet'
 import { useRoute } from 'vue-router'
+import mapInsetImage from '../../data/live/images/inset_with_highlights.png'
 import mapImage from '../../data/live/map/map.png'
 import mapData from '../../data/live/map/locations.json'
 
@@ -180,13 +209,14 @@ const demoGeometryFiles = import.meta.glob('../../data/live/map/geometries/demos
   import: 'default',
   eager: true
 })
-const networkingGeometryFiles = import.meta.glob('../../data/live/map/geometries/networking/*', {
+const otherGeometryFiles = import.meta.glob('../../data/live/map/geometries/other/*', {
   query: '?raw',
   import: 'default',
   eager: true
 })
 
 const mapElement = ref(null)
+const insetMapElement = ref(null)
 const searchElement = ref(null)
 const searchResultsElement = ref(null)
 const search = ref('')
@@ -195,6 +225,8 @@ const selectedSearchResult = ref(null)
 const activeTypes = ref([])
 const selectedMapCard = ref(null)
 const activePosterSlide = ref('')
+const showMapInset = ref(false)
+const insetExpanded = ref(false)
 const markers = []
 const geometryLayers = []
 const posterLayers = []
@@ -219,6 +251,11 @@ const mapSearchCategories = [
     title: 'Feature Booths'
   },
   {
+    key: 'type-auditorium',
+    type: 'auditorium',
+    title: 'Auditorium'
+  },
+  {
     key: 'type-networking',
     type: 'networking',
     title: 'Networking Lounge'
@@ -241,7 +278,7 @@ const mapSearchCategories = [
 ]
 const neighborhoodsById = Object.fromEntries(mapData.neighborhoods.map((neighborhood) => [neighborhood.id, neighborhood]))
 const demosById = Object.fromEntries(mapData.demos.map((demoArea) => [demoArea.id, demoArea]))
-const networkingById = Object.fromEntries((mapData.networking || []).map((area) => [area.id, area]))
+const otherById = Object.fromEntries((mapData.other || []).map((area) => [area.id, area]))
 const neighborhoodPosterGeometriesById = Object.fromEntries(Object.keys(neighborhoodPosterGeometryFiles).map((path) => [
   getFileId(path).replace(/[-_]posters$/, ''),
   neighborhoodPosterGeometryFiles[path]
@@ -260,10 +297,10 @@ const demoGeometries = Object.keys(demoGeometryFiles).sort().map((path) => ({
   itemLabel: 'demos',
   geometry: demoGeometryFiles[path]
 }))
-const networkingGeometries = Object.keys(networkingGeometryFiles).sort().map((path) => ({
+const otherGeometries = Object.keys(otherGeometryFiles).sort().map((path) => ({
   id: getFileId(path),
-  title: networkingById[getFileId(path)]?.title,
-  geometry: networkingGeometryFiles[path]
+  title: otherById[getFileId(path)]?.title,
+  geometry: otherGeometryFiles[path]
 }))
 const mapSearchResults = computed(() => {
   if (!searchFocused.value || selectedSearchResult.value) {
@@ -317,7 +354,9 @@ const mapSearchResults = computed(() => {
 let selectedMarker = null
 let selectedGeometryPath = null
 let shouldCenterActivePoster = true
+let ignoreNextMapClick = false
 let map
+let insetMap
 const route = useRoute()
 
 onMounted(() => {
@@ -339,12 +378,20 @@ onMounted(() => {
   L.imageOverlay(mapImage, bounds).addTo(map)
   setZoomLimits(bounds)
   map.fitBounds(bounds)
-  map.on('resize', () => setZoomLimits(bounds))
+  updateMapInsetVisibility()
+  map.on('resize', () => {
+    setZoomLimits(bounds)
+    updateMapInsetVisibility()
+  })
+  map.on('zoomstart', () => {
+    showMapInset.value = false
+  })
+  map.on('zoomend', updateMapInsetVisibility)
   map.on('click', clearMapHighlight)
 
   const geometryOverlay = getGeometryOverlay()
 
-  L.svgOverlay(geometryOverlay.svg, bounds, {
+  L.svgOverlay(geometryOverlay.svg, getMapContentBounds(), {
     interactive: true
   }).addTo(map)
 
@@ -358,16 +405,16 @@ onMounted(() => {
     .forEach(setPosterMarkers)
 
   geometryOverlay.items
-    .filter(({ type }) => type === 'networking')
-    .forEach((networking) => {
-      const marker = L.marker(getGeometryBounds(networking).getCenter(), {
-        icon: getNetworkingIcon()
+    .filter(({ type }) => type === 'auditorium' || type === 'networking')
+    .forEach((area) => {
+      const marker = L.marker(getGeometryBounds(area).getCenter(), {
+        icon: area.type === 'auditorium' ? getAuditoriumIcon() : getNetworkingIcon()
       }).addTo(map)
 
       const item = {
-        node: networking,
-        type: 'networking',
-        geometryPath: networking.path,
+        node: area,
+        type: area.type,
+        geometryPath: area.path,
         marker
       }
 
@@ -462,6 +509,11 @@ onUnmounted(() => {
     map = null
   }
 
+  if (insetMap) {
+    insetMap.remove()
+    insetMap = null
+  }
+
   markers.length = 0
   geometryLayers.length = 0
   clearPosterMarkers(true)
@@ -481,7 +533,38 @@ watch(search, (value) => {
 })
 
 watch(activePosterSlide, () => updatePosterMarkers(shouldCenterActivePoster))
-watch(() => [route.query.neighborhood, route.query.poster, route.query.sct, route.query.demo, route.query.item], selectRouteLocation)
+watch(() => [route.query.neighborhood, route.query.poster, route.query.sct, route.query.demo, route.query.item, route.query.filter], selectRouteLocation)
+watch(insetExpanded, async (expanded) => {
+  if (!expanded) {
+    if (insetMap) {
+      insetMap.remove()
+      insetMap = null
+    }
+    return
+  }
+
+  await nextTick()
+
+  if (!insetExpanded.value) {
+    return
+  }
+
+  const bounds = [[0, 0], [1654, 2062]]
+
+  insetMap = L.map(insetMapElement.value, {
+    crs: L.CRS.Simple,
+    minZoom: minAllowedZoom,
+    zoomSnap: 0,
+    zoomControl: false,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1,
+    attributionControl: false
+  })
+  L.imageOverlay(mapInsetImage, bounds).addTo(insetMap)
+  insetMap.fitBounds(bounds)
+  insetMap.setMinZoom(insetMap.getZoom())
+  insetMap.setMaxZoom(insetMap.getZoom() + maxZoomSteps)
+})
 
 function closeSearchResults(event) {
   const target = event.target
@@ -506,6 +589,13 @@ function getMapBounds() {
   ]
 }
 
+function getMapContentBounds() {
+  return [
+    [mapData.image.height - mapData.image.contentHeight, 0],
+    [mapData.image.height, mapData.image.contentWidth]
+  ]
+}
+
 function getFileId(path) {
   return path.split('/').pop()
 }
@@ -526,8 +616,8 @@ function getGeometryOverlay() {
     items.push(addGeometryPath(svg, geometry, 'demo', '#002C77'))
   })
 
-  networkingGeometries.forEach((geometry) => {
-    items.push(addGeometryPath(svg, geometry, 'networking', '#000000'))
+  otherGeometries.forEach((geometry) => {
+    items.push(addGeometryPath(svg, geometry, geometry.id, '#000000'))
   })
 
   return {
@@ -647,6 +737,16 @@ function getNetworkingIcon() {
   })
 }
 
+function getAuditoriumIcon() {
+  return L.divIcon({
+    className: 'map-node map-node--auditorium',
+    html: '<span class="material-symbols-outlined">podium</span>',
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+    popupAnchor: [0, -17]
+  })
+}
+
 function getSctIcon() {
   return L.divIcon({
     className: 'map-node map-node--sct',
@@ -662,6 +762,7 @@ function selectType(type) {
   activeTypes.value = activeTypes.value.includes(type)
     ? activeTypes.value.filter((activeType) => activeType !== type)
     : activeTypes.value.concat(type)
+  ignoreNextMapClick = activeTypes.value.length > 0
   selectedMarker = null
   selectedGeometryPath = null
   clearPosterMarkers()
@@ -733,6 +834,10 @@ function zoomOut() {
   map.zoomOut()
 }
 
+function updateMapInsetVisibility() {
+  showMapInset.value = map.getZoom() <= map.getMinZoom()
+}
+
 function closePopup() {
   selectedMapCard.value = null
   activePosterSlide.value = ''
@@ -747,9 +852,21 @@ function clearSelection() {
 }
 
 function clearMapHighlight() {
+  if (ignoreNextMapClick && activeTypes.value.length) {
+    ignoreNextMapClick = false
+    return
+  }
+
+  activeTypes.value = []
   selectedSearchResult.value = null
   search.value = ''
   clearSelection()
+}
+
+function resetIgnoredMapClick() {
+  window.setTimeout(() => {
+    ignoreNextMapClick = false
+  }, 0)
 }
 
 function addMarkerClick(item) {
@@ -771,7 +888,7 @@ function selectMarker(item) {
   selectedMapCard.value = {
     type: item.type,
     title: item.node.title,
-    subtitle: item.node.location || '',
+    subtitle: item.type === 'food' ? '' : item.node.location || '',
     description: item.node.description || ''
   }
   map.flyTo(item.marker.getLatLng(), map.getMaxZoom())
@@ -782,8 +899,30 @@ function addGeometryClick(item) {
   item.path.addEventListener('click', (event) => {
     L.DomEvent.stop(event)
     selectedSearchResult.value = null
+
+    if (selectedGeometryPath === item.path && selectClosestPoster(item, event)) {
+      return
+    }
+
     selectGeometry(item)
   })
+}
+
+function selectClosestPoster(item, event) {
+  const clickPoint = map.mouseEventToContainerPoint(event)
+  const closestPoster = posterLayers.filter(({ geometry }) => geometry === item).reduce((closest, layer) => {
+    const markerPoint = map.latLngToContainerPoint(layer.marker.getLatLng())
+    const distance = markerPoint.distanceTo(clickPoint)
+
+    return !closest || distance < closest.distance ? { poster: layer.poster, distance } : closest
+  }, null)
+
+  if (!closestPoster) {
+    return false
+  }
+
+  activePosterSlide.value = closestPoster.poster.id
+  return true
 }
 
 function selectRouteLocation() {
@@ -792,8 +931,19 @@ function selectRouteLocation() {
   const sctId = Array.isArray(route.query.sct) ? route.query.sct[0] : route.query.sct
   const demoId = Array.isArray(route.query.demo) ? route.query.demo[0] : route.query.demo
   const demoItemId = Array.isArray(route.query.item) ? route.query.item[0] : route.query.item
+  const filter = Array.isArray(route.query.filter) ? route.query.filter[0] : route.query.filter
 
   if (!map) {
+    return
+  }
+
+  if (filter && mapSearchCategories.some(({ type }) => type === filter)) {
+    activeTypes.value = [filter]
+    selectedMarker = null
+    selectedGeometryPath = null
+    clearPosterMarkers()
+    closePopup()
+    updateMarkers()
     return
   }
 
@@ -845,7 +995,7 @@ function selectGeometry(item, posterId) {
 
   selectedMapCard.value = item.title
     ? {
-        type: item.type === 'networking' ? 'networking' : '',
+        type: item.type === 'auditorium' || item.type === 'networking' ? item.type : '',
         title: item.title,
         subtitle: posters.length
           ? item.type === 'neighborhood'
@@ -942,6 +1092,7 @@ function setPosterMarkers(item) {
     posterLayers.push({
       poster,
       marker,
+      geometry: item,
       usesDemoIcon
     })
   })
@@ -1110,8 +1261,8 @@ function getGeometryBox(item) {
 
 function getGeometryPoint(x, y) {
   return [
-    mapData.image.height - (y / geometryHeight * mapData.image.height),
-    x / geometryWidth * mapData.image.width
+    mapData.image.height - (y / geometryHeight * mapData.image.contentHeight),
+    x / geometryWidth * mapData.image.contentWidth
   ]
 }
 
@@ -1127,6 +1278,13 @@ function updateMarkers() {
 
     element.classList.toggle('map-node--active', isActive)
     element.classList.toggle('map-node--muted', hasIndividualHighlight ? !isSelected : hasGroupHighlight && !isMatch)
+  })
+
+  posterLayers.filter(({ usesDemoIcon }) => usesDemoIcon).forEach(({ geometry, marker }) => {
+    const isSelected = geometry.path === selectedGeometryPath
+    const isMuted = hasIndividualHighlight ? !isSelected : hasGroupHighlight && !activeTypes.value.includes('demo')
+
+    marker.setOpacity(isMuted ? 0.25 : 1)
   })
 
   geometryLayers.forEach(({ path, type }) => {
@@ -1403,6 +1561,53 @@ function getPosterSearchText(poster) {
   border-top: 1px solid #dde3ea;
 }
 
+.map-inset {
+  position: fixed;
+  bottom: calc(104px + env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 510;
+  display: block;
+  overflow: hidden;
+  width: min(23vw, 90px);
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0;
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.14);
+}
+
+.map-inset img {
+  display: block;
+  width: 100%;
+}
+
+.map-inset-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.82);
+}
+
+.map-inset-expanded {
+  width: calc(100% - 32px);
+  max-width: calc((100vh - 32px) * 1.247);
+  aspect-ratio: 2062 / 1654;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.map-inset-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  background: #ffffff;
+  color: #1f2933;
+}
+
 .map-page :deep(.map-node) {
   display: grid;
   place-items: center;
@@ -1463,7 +1668,13 @@ function getPosterSearchText(poster) {
   color: #000000;
 }
 
-.map-page :deep(.map-node--networking.map-node--active) {
+.map-page :deep(.map-node--auditorium) {
+  border-color: #000000;
+  color: #000000;
+}
+
+.map-page :deep(.map-node--networking.map-node--active),
+.map-page :deep(.map-node--auditorium.map-node--active) {
   border-color: #000000;
   background: #000000;
   color: #ffffff;

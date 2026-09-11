@@ -79,7 +79,7 @@ function getDefaultHappeningNow() {
   if (now.value < firstAgendaTime) {
     return {
       title: 'Starts September 15',
-      time: '8:30 AM',
+      time: '8:00 AM',
       location: 'Johns Hopkins APL South Campus'
     }
   }
